@@ -1,4 +1,6 @@
-After a decade in the health & fitness industry I know the importance of keeping track of what
+## Problem Statement
+
+After a decade in the health & fitness industry I understand the importance of keeping track of what
 you are eating if you are trying to reach certain fitness goals. Whether that be weight loss,
 muscle growth, or maintaining your current weight/physique. I propose developing an app to help
 figure out what someone's nutritional needs (carbs, pro, and fat in grams) are based on their
@@ -23,6 +25,39 @@ further away from your goal it is in red text and the closer you are to the goal
 (red -> orange -> green). The same logic could also be applied if a person goes over their daily
 goal by too much as well.
 
+##### Future Ideas
 I could also add an activity tracker with in it as well. Something to record if you worked out that day,
 the duration of the workout, intensity level, on a scale of 1-10 how happy were you with the workout, or
 a notes section. 
+
+## Project Technologies/Techniques
+- Security/Authentication
+  - AWS Cognito
+- Database
+  - MySQL 8.x
+- ORM Framework
+  - Hibernate 
+- Web Services consumed using Java
+  - TBD 
+- CSS 
+  - Bootstrap
+- Data Validation
+  - Bootstrap Validator for front end
+- Logging
+  - Log4J2
+- Hosting
+  - AWS
+- Tech I'd like to explore as part of this work
+  - TBD
+- Unit Testing
+  - JUnit tests
+- IDE: IntelliJ IDEA
+
+
+## Design 
+Screens: 
+
+1) Create meal
+2) View meals
+3) Update meal
+4) Delete Meal
