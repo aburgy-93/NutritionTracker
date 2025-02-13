@@ -34,3 +34,10 @@ of what each page will/might look like and will get them done before the 2/12 du
 Need to keep researching if there are any free/easy to use APIs with food/nutrition data. If all else fails
 users can create their own local database with food they have entered themselves and can re-use those items
 over and over again.
+
+#### Week 4 
+2/12/2025
+
+Task completed:
+* Created the screens for each webpage
+

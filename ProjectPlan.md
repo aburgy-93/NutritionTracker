@@ -42,6 +42,10 @@ project as a result, either in that week or the following week
 - [ ] Create controller to manage the work of
 - [ ] Update weekly reflection
 
+### Week 5 - 
+#### This week my focus
+- [ ] 
+
 ### Week 7
 #### Checkpoint 2 is Due: Database designed and created, at least one DAO with full CRUD (create, read, update, delete)
 implemented with Hibernate, DAO is fully unit tested, Log4J is implemented (no System.out.printlns)
