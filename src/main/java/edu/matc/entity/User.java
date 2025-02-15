@@ -33,13 +33,13 @@ public class User {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, int userWeight, String birthDate, int id) {
+    public User(String accessPrivileges,String firstName, String lastName, String email, int userWeight, String birthDate) {
+        this.accessPrivileges = accessPrivileges;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.userWeight = userWeight;
         this.birthDate = birthDate;
-        this.id = id;
     }
 
     /**
