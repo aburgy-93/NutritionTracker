@@ -3,8 +3,8 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-@Table(name = "food_tracker")
+@Entity // class mapped to a particular table
+@Table(name = "food_tracker") // table used, case-sensitive
 public class Food {
     @Column(name = "user_id")
     private int userId;
@@ -55,9 +55,10 @@ public class Food {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
 
-    public Food() {
-
-    }
+    /**
+     * No argument constructor
+     */
+    public Food() {}
 
     /**
      * Instantiates a new Food
@@ -72,10 +73,6 @@ public class Food {
      * @param carbs the amount of carbs
      * @param fat the amount of fat
      * @param mealTime the meal time
-     * @param totalCalories the total calories based on serving size
-     * @param totalProtein the total protein based on serving size
-     * @param totalCarbs the total carbs based on serving size
-     * @param totalFats the total fat based on serving size
      */
 
     public Food(int userId, String date, String foodName, String foodType, int servingSize, int calories, int protein,
