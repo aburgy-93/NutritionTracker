@@ -1,5 +1,6 @@
 package edu.matc.persistence;
 
+import edu.matc.entity.User;
 import org.hibernate.SessionFactory;
 
 import edu.matc.entity.Food;
@@ -17,5 +18,13 @@ public class FoodDao {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
-
+    /**
+     * Get user by id
+     */
+    public User getUserByID() {
+        Session session = sessionFactory.openSession();
+        User user = session.get(User.class, id);
+        session.close();
+        return user;
+    }
 }
