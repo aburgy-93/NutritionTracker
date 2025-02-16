@@ -75,8 +75,8 @@ public class UserFood {
      * @param mealTime the meal time
      */
 
-    public UserFood(int userId, String date, String foodName, String foodType, int servingSize, int calories, int protein,
-                    int carbs, int fat, String mealTime, int id) {
+    public UserFood(int userId, String date, String foodName, String foodType, int servingSize, int calories, double protein,
+                    double carbs, double fat, String mealTime, double totalCalories, double totalProtein, double totalCarbs, double totalFats) {
         this.userId = userId;
         this.date = date;
         this.foodName = foodName;
@@ -87,8 +87,10 @@ public class UserFood {
         this.carbs = carbs;
         this.fat = fat;
         this.mealTime = mealTime;
-        this.id = id;
-       ;
+        this.totalCalories = totalCalories;
+        this.totalProtein = totalProtein;
+        this.totalCarbs = totalCarbs;
+        this.totalFats = totalFats;
     }
 
     /**
