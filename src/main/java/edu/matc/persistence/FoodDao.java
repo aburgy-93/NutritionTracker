@@ -17,6 +17,11 @@ public class FoodDao {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
+    /**
+     * Get food item by id
+     * @param id id of food
+     * @return food
+     */
     public Food getFoodById(int id){
         Session session = sessionFactory.openSession();
         Food food = session.get(Food.class, id);
@@ -24,6 +29,10 @@ public class FoodDao {
         return food;
     }
 
+    /**
+     * Get a list of all foods
+     * @return list of foods
+     */
     public List<Food> getAllFood(){
         Session session = sessionFactory.openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
@@ -36,6 +45,10 @@ public class FoodDao {
         return foods;
     }
 
+    /**
+     * Update a food
+     * @param food food to be updated
+     */
     public void updateFood(Food food){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -44,6 +57,11 @@ public class FoodDao {
         session.close();
     }
 
+    /**
+     * Add a new food to food table
+     * @param food new food to be added
+     * @return id of food added
+     */
     public int insertFood(Food food){
         int id = 0;
         Session session = sessionFactory.openSession();
@@ -55,6 +73,10 @@ public class FoodDao {
         return id;
     }
 
+    /**
+     * Delete food from table
+     * @param food food to be deleted from table
+     */
     public void deleteFood(Food food){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

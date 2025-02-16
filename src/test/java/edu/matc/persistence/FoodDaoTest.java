@@ -12,7 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class FoodDaoTest {
     FoodDao foodDao;
 
+
     @BeforeEach
+
     void setUp() {
         foodDao = new FoodDao();
         Database database = new Database();

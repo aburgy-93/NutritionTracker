@@ -62,7 +62,6 @@ public class UserFood {
 
     /**
      * Instantiates a new Food
-     *
      * @param userId the user who entered the food
      * @param date the date of food entered
      * @param foodName the name of the food
@@ -73,6 +72,10 @@ public class UserFood {
      * @param carbs the number of carbs
      * @param fat the amount of fat
      * @param mealTime the meal time
+     * @param totalCalories total amount of calories based on serving size and calories
+     * @param totalProtein total amount of protein based on serving size and protein
+     * @param totalCarbs total number of carbs based on serving size and carbs
+     * @param totalFats total amount of fat based on serving size and fat
      */
 
     public UserFood(int userId, String date, String foodName, String foodType, int servingSize, int calories, double protein,
@@ -285,5 +288,4 @@ public class UserFood {
      * @param id food id
      */
     public void setId(int id) {this.id = id;}
-
 }
