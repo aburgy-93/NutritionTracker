@@ -22,29 +22,36 @@ project as a result, either in that week or the following week
 - [X] List technologies, versions and how they will be used
 - [X] Write project plan
 - [X] Document user stories and select MVP stories
-- [ ] Confirm MVP stories meet Ent Java indie project objectives
-- [ ] Design screens - make sure all MVP user stories are covered
-- [ ] Triple-check for Checkpoint 1
-- [ ] Update journal/time log/reflection
+- [X] Confirm MVP stories meet Ent Java indie project objectives
+- [X] Design screens - make sure all MVP user stories are covered
+- [X] Triple-check for Checkpoint 1
+- [X] Update journal/time log/reflection
 
 ### Week 4 - Class topic is Hibernate
-#### This week my focus
-- [ ] First cut at database design
-- [ ] Create the dev version of the database -
-- [ ] Create a class to perform CRUD on trail -
-- [ ] Create the config files for the DB connection info (dev and test)
-- [ ] Create a test version of the database for unit testing
-- [ ] Create unit tests for the Food Data Access Objects(DAO)
+#### This week my focus is working on database setup and DAOs
+- [X] First cut at database design
+- [X] Create the dev version of the database — nutrition_tracker
+- [X] Create the test version of the database - nutrition_test
+- [X] Create a class to perform CRUD on Food
+- [X] Create a class to perform CRUD on User
+- [X] Create a class to perform CRUD on UserFood
+- [X] Create the config files for the DB connection info (dev and test)
+- [X] Create unit tests for the Food Data Access Objects(DAO)
+- [X] Create unit tests for the User Data Access Objects(DAO)
+- [X] Create unit tests for the UserFood Data Access Objects(DAO)
 - [ ] Create a class for the DB connection business
-- [ ] Create JSP for finding
+- [ ] Create JSP for 
 - [ ] Create JSP for
 - [ ] Create controller to route to
 - [ ] Create controller to manage the work of
-- [ ] Update weekly reflection
+- [X] Update weekly reflection
 
-### Week 5 - 
+### Week 5 
 #### This week my focus
-- [ ] 
+- [ ] Create JSP for
+- [ ] Create JSP for
+- [ ] Create controller to route to
+- [ ] Create controller to manage the work of
 
 ### Week 7
 #### Checkpoint 2 is Due: Database designed and created, at least one DAO with full CRUD (create, read, update, delete)

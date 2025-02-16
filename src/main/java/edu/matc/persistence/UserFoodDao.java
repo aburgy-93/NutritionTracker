@@ -19,7 +19,9 @@ public class UserFoodDao {
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
     /**
-     * Get food by id user entered
+     * Get a user entered food
+     * @param id id of food to be returned
+     * @return food
      */
     public UserFood getUserFoodById(int id) {
         Session session = sessionFactory.openSession();
@@ -28,6 +30,10 @@ public class UserFoodDao {
         return food;
     }
 
+    /**
+     * Update a user food item
+     * @param food food to be updated
+     */
     public void updateUserFood(UserFood food) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -36,6 +42,11 @@ public class UserFoodDao {
         session.close();
     }
 
+    /**
+     * Insert a new food into user's food tracker
+     * @param food food to be inserted
+     * @return food id
+     */
     public int insertUserFood(UserFood food) {
         int id = 0;
         Session session = sessionFactory.openSession();
@@ -47,6 +58,10 @@ public class UserFoodDao {
         return id;
     }
 
+    /**
+     * Delete food from user tracker
+     * @param food food to be deleted
+     */
     public void deleteUserFood(UserFood food) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -55,6 +70,10 @@ public class UserFoodDao {
         session.close();
     }
 
+    /**
+     * Get all foods in user food tracker
+     * @return list of foods
+     */
     public List<UserFood> getAllUserFood() {
         Session session = sessionFactory.openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();

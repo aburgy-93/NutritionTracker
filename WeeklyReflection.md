@@ -1,6 +1,7 @@
 # Weekly Reflection
 
-Document how your week in Ent Java went. You may use whatever format suits you, as long as you share how much time you worked and provide a general overview of how things went: achievements and struggles.
+Document how your week in Ent Java went. You may use whatever format suits you, as long as you share how much time you 
+worked and provide a general overview of how things went: achievements and struggles.
 
 
 ### Week 2
@@ -40,4 +41,10 @@ over and over again.
 
 Task completed:
 * Created the screens for each webpage
+* Created DOAs for Food, User, UserFood classes
+* Created test classes for those DOAs
 
+Not too many issues or roadbeds this week.
+Mostly getting used to working with hibernate and setting up the DOAs for each of the classes I created. I need to next
+work on setting up the JSP and controllers for each webpage. I also need to make sure I figure out how to properly
+assign the userId to the added food item. 
