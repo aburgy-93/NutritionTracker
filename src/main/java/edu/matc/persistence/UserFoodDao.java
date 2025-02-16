@@ -36,9 +36,8 @@ public class UserFoodDao {
         session.close();
     }
 
-    public int insertUserFood(UserFood food, User user) {
+    public int insertUserFood(UserFood food) {
         int id = 0;
-        int userId = user.getId();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.persist(food);
