@@ -25,28 +25,28 @@ public class UserFood {
     private int calories;
 
     @Column(name = "protein")
-    private int protein;
+    private double protein;
 
     @Column(name = "carbs")
-    private int carbs;
+    private double carbs;
 
     @Column(name = "fat")
-    private int fat;
+    private double fat;
 
     @Column(name = "meal_time")
     private String mealTime;
 
     @Column(name = "total_calories")
-    private int totalCalories;
+    private double totalCalories;
 
     @Column(name = "total_protein")
-    private int totalProtein;
+    private double totalProtein;
 
     @Column(name = "total_carbs")
-    private int totalCarbs;
+    private double totalCarbs;
 
     @Column(name = "total_fat")
-    private int totalFats;
+    private double totalFats;
 
     // Every Entity must have a unique identifier which is annotated @Id
     // Notice there is no @Column here as the column and instance variable name are the same
@@ -70,7 +70,7 @@ public class UserFood {
      * @param servingSize the serving size
      * @param calories the amount of calories
      * @param protein the amount of protein
-     * @param carbs the amount of carbs
+     * @param carbs the number of carbs
      * @param fat the amount of fat
      * @param mealTime the meal time
      */
@@ -158,7 +158,7 @@ public class UserFood {
     public int getCalories() {return calories;}
 
     /**
-     * Set the calories amount
+     * Set the calorie amount
      * @param calories the calories of the food
      */
     public void setCalories(int calories) {this.calories = calories;}
@@ -167,37 +167,37 @@ public class UserFood {
      * Get the protein amount
      * @return the amount of protein in the food
      */
-    public int getProtein() {return protein;}
+    public double getProtein() {return protein;}
 
     /**
      * Set the protein of the food
      * @param protein the protein of the food
      */
-    public void setProtein(int protein) {this.protein = protein;}
+    public void setProtein(double protein) {this.protein = protein;}
 
     /**
      * Get the carbs of the food
      * @return the carbs in the food
      */
-    public int getCarbs() {return carbs;}
+    public double getCarbs() {return carbs;}
 
     /**
      * Set the carbs for the food
      * @param carbs the carbs amount in the food
      */
-    public void setCarbs(int carbs) {this.carbs = carbs;}
+    public void setCarbs(double carbs) {this.carbs = carbs;}
 
     /**
      * Get the fat in the food
      * @return the fat amount in food
      */
-    public int getFat(){return fat;}
+    public double getFat(){return fat;}
 
     /**
      * Set the fat in the food
      * @param fat the amount of fat in the food
      */
-    public void setFat(int fat) {this.fat = fat;}
+    public void setFat(double fat) {this.fat = fat;}
 
     /**
      * Get the meal time (breakfast, lunch, dinner, snack)
@@ -216,51 +216,61 @@ public class UserFood {
      * @return the total amount of calories
      */
 
-
-    // Need to set up a method to calculate total calories, protein, carbs and fat
-    public int getTotalCalories() {return totalCalories;}
+    public double getTotalCalories() {return totalCalories;}
 
     /**
      * Set the total amount of calories based on calories and serving size
-     * @param totalCalories the total calories in the food based on serving size
+     * @param calories number of calories in a food
+     * @param servingSize the amount of servings a user had
      */
-    public void setTotalCalories(int totalCalories) {this.totalCalories = totalCalories;}
+    public void setTotalCalories(double calories, int servingSize) {
+        this.totalCalories = calories * servingSize;
+    }
 
     /**
      * Get the total amount of protein
      * @return the total amount of protein
      */
-    public int getTotalProtein() {return totalProtein;}
+    public double getTotalProtein() {return totalProtein;}
 
     /**
      * Set the total amount of protein based on protein and serving size
-     * @param totalProtein the total protein based on serving size
+     * @param protein the amount of protein in food
+     * @param servingSize the amount of servings a user had
      */
-    public void setTotalProtein(int totalProtein) {this.totalProtein = totalProtein;}
+    public void setTotalProtein(double protein, int servingSize) {
+        this.totalProtein = protein * servingSize;
+    }
 
     /**
-     * Get the total amount of carbs
-     * @return the total amount of carbs
+     * Get the total number of carbs
+     * @return the total number of carbs
      */
-    public int getTotalCarbs() {return totalCarbs;}
+    public double getTotalCarbs() {return totalCarbs;}
 
     /**
-     * Set the total amount of carbs based on carbs and serving size
-     * @param totalCarbs the total carbs based on serving size
+     * Set the total number of carbs based on carbs and serving size
+     * @param carbs the total carbs based on serving size
+     * @param servingSize the amount of servings a user had
      */
-    public void setTotalCarbs(int totalCarbs) {this.totalCarbs = totalCarbs;}
+    public void setTotalCarbs(double carbs, int servingSize) {
+        this.totalCarbs = carbs * servingSize;
+    }
 
     /**
      * Get the total amount of fat
      * @return the total amount of fat
      */
-    public int getTotalFats() {return totalFats;}
+    public double getTotalFats() {return totalFats;}
 
     /**
      * Set the total amount of fat based on fat and serving size
-     * @param totalFats the total amount of fat based on serving size
+     * @param fat the amount of fat in a food
+     * @param servingSize the amount of servings a user had
      */
-    public void setTotalFats(int totalFats) {this.totalFats = totalFats;}
+    public void setTotalFats(double fat, int servingSize) {
+        this.totalFats = fat * servingSize;
+    }
 
     /**
      * Get the food ID
