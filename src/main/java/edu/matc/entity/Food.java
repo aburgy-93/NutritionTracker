@@ -151,4 +151,16 @@ public class Food {
      * @param protein protein amount in food
      */
     public void setProtein(int protein) {this.protein = protein;}
+
+    /**
+     * Get the id
+     * @return id
+     */
+    public int getId() {return id;}
+
+    /**
+     * Set the id
+     * @param id food id
+     */
+    public void setId(int id) {this.id = id;}
 }
