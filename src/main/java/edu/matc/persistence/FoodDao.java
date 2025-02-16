@@ -1,7 +1,9 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Food;
+import edu.matc.entity.User;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -26,6 +28,7 @@ public class FoodDao {
         Session session = sessionFactory.openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Food> criteria = builder.createQuery(Food.class);
+        Root<Food> root = criteria.from(Food.class);
         List<Food> foods = session.createSelectionQuery(criteria).getResultList();
 
         logger.debug("The list of foods is " + foods);

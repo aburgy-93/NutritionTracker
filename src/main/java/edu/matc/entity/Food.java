@@ -23,13 +23,13 @@ public class Food {
     private int calories;
 
     @Column(name = "fat")
-    private int fat;
+    private double fat;
 
     @Column(name = "carbs")
-    private int carbs;
+    private double carbs;
 
     @Column(name = "protein")
-    private int protein;
+    private double protein;
 
     // Every Entity must have a unique identifier which is annotated @Id
     // Notice there is no @Column here as the column and instance variable name are the same
@@ -45,7 +45,7 @@ public class Food {
     }
 
     public Food(String foodName, String foodType, int servingSize, String servingUnit,
-                int calories, int fat, int carbs, int protein) {
+                int calories, double fat, double carbs, double protein) {
         this.foodName = foodName;
         this.foodType = foodType;
         this.servingSize = servingSize;
@@ -120,37 +120,37 @@ public class Food {
      * Gets fat in food
      * @return fat in food
      */
-    public int getFat(){return fat;};
+    public double getFat(){return fat;};
 
     /**
      * Sets the fat amount in a food
      * @param fat amount of fat in food
      */
-    public void setFat(int fat) {this.fat = fat;}
+    public void setFat(double fat) {this.fat = fat;}
 
     /**
      * Get the number of carbs in food
      * @return number of carbs in food
      */
-    public int getCarbs(){return carbs;}
+    public double getCarbs(){return carbs;}
 
     /**
      * Sets the number of carbs in food
      * @param carbs the number of carbs in food
      */
-    public void setCarbs(int carbs) {this.carbs = carbs;}
+    public void setCarbs(double carbs) {this.carbs = carbs;}
 
     /**
      * Get the amount of protein in food
      * @return amount of protein in food
      */
-    public int getProtein(){return protein;}
+    public double getProtein(){return protein;}
 
     /**
      * Set the protein amount in food
      * @param protein protein amount in food
      */
-    public void setProtein(int protein) {this.protein = protein;}
+    public void setProtein(double protein) {this.protein = protein;}
 
     /**
      * Get the id
