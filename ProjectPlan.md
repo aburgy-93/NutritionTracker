@@ -1,13 +1,3 @@
-For those using this as a model, continue adding weekly tasks by
-considering:
-1. which user story will you work on in a given week
-2. detail the tasks needed to complete that user story
-3. what we are doing in class each week and what you might add to your
-project as a result, either in that week or the following week
-4. add in project checkpoints/milestones and tasks to achieve them
-5. I started a few of these below as examples
-
-
 # Project Plan
 
 ### Week 2
@@ -40,18 +30,35 @@ project as a result, either in that week or the following week
 - [X] Create unit tests for the User Data Access Objects(DAO)
 - [X] Create unit tests for the UserFood Data Access Objects(DAO)
 - [ ] Create a class for the DB connection business
-- [ ] Create JSP for 
-- [ ] Create JSP for
-- [ ] Create controller to route to
-- [ ] Create controller to manage the work of
+- [ ] Create JSP for Nutrition Calculator page
+- [ ] Create JSP for Nutrition Calculator Results page
+- [ ] Create JSP for User Dashboard
+- [ ] Create controller for Food Entry Processing
+- [ ] Create controller for User Dashboard
 - [X] Update weekly reflection
 
 ### Week 5 
 #### This week my focus
-- [ ] Create JSP for
-- [ ] Create JSP for
-- [ ] Create controller to route to
-- [ ] Create controller to manage the work of
+- [ ] Create JSP for Dashboard
+- [ ] Create JSP for meal logging page
+- [ ] Create JSP for meal history page
+- [ ] Create JSP for meal edit page
+- [ ] Create JSP for user profile page
+- [ ] MealController
+  -  /add-meal → Handles adding a meal.
+  -  /edit-meal → Handles meal editing.
+  -  /delete-meal → Handles meal deletion.
+  -  /meal-history → Retrieves logged meals for a user.
+  -  /copy-meal → Copies a meal from a previous day. 
+- [ ] UserController
+  -   /profile → Loads user profile.
+  -   /update-profile → Updates user nutrition goals. 
+- [ ] DashboardController
+  -  /dashboard → Displays a user's daily macro progress.
+- [ ] Implement authentication with AWS Cognito.
+- [ ] Add database logic for meals and users.
+- [ ] Implement services for CRUD operations.
+- [ ] Write unit tests for controllers and DAOs.
 
 ### Week 7
 #### Checkpoint 2 is Due: Database designed and created, at least one DAO with full CRUD (create, read, update, delete)
