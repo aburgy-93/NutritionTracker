@@ -1,44 +1,57 @@
 # User Stories
 ---<br><br>
 ### Sign up *
-As a new user I want to create and account, so I can track, edit, view my daily meals
-to see how close I am at reaching my nutritional goals each day. 
+As a new user, I want to create an account so that I can track, edit, and view my daily meals and see 
+how close I am to reaching my nutritional goals each day.
 
 ### Sign in *
-As a registered user I want to set my own nutritional goals so that each day I can 
-track what I eat to see how close to my goals I get each day. 
+As a registered user, I want to log into my account so that I can track my meals and monitor my progress toward my 
+nutritional goals.
 
-I want to be able to view each meal, edit meals if I made a mistake, and delete meals
-if needed.
-
-### As a user I want to denote meal times *
-When I add a meal I should be able to denote if it was for breakfast, lunch, dinner,
-snack, ect.
-
-### Add meals or individual food(s) *
-If there is a meal I have or food that I eat regularly I want to be able to save its
-information, so I can reuse it later and not have to re-enter its nutritional data. 
-
-### Copy meals from previous days *
-If I tend to eat the same thing or similar thing from day to day I would like to copy
-that meal from one day to the next, and also be able to update it as needed. 
-
-### Track Daily Progress *
-As a user, I want to see a summary of my daily macronutrient intake, so I can quickly
-check how close I am to meeting my goals
-A dashboard displaying total macros consumed vs. goals, possibly with color-coded 
-feedback (red → orange → green).
+### Password Reset * 
+As a user, I want to be able to reset my password if I forget it.
 
 ### Edit User Profile *
-As a user I would like to be able to update my nutritional goals as needed. Some phases
+As a user, I would like to be able to update my nutritional goals as needed. Some phases
 someone may need to eat more or less depending on their goals, so being able to update
-how much food you need to eat in a day is important to users. 
+how much food you need to eat in a day is important to users.
 
-### Password Reset *
-As a user I want to be able to reset my password if I forget it. 
+### Add Meals or Individual Foods *
+As a user, I want to save the nutritional information of meals or individual foods I eat regularly 
+so that I can quickly reuse them without re-entering data.
 
-### Admin Review Inaccurate food information
+### View Logged Meals *
+As a user, I want to be able to view each meal I have logged so that I can track what I’ve eaten 
+throughout the day.
+
+### Edit Meals *
+As a user, I want to be able to edit my logged meals in case I make a mistake.
+
+### Delete Meals *
+As a user, I want to be able to delete meals if needed.
+
+### Denote Meal Times *
+As a user, when adding a meal, I want to specify if it was for breakfast, lunch, dinner, snack, etc., 
+so that I can organize my daily intake.
+
+### Copy Meals from Previous Days *
+As a user, I want to copy a meal from a previous day to a new day so that I don’t have to re-enter 
+the same information repeatedly.
+As a user, I want to edit a copied meal in case I need to make small adjustments.
+
+### Track Daily Progress *
+As a user, I want to see a summary of my daily macronutrient intake so that I can quickly check how 
+close I am to meeting my goals.
+
+    A dashboard displaying total macros consumed vs. goals, possibly with color-coded feedback 
+    (red → orange → green).
+
+### Admin Review Inaccurate Food Information
+As an admin, I want to review and correct inaccurate food information in the database so that users 
+can rely on accurate nutritional data.
 
 ### Admin Review Inappropriate Items
+As an admin, I want to review and remove inappropriate items so that the food database remains 
+relevant and appropriate for all users.
 
 *Denotes MVP
