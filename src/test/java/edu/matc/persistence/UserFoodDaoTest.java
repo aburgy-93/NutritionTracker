@@ -1,12 +1,11 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Food;
+import edu.matc.entity.User;
 import edu.matc.entity.UserFood;
 import edu.matc.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.xml.crypto.Data;
 
 import java.util.List;
 
@@ -14,53 +13,66 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserFoodDaoTest {
     UserFoodDao userFoodDao;
-    UserFood userFood;
+    FoodDao foodDao;
+    UserDao userDao;
 
     @BeforeEach
     void setUp() {
         userFoodDao = new UserFoodDao();
+        foodDao = new FoodDao();
+        userDao = new UserDao();
         Database database = new Database();
         database.runSQL("cleanDB.sql");
     }
 
     @Test
     void getUserFoodById() {
-        UserFood food = userFoodDao.getUserFoodById(1);
-        assertNotNull(food);
-        assertEquals(food.getUserId(), 1);
+        UserFood retrievedUserFood = userFoodDao.getUserFoodById(1);
+        assertNotNull(retrievedUserFood);
+        assertEquals("Chicken Breast", retrievedUserFood.getFoodName());
     }
 
     @Test
     void updateUserFood() {
-        UserFood foodToUpdate = userFoodDao.getUserFoodById(1);
-        foodToUpdate.setFoodName("Lean Chicken Breast");
-        userFoodDao.updateUserFood(foodToUpdate);
-
-        UserFood food = userFoodDao.getUserFoodById(1);
-        assertEquals(food.getFoodName(), foodToUpdate.getFoodName());
+        Food retrievedFood = foodDao.getFoodById(1);
+        retrievedFood.setFoodName("Lean Chicken Breast");
+        foodDao.updateFood(retrievedFood);
+        UserFood retrievedUserFood = userFoodDao.getUserFoodById(1);
+        assertNotNull(retrievedUserFood);
+        assertEquals("Lean Chicken Breast", retrievedUserFood.getFoodName());
     }
 
     @Test
-    // How do I calculate the total calories, pro, carbs, fat when entering a new food?
     void insertUserFood() {
-        UserFood insertFood = new UserFood(1, "2025-02-16", "Large Egg", "Poultry",
-                1, 70, 6.0, 1.0, 4.5, "Breakfast",  70, 6.0, 1.0, 4.5);
-        userFoodDao.insertUserFood(insertFood);
-        assertNotNull(userFoodDao.getUserFoodById(3));
-        assertEquals(userFoodDao.getUserFoodById(3).getFoodName(), insertFood.getFoodName());
+        // get a user
+        UserDao userDao = new UserDao();
+        User user = userDao.getUserById(1);
+        assertNotNull(user);
+
+        // Create food with that user
+        UserFood foodEnteredByUser = new UserFood(user.getId(), 2, "2025-02-20", 1, "Breakfast", 70, 6.0, 1.0, 4.5, user);
+        int insertedUserFoodId = userFoodDao.insertUserFood(foodEnteredByUser);
+
+        // retrieve the food
+        UserFood retrievedUserFood = userFoodDao.getUserFoodById(insertedUserFoodId);
+
+        // Verify
+        assertNotNull(retrievedUserFood);
+        assertEquals("White Rice", retrievedUserFood.getFoodName());
+
     }
 
     @Test
+    // deletes everything a user tracked
     void deleteUserFood() {
-        UserFood food = userFoodDao.getUserFoodById(1);
-        userFoodDao.deleteUserFood(food);
-        assertNull(userFoodDao.getUserFoodById(1));
+        userFoodDao.deleteUserFood(userFoodDao.getUserFoodById(2));
+        assertNull(userFoodDao.getUserFoodById(2));
     }
 
     @Test
-    // How to list all foods based on userId?
     void getAllUserFood() {
-        List<UserFood> userFoods = userFoodDao.getAllUserFood();
-        assertEquals(2, userFoods.size());
+        List<UserFood> foods = userFoodDao.getAllUserFood();
+        assertNotNull(foods);
+        assertEquals(2, foods.size());
     }
 }

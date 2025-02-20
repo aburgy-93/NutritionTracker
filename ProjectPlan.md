@@ -45,7 +45,7 @@
 - [ ] Create JSP for meal edit page
 - [ ] Create JSP for user profile page
 - [ ] MealController
-  -  /add-meal → Handles adding a meal.
+  -   /add-meal → Handles adding a meal.
   -  /edit-meal → Handles meal editing.
   -  /delete-meal → Handles meal deletion.
   -  /meal-history → Retrieves logged meals for a user.

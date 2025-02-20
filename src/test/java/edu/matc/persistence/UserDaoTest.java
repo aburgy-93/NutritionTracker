@@ -11,17 +11,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
     UserDao userDao;
+    GenericDao genericDao;
 
     @BeforeEach
     void setUp() {
         userDao = new UserDao();
+        genericDao = new GenericDao(User.class);
         Database database = new Database();
         database.runSQL("cleanDB.sql");
     }
 
     @Test
     void getUserById() {
-        User retrievedUser = userDao.getUserById(1);
+        User retrievedUser = (User)genericDao.getById(1);
         assertNotNull(retrievedUser);
         assertEquals("Alex", retrievedUser.getFirstName());
     }
@@ -43,13 +45,13 @@ class UserDaoTest {
 
     @Test
     void deleteUser() {
-        userDao.deleteUser(userDao.getUserById(1));
+        genericDao.deleteEntity(userDao.getUserById(1));
         assertNull(userDao.getUserById(1));
     }
 
     @Test
     void getAllUsers() {
-        List<User> users = userDao.getAllUsers();
+        List users = genericDao.getAll();
         assertEquals(1, users.size());
     }
 }
