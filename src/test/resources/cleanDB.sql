@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 9.2.0, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: nutrition_tracker
+-- Host: 127.0.0.1    Database: nutrition_test
 -- ------------------------------------------------------
 -- Server version	9.2.0
 
@@ -56,21 +56,20 @@ DROP TABLE IF EXISTS `food_tracker`;
 CREATE TABLE `food_tracker` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
+  `food_id` int NOT NULL,
   `date` date NOT NULL,
-  `food_name` varchar(50) NOT NULL,
-  `food_type` varchar(50) NOT NULL,
   `serving_size` int NOT NULL,
-  `calories` int NOT NULL,
-  `protein` int NOT NULL,
-  `carbs` int NOT NULL,
-  `fat` int NOT NULL,
   `meal_time` varchar(50) NOT NULL,
   `total_calories` int NOT NULL,
   `total_protein` int NOT NULL,
   `total_carbs` int NOT NULL,
   `total_fat` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `food_id` (`food_id`),
+  CONSTRAINT `food_tracker_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `food_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `food_tracker_ibfk_2` FOREIGN KEY (`food_id`) REFERENCES `food_table` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +78,7 @@ CREATE TABLE `food_tracker` (
 
 LOCK TABLES `food_tracker` WRITE;
 /*!40000 ALTER TABLE `food_tracker` DISABLE KEYS */;
-INSERT INTO `food_tracker` VALUES (1,1,'2025-02-15','Chicken Breast','Meat',5,37,9,0,0,'Lunch',184,43,0,2),(2,1,'2025-02-15','White Rice','Grain',2,242,4,53,0,'Lunch',484,9,106,1);
+INSERT INTO `food_tracker` VALUES (1,1,1,'2025-02-15',5,'Lunch',184,43,0,2), (2, 1, 2, '2025-02-20', 1, 'Lunch', 242, 4.3, 53.0, 0.4);
 /*!40000 ALTER TABLE `food_tracker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-15 14:54:46
+-- Dump completed on 2025-02-20 10:18:50

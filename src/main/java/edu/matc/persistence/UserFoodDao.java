@@ -1,6 +1,5 @@
 package edu.matc.persistence;
 
-import edu.matc.entity.User;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.SessionFactory;

@@ -9,29 +9,14 @@ public class UserFood {
     @Column(name = "user_id")
     private int userId;
 
+    @Column(name = "food_id")
+    private int foodId;
+
     @Column(name = "date")
     private String date;
 
-    @Column(name = "food_name")
-    private String foodName;
-
-    @Column(name = "food_type")
-    private String foodType;
-
     @Column(name = "serving_size")
     private int servingSize;
-
-    @Column(name = "calories")
-    private int calories;
-
-    @Column(name = "protein")
-    private double protein;
-
-    @Column(name = "carbs")
-    private double carbs;
-
-    @Column(name = "fat")
-    private double fat;
 
     @Column(name = "meal_time")
     private String mealTime;
@@ -55,6 +40,14 @@ public class UserFood {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "food_id", referencedColumnName = "id", insertable=false, updatable=false)
+    private Food food;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
+    private User user;
+
     /**
      * No argument constructor
      */
@@ -63,14 +56,9 @@ public class UserFood {
     /**
      * Instantiates a new Food
      * @param userId the user who entered the food
+     * @param foodId the id of the food entered
      * @param date the date of food entered
-     * @param foodName the name of the food
-     * @param foodType the type of food
      * @param servingSize the serving size
-     * @param calories the amount of calories
-     * @param protein the amount of protein
-     * @param carbs the number of carbs
-     * @param fat the amount of fat
      * @param mealTime the meal time
      * @param totalCalories total amount of calories based on serving size and calories
      * @param totalProtein total amount of protein based on serving size and protein
@@ -78,22 +66,18 @@ public class UserFood {
      * @param totalFats total amount of fat based on serving size and fat
      */
 
-    public UserFood(int userId, String date, String foodName, String foodType, int servingSize, int calories, double protein,
-                    double carbs, double fat, String mealTime, double totalCalories, double totalProtein, double totalCarbs, double totalFats) {
+    public UserFood(int userId, int foodId, String date, int servingSize, String mealTime, double totalCalories,
+                    double totalProtein, double totalCarbs, double totalFats, User user) {
         this.userId = userId;
+        this.foodId = foodId;
         this.date = date;
-        this.foodName = foodName;
-        this.foodType = foodType;
         this.servingSize = servingSize;
-        this.calories = calories;
-        this.protein = protein;
-        this.carbs = carbs;
-        this.fat = fat;
         this.mealTime = mealTime;
         this.totalCalories = totalCalories;
         this.totalProtein = totalProtein;
         this.totalCarbs = totalCarbs;
         this.totalFats = totalFats;
+        this.user = user;
     }
 
     /**
@@ -108,6 +92,8 @@ public class UserFood {
      */
     public void setUserId(int userId) {this.userId = userId;}
 
+    public int getFoodId() {return foodId;}
+
     /**
      * Get date of meal
      * @return the date of meal eaten
@@ -121,30 +107,6 @@ public class UserFood {
     public void setDate(String date) {this.date = date;}
 
     /**
-     * Get the food name
-     * @return the food name
-     */
-    public String getFoodName() {return foodName;}
-
-    /**
-     * Set the food name
-     * @param foodName the name of the food entered
-     */
-    public void setFoodName(String foodName) {this.foodName = foodName;}
-
-    /**
-     * Get the type of food
-     * @return the food type
-     */
-    public String getFoodType() {return foodType;}
-
-    /**
-     * Set the food type
-     * @param foodType the food type
-     */
-    public void setFoodType(String foodType) {this.foodType = foodType;}
-
-    /**
      * Get the serving size
      * @return the serving size
      */
@@ -156,53 +118,6 @@ public class UserFood {
      */
     public void setServingSize(int servingSize) {this.servingSize = servingSize;}
 
-    /**
-     * Get the calories of the food
-     * @return the calories of the food
-     */
-    public int getCalories() {return calories;}
-
-    /**
-     * Set the calorie amount
-     * @param calories the calories of the food
-     */
-    public void setCalories(int calories) {this.calories = calories;}
-
-    /**
-     * Get the protein amount
-     * @return the amount of protein in the food
-     */
-    public double getProtein() {return protein;}
-
-    /**
-     * Set the protein of the food
-     * @param protein the protein of the food
-     */
-    public void setProtein(double protein) {this.protein = protein;}
-
-    /**
-     * Get the carbs of the food
-     * @return the carbs in the food
-     */
-    public double getCarbs() {return carbs;}
-
-    /**
-     * Set the carbs for the food
-     * @param carbs the carbs amount in the food
-     */
-    public void setCarbs(double carbs) {this.carbs = carbs;}
-
-    /**
-     * Get the fat in the food
-     * @return the fat amount in food
-     */
-    public double getFat(){return fat;}
-
-    /**
-     * Set the fat in the food
-     * @param fat the amount of fat in the food
-     */
-    public void setFat(double fat) {this.fat = fat;}
 
     /**
      * Get the meal time (breakfast, lunch, dinner, snack)
@@ -288,4 +203,12 @@ public class UserFood {
      * @param id food id
      */
     public void setId(int id) {this.id = id;}
+
+    public String getFoodName() {
+        return food.getFoodName();
+    }
+
+    public void setFoodName(String foodName) {
+        this.food.setFoodName(foodName);
+    }
 }
