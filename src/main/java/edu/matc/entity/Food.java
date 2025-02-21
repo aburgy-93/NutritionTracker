@@ -83,7 +83,7 @@ public class Food {
      *
      * @param foodName the name of the food
      */
-    public void setFoodName(String foodName) {this.foodName = foodName;};
+    public void setFoodName(String foodName) {this.foodName = foodName;}
 
     /**
      * Gets a food type
@@ -97,7 +97,7 @@ public class Food {
      *
      * @param foodType the food type
      */
-    public void setFoodType(String foodType) {this.foodType = foodType;};
+    public void setFoodType(String foodType) {this.foodType = foodType;}
 
     /**
      * Gets the serving size
@@ -111,7 +111,7 @@ public class Food {
      *
      * @param servingSize the serving size
      */
-    public void setServingSize(int servingSize) {this.servingSize = servingSize;};
+    public void setServingSize(int servingSize) {this.servingSize = servingSize;}
 
     /**
      * Gets the serving unit
@@ -125,7 +125,7 @@ public class Food {
      *
      * @param servingUnit serving unit
      */
-    public void setServingUnit(String servingUnit) {this.servingUnit = servingUnit;};
+    public void setServingUnit(String servingUnit) {this.servingUnit = servingUnit;}
 
     /**
      * Gets calories of food
@@ -139,14 +139,14 @@ public class Food {
      *
      * @param calories calories in food
      */
-    public void setCalories(int calories) {this.calories = calories;};
+    public void setCalories(int calories) {this.calories = calories;}
 
     /**
      * Gets fat in food
      *
      * @return fat in food
      */
-    public double getFat(){return fat;};
+    public double getFat(){return fat;}
 
     /**
      * Sets the fat amount in a food
@@ -196,4 +196,19 @@ public class Food {
      * @param id food id
      */
     public void setId(int id) {this.id = id;}
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", foodName='" + foodName + '\'' +
+                ", foodType='" + foodType + '\'' +
+                ", servingSize=" + servingSize +
+                " " + servingUnit +
+                ", calories=" + calories +
+                ", fat=" + fat +
+                "g, carbs=" + carbs +
+                "g, protein=" + protein +
+                "g}";
+    }
 }

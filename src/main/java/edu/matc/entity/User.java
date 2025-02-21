@@ -156,4 +156,17 @@ public class User {
      */
     public void setId(int id) {this.id = id;};
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", accessPrivileges='" + accessPrivileges + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", userWeight=" + userWeight + " lbs" +
+                ", birthDate='" + birthDate + '\'' +
+                '}';
+    }
+
 }

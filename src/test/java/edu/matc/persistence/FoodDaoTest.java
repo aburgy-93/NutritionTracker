@@ -17,7 +17,7 @@ class FoodDaoTest {
     /**
      * The Generic dao.
      */
-    GenericDao genericDao;
+    GenericDao<Food> genericDao;
 
     /**
      * Sets up.
@@ -25,7 +25,7 @@ class FoodDaoTest {
     @BeforeEach
 
     void setUp() {
-        genericDao = new GenericDao(Food.class);
+        genericDao = new GenericDao<>(Food.class);
         Database database = new Database();
         database.runSQL("cleanDB.sql");
     }
@@ -35,7 +35,7 @@ class FoodDaoTest {
      */
     @Test
     void getFoodById() {
-        Food retrievedFood = (Food) genericDao.getById(1);
+        Food retrievedFood = genericDao.getById(1);
         assertNotNull(retrievedFood);
         assertEquals("Chicken Breast", retrievedFood.getFoodName());
     }
@@ -45,7 +45,7 @@ class FoodDaoTest {
      */
     @Test
     void getAllFood() {
-        List retrievedFood = genericDao.getAll();
+        List<Food> retrievedFood = genericDao.getAll();
         assertNotNull(retrievedFood);
         assertEquals(2, retrievedFood.size());
     }
@@ -55,10 +55,10 @@ class FoodDaoTest {
      */
     @Test
     void updateFood() {
-        Food foodToUpdate = (Food) genericDao.getById(1);
+        Food foodToUpdate = genericDao.getById(1);
         foodToUpdate.setFoodName("Brown Rice");
         genericDao.update(foodToUpdate);
-        Food retrievedFood = (Food) genericDao.getById(1);
+        Food retrievedFood = genericDao.getById(1);
         assertEquals("Brown Rice", retrievedFood.getFoodName());
     }
 
@@ -73,7 +73,8 @@ class FoodDaoTest {
     void insertFood() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         Food foodToInsert = new Food("Large Eggs", "Poultry", 1, "Large Egg",
                 70, 4.5,1.0,6.0);
-        int insertedFood = genericDao.insert(foodToInsert);
+        genericDao.insert(foodToInsert);
+
         assertEquals("Large Eggs", foodToInsert.getFoodName());
     }
 
@@ -82,7 +83,7 @@ class FoodDaoTest {
      */
     @Test
     void deleteFood() {
-        Food foodToDelete = (Food) genericDao.getById(2);
+        Food foodToDelete = genericDao.getById(2);
         genericDao.deleteEntity(foodToDelete);
         assertNull(genericDao.getById(2));
     }
