@@ -58,12 +58,25 @@ class UserFoodDaoTest {
      */
     @Test
     void updateUserFood() {
+        String newFoodName = "Lean Chicken Breast";
+        // Get the food from the table
         Food retrievedFood = foodDao.getById(1);
-        retrievedFood.setFoodName("Lean Chicken Breast");
+
+        // Update the name of the food
+        retrievedFood.setFoodName(newFoodName);
+
+        // Update the food in the table
         foodDao.update(retrievedFood);
+
+        // Get the food from the table
         UserFood retrievedUserFood = userFoodDao.getById(1);
+
+        // Verify the updated food
         assertNotNull(retrievedUserFood);
-        assertEquals("Lean Chicken Breast", retrievedUserFood.getFoodName());
+
+        // Since these are two different objects, they won't be equal, but the food names will be
+        // Not sure if there is a better way to test equalness of values of a different object.
+        assertEquals(retrievedFood.getFoodName(), retrievedUserFood.getFoodName());
     }
 
     /**
@@ -75,12 +88,12 @@ class UserFoodDaoTest {
      */
     @Test
     void insertUserFood() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        // get a user
+        // get a user, verify user exists
         User user = userDao.getById(1);
         assertNotNull(user);
 
         // Create food with that user
-        UserFood foodEnteredByUser = new UserFood(user.getId(), 2, "2025-02-20", 1, "Breakfast", 70, 6.0, 1.0, 4.5, user);
+        UserFood foodEnteredByUser = new UserFood(user.getId(), 2, "2025-02-20", 1, "Breakfast", 70, 6.0, 1.0, 5.0, user);
         int insertedUserFoodId = userFoodDao.insert(foodEnteredByUser);
 
         // retrieve the food
@@ -88,7 +101,9 @@ class UserFoodDaoTest {
 
         // Verify
         assertNotNull(retrievedUserFood);
-        assertEquals("White Rice", retrievedUserFood.getFoodName());
+
+        // Only works when I get an attribute but not when I compare the two objects
+        assertEquals(foodEnteredByUser.getFoodId(), retrievedUserFood.getFoodId());
     }
 
     /**
