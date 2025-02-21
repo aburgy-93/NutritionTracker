@@ -12,12 +12,27 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type User food dao test.
+ */
 class UserFoodDaoTest {
+    /**
+     * The User dao.
+     */
     GenericDao<User> userDao;
+    /**
+     * The Food dao.
+     */
     GenericDao<Food> foodDao;
+    /**
+     * The User food dao.
+     */
     GenericDao<UserFood> userFoodDao;
 
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         userFoodDao = new GenericDao<>(UserFood.class);
@@ -28,6 +43,9 @@ class UserFoodDaoTest {
         database.runSQL("cleanDB.sql");
     }
 
+    /**
+     * Gets user food by id.
+     */
     @Test
     void getUserFoodById() {
         UserFood retrievedUserFood = userFoodDao.getById(1);
@@ -35,6 +53,9 @@ class UserFoodDaoTest {
         assertEquals("Chicken Breast", retrievedUserFood.getFoodName());
     }
 
+    /**
+     * Update user food.
+     */
     @Test
     void updateUserFood() {
         Food retrievedFood = foodDao.getById(1);
@@ -45,6 +66,13 @@ class UserFoodDaoTest {
         assertEquals("Lean Chicken Breast", retrievedUserFood.getFoodName());
     }
 
+    /**
+     * Insert user food.
+     *
+     * @throws InvocationTargetException the invocation target exception
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws IllegalAccessException    the illegal access exception
+     */
     @Test
     void insertUserFood() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         // get a user
@@ -63,6 +91,9 @@ class UserFoodDaoTest {
         assertEquals("White Rice", retrievedUserFood.getFoodName());
     }
 
+    /**
+     * Delete user food.
+     */
     @Test
     // deletes everything a user tracked
     void deleteUserFood() {
@@ -70,6 +101,9 @@ class UserFoodDaoTest {
         assertNull(userFoodDao.getById(2));
     }
 
+    /**
+     * Gets all user food.
+     */
     @Test
     void getAllUserFood() {
         List<UserFood> foods = userFoodDao.getAll();

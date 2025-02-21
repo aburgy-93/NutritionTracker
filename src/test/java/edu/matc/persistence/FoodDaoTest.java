@@ -10,9 +10,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Food dao test.
+ */
 class FoodDaoTest {
+    /**
+     * The Generic dao.
+     */
     GenericDao genericDao;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
 
     void setUp() {
@@ -21,6 +30,9 @@ class FoodDaoTest {
         database.runSQL("cleanDB.sql");
     }
 
+    /**
+     * Gets food by id.
+     */
     @Test
     void getFoodById() {
         Food retrievedFood = (Food) genericDao.getById(1);
@@ -28,6 +40,9 @@ class FoodDaoTest {
         assertEquals("Chicken Breast", retrievedFood.getFoodName());
     }
 
+    /**
+     * Gets all food.
+     */
     @Test
     void getAllFood() {
         List retrievedFood = genericDao.getAll();
@@ -35,6 +50,9 @@ class FoodDaoTest {
         assertEquals(2, retrievedFood.size());
     }
 
+    /**
+     * Update food.
+     */
     @Test
     void updateFood() {
         Food foodToUpdate = (Food) genericDao.getById(1);
@@ -44,6 +62,13 @@ class FoodDaoTest {
         assertEquals("Brown Rice", retrievedFood.getFoodName());
     }
 
+    /**
+     * Insert food.
+     *
+     * @throws InvocationTargetException the invocation target exception
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws IllegalAccessException    the illegal access exception
+     */
     @Test
     void insertFood() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         Food foodToInsert = new Food("Large Eggs", "Poultry", 1, "Large Egg",
@@ -52,6 +77,9 @@ class FoodDaoTest {
         assertEquals("Large Eggs", foodToInsert.getFoodName());
     }
 
+    /**
+     * Delete food.
+     */
     @Test
     void deleteFood() {
         Food foodToDelete = (Food) genericDao.getById(2);

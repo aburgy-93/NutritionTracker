@@ -12,10 +12,20 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+/**
+ * The type Generic dao.
+ *
+ * @param <T> the type parameter
+ */
 public class GenericDao<T> {
     private Class<T> type;
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * Instantiates a new Generic dao.
+     *
+     * @param type the type
+     */
     public GenericDao(Class<T> type) {
         this.type = type;
     }
@@ -24,6 +34,12 @@ public class GenericDao<T> {
         return SessionFactoryProvider.getSessionFactory().openSession();
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
     public T getById(int id) {
         Session session = getSession();
         T entity = (T)session.get(type, id);
@@ -31,6 +47,11 @@ public class GenericDao<T> {
         return entity;
     }
 
+    /**
+     * Update.
+     *
+     * @param entity the entity
+     */
     public void update(T entity) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
@@ -39,6 +60,15 @@ public class GenericDao<T> {
         session.close();
     }
 
+    /**
+     * Insert int.
+     *
+     * @param entity the entity
+     * @return the int
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws InvocationTargetException the invocation target exception
+     * @throws IllegalAccessException    the illegal access exception
+     */
     public int insert(T entity) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         int id = 0;
         Session session = getSession();
@@ -50,6 +80,11 @@ public class GenericDao<T> {
         return id;
     }
 
+    /**
+     * Delete entity.
+     *
+     * @param entity the entity
+     */
     public void deleteEntity(T entity) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
@@ -58,6 +93,11 @@ public class GenericDao<T> {
         session.close();
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     public List<T> getAll() {
         Session session = getSession();
 
