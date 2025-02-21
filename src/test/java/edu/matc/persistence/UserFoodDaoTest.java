@@ -104,6 +104,9 @@ class UserFoodDaoTest {
 
         // Only works when I get an attribute but not when I compare the two objects
         assertEquals(foodEnteredByUser.getFoodId(), retrievedUserFood.getFoodId());
+
+        // Does not currently work when the two objects are compared
+        // assertEquals(foodEnteredByUser, retrievedUserFood);
     }
 
     /**
