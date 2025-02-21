@@ -56,11 +56,22 @@ class UserDaoTest {
      */
     @Test
     void updateUser() {
+        String newLastName = "Smith";
+
+        // Get the user to update
         User userToUpdate = genericUserDao.getById(1);
-        userToUpdate.setLastName("Smith");
+
+        // Set their new last name
+        userToUpdate.setLastName(newLastName);
+
+        // Update the table
         genericUserDao.update(userToUpdate);
+
+        // Retrieve the user from the table
         User retrievedUser = genericUserDao.getById(1);
-        assertEquals("Smith", retrievedUser.getLastName());
+
+        // Verify
+        assertEquals(userToUpdate, retrievedUser);
     }
 
     /**
@@ -72,14 +83,18 @@ class UserDaoTest {
      */
     @Test
     void addUser() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        // Create new user
         User newUser = new User("user", "Ricky", "Bobby", "numberone@gmail.com", 225, "1979-01-01");
 
+        // Insert the new user and return their userId
         int userId = genericUserDao.insert(newUser);
 
+        // Retrieve the new user from the table
         User retrievedUser = genericUserDao.getById(userId);
 
+        // Verify the new user and their data
         assertNotEquals(0, retrievedUser.getId());
-        assertEquals("Ricky", retrievedUser.getFirstName());
+        assertEquals(newUser, retrievedUser);
     }
 
     /**
