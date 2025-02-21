@@ -201,6 +201,7 @@ public class Food {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Food food = (Food) o;
         return servingSize == food.servingSize && calories == food.calories && Double.compare(fat, food.fat) == 0 && Double.compare(carbs, food.carbs) == 0 && Double.compare(protein, food.protein) == 0 && id == food.id && Objects.equals(foodName, food.foodName) && Objects.equals(foodType, food.foodType) && Objects.equals(servingUnit, food.servingUnit);

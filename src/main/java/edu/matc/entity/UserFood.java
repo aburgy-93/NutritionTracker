@@ -3,6 +3,8 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Objects;
+
 /**
  * The type User food.
  */
@@ -262,5 +264,17 @@ public class UserFood {
                 ", totalCarbs=" + totalCarbs +
                 ", totalFats=" + totalFats +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UserFood userFood = (UserFood) o;
+        return userId == userFood.userId && foodId == userFood.foodId && servingSize == userFood.servingSize && Double.compare(totalCalories, userFood.totalCalories) == 0 && Double.compare(totalProtein, userFood.totalProtein) == 0 && Double.compare(totalCarbs, userFood.totalCarbs) == 0 && Double.compare(totalFats, userFood.totalFats) == 0 && id == userFood.id && Objects.equals(date, userFood.date) && Objects.equals(mealTime, userFood.mealTime) && Objects.equals(food, userFood.food) && Objects.equals(user, userFood.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, foodId, date, servingSize, mealTime, totalCalories, totalProtein, totalCarbs, totalFats, id, food, user);
     }
 }
