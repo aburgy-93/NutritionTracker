@@ -14,13 +14,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserFoodDaoTest {
     UserFoodDao userFoodDao;
     FoodDao foodDao;
-    UserDao userDao;
+
+    GenericDao<User> userDao;
+//    GenericDao<Food> foodDao;
+//    GenericDao<UserFood> userFoodDao;
+
 
     @BeforeEach
     void setUp() {
         userFoodDao = new UserFoodDao();
         foodDao = new FoodDao();
-        userDao = new UserDao();
+        userDao = new GenericDao<>(User.class);
+
         Database database = new Database();
         database.runSQL("cleanDB.sql");
     }
@@ -45,8 +50,7 @@ class UserFoodDaoTest {
     @Test
     void insertUserFood() {
         // get a user
-        UserDao userDao = new UserDao();
-        User user = userDao.getUserById(1);
+        User user = userDao.getById(1);
         assertNotNull(user);
 
         // Create food with that user
