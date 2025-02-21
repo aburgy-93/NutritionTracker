@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class GenericDao<T> {
@@ -23,20 +24,28 @@ public class GenericDao<T> {
         return SessionFactoryProvider.getSessionFactory().openSession();
     }
 
-    public <T>T getById(int id) {
+    public T getById(int id) {
         Session session = getSession();
         T entity = (T)session.get(type, id);
         session.close();
         return entity;
     }
 
-    public int addUser(User user) {
+    public void update(T entity) {
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+        session.merge(entity);
+        transaction.commit();
+        session.close();
+    }
+
+    public int insert(T entity) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         int id = 0;
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        session.persist(user);
+        session.persist(entity);
         transaction.commit();
-        id = user.getId();
+        id = (int) entity.getClass().getMethod("getId").invoke(entity);
         session.close();
         return id;
     }
