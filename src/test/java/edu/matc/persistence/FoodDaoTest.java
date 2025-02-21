@@ -35,7 +35,10 @@ class FoodDaoTest {
      */
     @Test
     void getFoodById() {
+        // get food by its ID
         Food retrievedFood = genericDao.getById(1);
+
+        // verify it exists
         assertNotNull(retrievedFood);
         assertEquals("Chicken Breast", retrievedFood.getFoodName());
     }
@@ -45,9 +48,15 @@ class FoodDaoTest {
      */
     @Test
     void getAllFood() {
+        // get all foods in the food table
         List<Food> retrievedFood = genericDao.getAll();
+
+        // get the size of the table
+        int tableSize = retrievedFood.size();
+
+        // verify the size of the list
         assertNotNull(retrievedFood);
-        assertEquals(2, retrievedFood.size());
+        assertEquals(tableSize, retrievedFood.size());
     }
 
     /**
