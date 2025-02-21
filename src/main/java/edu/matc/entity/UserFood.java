@@ -247,4 +247,20 @@ public class UserFood {
     public void setFoodName(String foodName) {
         this.food.setFoodName(foodName);
     }
+
+    @Override
+    public String toString() {
+        return "UserFood{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", foodId=" + foodId +
+                ", date='" + date + '\'' +
+                ", servingSize=" + servingSize +
+                ", mealTime='" + mealTime + '\'' +
+                ", totalCalories=" + totalCalories +
+                ", totalProtein=" + totalProtein +
+                ", totalCarbs=" + totalCarbs +
+                ", totalFats=" + totalFats +
+                '}';
+    }
 }

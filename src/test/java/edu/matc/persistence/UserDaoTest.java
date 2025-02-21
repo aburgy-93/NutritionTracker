@@ -20,7 +20,13 @@ class UserDaoTest {
      * The Generic dao.
      */
     GenericDao<User> genericUserDao;
+    /**
+     * The Generic user food dao.
+     */
     GenericDao<UserFood> genericUserFoodDao;
+    /**
+     * The Generic food dao.
+     */
     GenericDao<Food> genericFoodDao;
 
     /**
@@ -40,7 +46,7 @@ class UserDaoTest {
      */
     @Test
     void getUserById() {
-        User retrievedUser = (User)genericUserDao.getById(1);
+        User retrievedUser = genericUserDao.getById(1);
         assertNotNull(retrievedUser);
         assertEquals("Alex", retrievedUser.getFirstName());
     }
@@ -50,10 +56,10 @@ class UserDaoTest {
      */
     @Test
     void updateUser() {
-        User userToUpdate = (User)genericUserDao.getById(1);
+        User userToUpdate = genericUserDao.getById(1);
         userToUpdate.setLastName("Smith");
         genericUserDao.update(userToUpdate);
-        User retrievedUser = (User)genericUserDao.getById(1);
+        User retrievedUser = genericUserDao.getById(1);
         assertEquals("Smith", retrievedUser.getLastName());
     }
 
@@ -70,7 +76,7 @@ class UserDaoTest {
 
         int userId = genericUserDao.insert(newUser);
 
-        User retrievedUser = (User)genericUserDao.getById(userId);
+        User retrievedUser = genericUserDao.getById(userId);
 
         assertNotEquals(0, retrievedUser.getId());
         assertEquals("Ricky", retrievedUser.getFirstName());
@@ -85,10 +91,13 @@ class UserDaoTest {
         assertNull(genericUserDao.getById(1));
     }
 
+    /**
+     * Delete a user and their meals.
+     */
     @Test
     void deleteWithMeals() {
         // get the user we want to delete that has food associated with it
-        User userToDelete = (User)genericUserDao.getById(1);
+        User userToDelete = genericUserDao.getById(1);
         assertNotNull(userToDelete);
 
         // Get all foods a user has entered
