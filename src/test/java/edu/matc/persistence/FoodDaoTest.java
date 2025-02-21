@@ -55,11 +55,23 @@ class FoodDaoTest {
      */
     @Test
     void updateFood() {
+        // String with updated food name
+        String updatedFoodName = "Brown rice";
+
+        // get food to update
         Food foodToUpdate = genericDao.getById(1);
-        foodToUpdate.setFoodName("Brown Rice");
+
+        // set the food's new name
+        foodToUpdate.setFoodName(updatedFoodName);
+
+        // update the food
         genericDao.update(foodToUpdate);
+
+        // get the food inserted by id
         Food retrievedFood = genericDao.getById(1);
-        assertEquals("Brown Rice", retrievedFood.getFoodName());
+
+        // verify the updated food and retrieved food are the same
+        assertEquals(foodToUpdate, retrievedFood);
     }
 
     /**
@@ -71,11 +83,18 @@ class FoodDaoTest {
      */
     @Test
     void insertFood() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        // create food to be inserted
         Food foodToInsert = new Food("Large Eggs", "Poultry", 1, "Large Egg",
                 70, 4.5,1.0,6.0);
+
+        // insert the food
         genericDao.insert(foodToInsert);
 
-        assertEquals("Large Eggs", foodToInsert.getFoodName());
+        // get food inserted
+        Food retrievedFood = genericDao.getById(3);
+
+        // check to make sure the inserted food and food in table are the same
+        assertEquals(retrievedFood, foodToInsert);
     }
 
     /**

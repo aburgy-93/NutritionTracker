@@ -4,6 +4,8 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Objects;
+
 /**
  * The type Food.
  */
@@ -196,6 +198,18 @@ public class Food {
      * @param id food id
      */
     public void setId(int id) {this.id = id;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Food food = (Food) o;
+        return servingSize == food.servingSize && calories == food.calories && Double.compare(fat, food.fat) == 0 && Double.compare(carbs, food.carbs) == 0 && Double.compare(protein, food.protein) == 0 && id == food.id && Objects.equals(foodName, food.foodName) && Objects.equals(foodType, food.foodType) && Objects.equals(servingUnit, food.servingUnit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(foodName, foodType, servingSize, servingUnit, calories, fat, carbs, protein, id);
+    }
 
     @Override
     public String toString() {
