@@ -3,6 +3,9 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * The type User.
+ */
 @Entity
 @Table(name = "food_user")
 public class User {
@@ -31,8 +34,21 @@ public class User {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
 
+    /**
+     * Instantiates a new User.
+     */
     public User() {}
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param accessPrivileges the access privileges
+     * @param firstName        the first name
+     * @param lastName         the last name
+     * @param email            the email
+     * @param userWeight       the user weight
+     * @param birthDate        the birth date
+     */
     public User(String accessPrivileges,String firstName, String lastName, String email, int userWeight, String birthDate) {
         this.accessPrivileges = accessPrivileges;
         this.firstName = firstName;
@@ -44,6 +60,7 @@ public class User {
 
     /**
      * Gets user's access privileges
+     *
      * @return the access privileges of user
      */
     public String getAccessPrivileges() {return accessPrivileges;};
@@ -58,7 +75,7 @@ public class User {
     /**
      * Gets the user's first name
      *
-     * @return user's first name
+     * @return user 's first name
      */
     public String getFirstName() {return firstName;};
 
@@ -72,12 +89,13 @@ public class User {
     /**
      * Get the user's last name
      *
-     * @return user's last name
+     * @return user 's last name
      */
     public String getLastName() {return lastName;};
 
     /**
      * Sets the user's last name
+     *
      * @param lastName user's last name
      */
     public void setLastName(String lastName) {this.lastName = lastName;};
@@ -85,7 +103,7 @@ public class User {
     /**
      * Gets the user's email
      *
-     * @return user's email
+     * @return user 's email
      */
     public String getEmail() {return email;};
 
@@ -99,7 +117,7 @@ public class User {
     /**
      * Gets the user's weight
      *
-     * @return user's weight
+     * @return user 's weight
      */
     public int getUserWeight() {return userWeight;};
 
@@ -112,12 +130,14 @@ public class User {
 
     /**
      * Gets the user's birthdate
-     * @return user's birthdate
+     *
+     * @return user 's birthdate
      */
     public String getBirthDate() {return birthDate;};
 
     /**
      * Sets the user's birthdate
+     *
      * @param birthDate user's birthdate
      */
     public void setBirthDate(String birthDate) {this.birthDate = birthDate;};
@@ -131,6 +151,7 @@ public class User {
 
     /**
      * Sets the ID of the user
+     *
      * @param id user's id
      */
     public void setId(int id) {this.id = id;};

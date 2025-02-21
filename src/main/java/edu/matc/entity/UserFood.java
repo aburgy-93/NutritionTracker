@@ -3,6 +3,9 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * The type User food.
+ */
 @Entity // class mapped to a particular table
 @Table(name = "food_tracker") // table used, case-sensitive
 public class UserFood {
@@ -55,17 +58,18 @@ public class UserFood {
 
     /**
      * Instantiates a new Food
-     * @param userId the user who entered the food
-     * @param foodId the id of the food entered
-     * @param date the date of food entered
-     * @param servingSize the serving size
-     * @param mealTime the meal time
+     *
+     * @param userId        the user who entered the food
+     * @param foodId        the id of the food entered
+     * @param date          the date of food entered
+     * @param servingSize   the serving size
+     * @param mealTime      the meal time
      * @param totalCalories total amount of calories based on serving size and calories
-     * @param totalProtein total amount of protein based on serving size and protein
-     * @param totalCarbs total number of carbs based on serving size and carbs
-     * @param totalFats total amount of fat based on serving size and fat
+     * @param totalProtein  total amount of protein based on serving size and protein
+     * @param totalCarbs    total number of carbs based on serving size and carbs
+     * @param totalFats     total amount of fat based on serving size and fat
+     * @param user          the user
      */
-
     public UserFood(int userId, int foodId, String date, int servingSize, String mealTime, double totalCalories,
                     double totalProtein, double totalCarbs, double totalFats, User user) {
         this.userId = userId;
@@ -82,38 +86,49 @@ public class UserFood {
 
     /**
      * Get user id
+     *
      * @return the user's id
      */
     public int getUserId() {return userId;}
 
     /**
      * Set the user id
+     *
      * @param userId the user ID
      */
     public void setUserId(int userId) {this.userId = userId;}
 
+    /**
+     * Gets food id.
+     *
+     * @return the food id
+     */
     public int getFoodId() {return foodId;}
 
     /**
      * Get date of meal
+     *
      * @return the date of meal eaten
      */
     public String getDate() {return date;}
 
     /**
      * Set the meal date
+     *
      * @param date the meal date
      */
     public void setDate(String date) {this.date = date;}
 
     /**
      * Get the serving size
+     *
      * @return the serving size
      */
     public int getServingSize() {return servingSize;}
 
     /**
      * Set the serving size
+     *
      * @param servingSize the serving size
      */
     public void setServingSize(int servingSize) {this.servingSize = servingSize;}
@@ -121,26 +136,29 @@ public class UserFood {
 
     /**
      * Get the meal time (breakfast, lunch, dinner, snack)
+     *
      * @return the name of the mealtime
      */
     public String getMealTime() {return mealTime;}
 
     /**
      * Set the mealtime name
+     *
      * @param mealTime the name of the meal time
      */
     public void setMealTime(String mealTime) {this.mealTime = mealTime;}
 
     /**
      * Get the total amount of calories
+     *
      * @return the total amount of calories
      */
-
     public double getTotalCalories() {return totalCalories;}
 
     /**
      * Set the total amount of calories based on calories and serving size
-     * @param calories number of calories in a food
+     *
+     * @param calories    number of calories in a food
      * @param servingSize the amount of servings a user had
      */
     public void setTotalCalories(double calories, int servingSize) {
@@ -149,13 +167,15 @@ public class UserFood {
 
     /**
      * Get the total amount of protein
+     *
      * @return the total amount of protein
      */
     public double getTotalProtein() {return totalProtein;}
 
     /**
      * Set the total amount of protein based on protein and serving size
-     * @param protein the amount of protein in food
+     *
+     * @param protein     the amount of protein in food
      * @param servingSize the amount of servings a user had
      */
     public void setTotalProtein(double protein, int servingSize) {
@@ -164,13 +184,15 @@ public class UserFood {
 
     /**
      * Get the total number of carbs
+     *
      * @return the total number of carbs
      */
     public double getTotalCarbs() {return totalCarbs;}
 
     /**
      * Set the total number of carbs based on carbs and serving size
-     * @param carbs the total carbs based on serving size
+     *
+     * @param carbs       the total carbs based on serving size
      * @param servingSize the amount of servings a user had
      */
     public void setTotalCarbs(double carbs, int servingSize) {
@@ -179,13 +201,15 @@ public class UserFood {
 
     /**
      * Get the total amount of fat
+     *
      * @return the total amount of fat
      */
     public double getTotalFats() {return totalFats;}
 
     /**
      * Set the total amount of fat based on fat and serving size
-     * @param fat the amount of fat in a food
+     *
+     * @param fat         the amount of fat in a food
      * @param servingSize the amount of servings a user had
      */
     public void setTotalFats(double fat, int servingSize) {
@@ -194,20 +218,32 @@ public class UserFood {
 
     /**
      * Get the food ID
+     *
      * @return the food ID
      */
     public int getId() {return id;}
 
     /**
      * Set the id
+     *
      * @param id food id
      */
     public void setId(int id) {this.id = id;}
 
+    /**
+     * Gets food name.
+     *
+     * @return the food name
+     */
     public String getFoodName() {
         return food.getFoodName();
     }
 
+    /**
+     * Sets food name.
+     *
+     * @param foodName the food name
+     */
     public void setFoodName(String foodName) {
         this.food.setFoodName(foodName);
     }
