@@ -1,6 +1,8 @@
 package edu.matc.persistence;
 
+import edu.matc.entity.Food;
 import edu.matc.entity.User;
+import edu.matc.entity.UserFood;
 import edu.matc.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,14 +19,18 @@ class UserDaoTest {
     /**
      * The Generic dao.
      */
-    GenericDao genericDao;
+    GenericDao<User> genericUserDao;
+    GenericDao<UserFood> genericUserFoodDao;
+    GenericDao<Food> genericFoodDao;
 
     /**
      * Sets up.
      */
     @BeforeEach
     void setUp() {
-        genericDao = new GenericDao(User.class);
+        genericUserDao = new GenericDao<>(User.class);
+        genericUserFoodDao = new GenericDao<>(UserFood.class);
+        genericFoodDao = new GenericDao<>(Food.class);
         Database database = new Database();
         database.runSQL("cleanDB.sql");
     }
@@ -34,7 +40,7 @@ class UserDaoTest {
      */
     @Test
     void getUserById() {
-        User retrievedUser = (User)genericDao.getById(1);
+        User retrievedUser = (User)genericUserDao.getById(1);
         assertNotNull(retrievedUser);
         assertEquals("Alex", retrievedUser.getFirstName());
     }
@@ -44,10 +50,10 @@ class UserDaoTest {
      */
     @Test
     void updateUser() {
-        User userToUpdate = (User)genericDao.getById(1);
+        User userToUpdate = (User)genericUserDao.getById(1);
         userToUpdate.setLastName("Smith");
-        genericDao.update(userToUpdate);
-        User retrievedUser = (User)genericDao.getById(1);
+        genericUserDao.update(userToUpdate);
+        User retrievedUser = (User)genericUserDao.getById(1);
         assertEquals("Smith", retrievedUser.getLastName());
     }
 
@@ -62,9 +68,9 @@ class UserDaoTest {
     void addUser() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         User newUser = new User("user", "Ricky", "Bobby", "numberone@gmail.com", 225, "1979-01-01");
 
-        int userId = genericDao.insert(newUser);
+        int userId = genericUserDao.insert(newUser);
 
-        User retrievedUser = (User)genericDao.getById(userId);
+        User retrievedUser = (User)genericUserDao.getById(userId);
 
         assertNotEquals(0, retrievedUser.getId());
         assertEquals("Ricky", retrievedUser.getFirstName());
@@ -75,8 +81,31 @@ class UserDaoTest {
      */
     @Test
     void deleteUser() {
-        genericDao.deleteEntity(genericDao.getById(1));
-        assertNull(genericDao.getById(1));
+        genericUserDao.deleteEntity(genericUserDao.getById(1));
+        assertNull(genericUserDao.getById(1));
+    }
+
+    @Test
+    void deleteWithMeals() {
+        // get the user we want to delete that has food associated with it
+        User userToDelete = (User)genericUserDao.getById(1);
+        assertNotNull(userToDelete);
+
+        // Get all foods a user has entered
+        List<Food> foodsToDelete = genericFoodDao.getAll();
+        assertNotNull(foodsToDelete);
+
+        // get the associated food IDs
+        int food1 = foodsToDelete.get(0).getId();
+        int food2 = foodsToDelete.get(1).getId();
+
+        // verify user was deleted
+        genericUserDao.deleteEntity(userToDelete);
+        assertNull(genericUserDao.getById(1));
+
+        // verify the foods were deleted
+        assertNull(genericUserFoodDao.getById(food1));
+        assertNull(genericUserFoodDao.getById(food2));
     }
 
     /**
@@ -84,7 +113,7 @@ class UserDaoTest {
      */
     @Test
     void getAllUsers() {
-        List users = genericDao.getAll();
+        List<User> users = genericUserDao.getAll();
         assertEquals(1, users.size());
     }
 }
