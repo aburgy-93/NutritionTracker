@@ -102,10 +102,8 @@ class UserFoodDaoTest {
         // retrieve the food
         UserFood retrievedUserFood = userFoodDao.getById(insertedUserFoodId);
 
-        // Verify
+        // Verify not null and the entered food and retrieved food are the same
         assertNotNull(retrievedUserFood);
-
-        // Only works when I get an attribute but not when I compare the two objects
         assertEquals(foodEnteredByUser, retrievedUserFood);
     }
 
