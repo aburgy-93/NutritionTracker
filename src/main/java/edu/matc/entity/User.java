@@ -3,14 +3,23 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * The type User.
  */
-@Entity
+@Entity(name = "User")
 @Table(name = "food_user")
 public class User {
+    // Every Entity must have a unique identifier which is annotated @Id
+    // Notice there is no @Column here as the column and instance variable name are the same
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
+    private int id;
+
     @Column(name = "access_privileges")
     private String accessPrivileges;
 
@@ -29,12 +38,8 @@ public class User {
     @Column(name = "birthDate")
     private String birthDate;
 
-    // Every Entity must have a unique identifier which is annotated @Id
-    // Notice there is no @Column here as the column and instance variable name are the same
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
-    @GenericGenerator(name = "native",strategy = "native")
-    private int id;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserFood> foodTracker = new ArrayList<>();
 
     /**
      * Instantiates a new User.
@@ -49,7 +54,7 @@ public class User {
      * @param lastName         the last name
      * @param email            the email
      * @param userWeight       the user weight
-     * @param birthDate        the birth date
+     * @param birthDate        the birthdate
      */
     public User(String accessPrivileges,String firstName, String lastName, String email, int userWeight, String birthDate) {
         this.accessPrivileges = accessPrivileges;
@@ -77,7 +82,7 @@ public class User {
     /**
      * Gets the user's first name
      *
-     * @return user 's first name
+     * @return user's first name
      */
     public String getFirstName() {return firstName;};
 

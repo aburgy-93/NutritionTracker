@@ -92,8 +92,11 @@ class UserFoodDaoTest {
         User user = userDao.getById(1);
         assertNotNull(user);
 
+        // get the food
+        Food food = foodDao.getById(1);
+
         // Create food with that user
-        UserFood foodEnteredByUser = new UserFood(user.getId(), 2, "2025-02-20", 1, "Breakfast", 70, 6.0, 1.0, 5.0, user);
+        UserFood foodEnteredByUser = new UserFood(user, food, "2025-02-22", 5, "Lunch" );
         int insertedUserFoodId = userFoodDao.insert(foodEnteredByUser);
 
         // retrieve the food
@@ -103,10 +106,7 @@ class UserFoodDaoTest {
         assertNotNull(retrievedUserFood);
 
         // Only works when I get an attribute but not when I compare the two objects
-        assertEquals(foodEnteredByUser.getFoodId(), retrievedUserFood.getFoodId());
-
-        // Does not currently work when the two objects are compared
-        // assertEquals(foodEnteredByUser, retrievedUserFood);
+        assertEquals(foodEnteredByUser, retrievedUserFood);
     }
 
     /**

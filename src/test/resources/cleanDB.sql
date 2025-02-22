@@ -60,10 +60,10 @@ CREATE TABLE `food_tracker` (
   `date` date NOT NULL,
   `serving_size` int NOT NULL,
   `meal_time` varchar(50) NOT NULL,
-  `total_calories` int NOT NULL,
-  `total_protein` int NOT NULL,
-  `total_carbs` int NOT NULL,
-  `total_fat` int NOT NULL,
+  `total_calories` double NOT NULL,
+  `total_protein` decimal(5,2) NOT NULL,
+  `total_carbs` decimal(5,2) NOT NULL,
+  `total_fat` decimal(5,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `food_id` (`food_id`),
@@ -78,7 +78,7 @@ CREATE TABLE `food_tracker` (
 
 LOCK TABLES `food_tracker` WRITE;
 /*!40000 ALTER TABLE `food_tracker` DISABLE KEYS */;
-INSERT INTO `food_tracker` VALUES (1,1,1,'2025-02-15',5,'Lunch',184,43,0,2), (2, 1, 2, '2025-02-20', 1, 'Lunch', 242, 4.3, 53.0, 0.4);
+INSERT INTO `food_tracker` VALUES (1,1,1,'2025-02-15',5,'Lunch',185.0,43.0,0,2.0), (2, 1, 2, '2025-02-20', 1, 'Lunch', 242, 4.3, 53.0, 0.4);
 /*!40000 ALTER TABLE `food_tracker` ENABLE KEYS */;
 UNLOCK TABLES;
 
