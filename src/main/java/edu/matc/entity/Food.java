@@ -4,14 +4,24 @@ package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * The type Food.
  */
-@Entity
+@Entity(name = "Food")
 @Table(name = "food_table")
 public class Food {
+
+    // Every Entity must have a unique identifier which is annotated @Id
+    // Notice there is no @Column here as the column and instance variable name are the same
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
+    private int id;
+
     @Column(name = "food_name")
     private String foodName;
 
@@ -19,7 +29,7 @@ public class Food {
     private String foodType;
 
     @Column(name = "serving_size")
-    private int servingSize;
+    private double servingSize;
 
     @Column(name = "serving_name")
     private String servingUnit;
@@ -36,12 +46,9 @@ public class Food {
     @Column(name = "protein")
     private double protein;
 
-    // Every Entity must have a unique identifier which is annotated @Id
-    // Notice there is no @Column here as the column and instance variable name are the same
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
-    @GenericGenerator(name = "native",strategy = "native")
-    private int id;
+    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserFood> foodTracker = new ArrayList<>();
+
 
     /**
      * Instantiate a new Food
@@ -61,7 +68,7 @@ public class Food {
      * @param carbs       the carbs
      * @param protein     the protein
      */
-    public Food(String foodName, String foodType, int servingSize, String servingUnit,
+    public Food(String foodName, String foodType, double servingSize, String servingUnit,
                 int calories, double fat, double carbs, double protein) {
         this.foodName = foodName;
         this.foodType = foodType;
@@ -106,7 +113,7 @@ public class Food {
      *
      * @return serving size
      */
-    public int getServingSize() {return servingSize;}
+    public double getServingSize() {return servingSize;}
 
     /**
      * Set the serving size

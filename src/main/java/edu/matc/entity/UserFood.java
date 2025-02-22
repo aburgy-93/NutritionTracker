@@ -8,20 +8,21 @@ import java.util.Objects;
 /**
  * The type User food.
  */
-@Entity // class mapped to a particular table
+@Entity(name = "UserFood") // class mapped to a particular table
 @Table(name = "food_tracker") // table used, case-sensitive
 public class UserFood {
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "food_id")
-    private int foodId;
+    // Every Entity must have a unique identifier which is annotated @Id
+    // Notice there is no @Column here as the column and instance variable name are the same
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
+    private int id;
 
     @Column(name = "date")
     private String date;
 
     @Column(name = "serving_size")
-    private int servingSize;
+    private double servingSize;
 
     @Column(name = "meal_time")
     private String mealTime;
@@ -38,19 +39,12 @@ public class UserFood {
     @Column(name = "total_fat")
     private double totalFats;
 
-    // Every Entity must have a unique identifier which is annotated @Id
-    // Notice there is no @Column here as the column and instance variable name are the same
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
-    @GenericGenerator(name = "native",strategy = "native")
-    private int id;
-
     @ManyToOne
-    @JoinColumn(name = "food_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "food_id", nullable = false)
     private Food food;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     /**
@@ -58,54 +52,27 @@ public class UserFood {
      */
     public UserFood() {}
 
+
     /**
-     * Instantiates a new Food
+     * Instantiates a new User food.
      *
-     * @param userId        the user who entered the food
-     * @param foodId        the id of the food entered
-     * @param date          the date of food entered
-     * @param servingSize   the serving size
-     * @param mealTime      the meal time
-     * @param totalCalories total amount of calories based on serving size and calories
-     * @param totalProtein  total amount of protein based on serving size and protein
-     * @param totalCarbs    total number of carbs based on serving size and carbs
-     * @param totalFats     total amount of fat based on serving size and fat
-     * @param user          the user
+     * @param user        the user
+     * @param food        the food
+     * @param date        the date
+     * @param servingSize the serving size
+     * @param mealTime    the meal time
      */
-    public UserFood(int userId, int foodId, String date, int servingSize, String mealTime, double totalCalories,
-                    double totalProtein, double totalCarbs, double totalFats, User user) {
-        this.userId = userId;
-        this.foodId = foodId;
+    public UserFood(User user, Food food, String date, double servingSize, String mealTime) {
+        this.user = user;
+        this.food = food;
         this.date = date;
         this.servingSize = servingSize;
         this.mealTime = mealTime;
-        this.totalCalories = totalCalories;
-        this.totalProtein = totalProtein;
-        this.totalCarbs = totalCarbs;
-        this.totalFats = totalFats;
-        this.user = user;
+        setTotalCalories(food.getCalories(), servingSize);
+        setTotalProtein(food.getProtein(), servingSize);
+        setTotalCarbs(food.getCarbs(), servingSize);
+        setTotalFats(food.getFat(), servingSize);
     }
-
-    /**
-     * Get user id
-     *
-     * @return the user's id
-     */
-    public int getUserId() {return userId;}
-
-    /**
-     * Set the user id
-     *
-     * @param userId the user ID
-     */
-    public void setUserId(int userId) {this.userId = userId;}
-
-    /**
-     * Gets food id.
-     *
-     * @return the food id
-     */
-    public int getFoodId() {return foodId;}
 
     /**
      * Get date of meal
@@ -126,14 +93,14 @@ public class UserFood {
      *
      * @return the serving size
      */
-    public int getServingSize() {return servingSize;}
+    public double getServingSize() {return servingSize;}
 
     /**
      * Set the serving size
      *
      * @param servingSize the serving size
      */
-    public void setServingSize(int servingSize) {this.servingSize = servingSize;}
+    public void setServingSize(double servingSize) {this.servingSize = servingSize;}
 
 
     /**
@@ -163,7 +130,7 @@ public class UserFood {
      * @param calories    number of calories in a food
      * @param servingSize the amount of servings a user had
      */
-    public void setTotalCalories(double calories, int servingSize) {
+    public void setTotalCalories(double calories, double servingSize) {
         this.totalCalories = calories * servingSize;
     }
 
@@ -180,7 +147,7 @@ public class UserFood {
      * @param protein     the amount of protein in food
      * @param servingSize the amount of servings a user had
      */
-    public void setTotalProtein(double protein, int servingSize) {
+    public void setTotalProtein(double protein, double servingSize) {
         this.totalProtein = protein * servingSize;
     }
 
@@ -197,7 +164,7 @@ public class UserFood {
      * @param carbs       the total carbs based on serving size
      * @param servingSize the amount of servings a user had
      */
-    public void setTotalCarbs(double carbs, int servingSize) {
+    public void setTotalCarbs(double carbs, double servingSize) {
         this.totalCarbs = carbs * servingSize;
     }
 
@@ -214,7 +181,7 @@ public class UserFood {
      * @param fat         the amount of fat in a food
      * @param servingSize the amount of servings a user had
      */
-    public void setTotalFats(double fat, int servingSize) {
+    public void setTotalFats(double fat, double servingSize) {
         this.totalFats = fat * servingSize;
     }
 
@@ -254,8 +221,6 @@ public class UserFood {
     public String toString() {
         return "UserFood{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", foodId=" + foodId +
                 ", date='" + date + '\'' +
                 ", servingSize=" + servingSize +
                 ", mealTime='" + mealTime + '\'' +
@@ -270,11 +235,11 @@ public class UserFood {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         UserFood userFood = (UserFood) o;
-        return userId == userFood.userId && foodId == userFood.foodId && servingSize == userFood.servingSize && Double.compare(totalCalories, userFood.totalCalories) == 0 && Double.compare(totalProtein, userFood.totalProtein) == 0 && Double.compare(totalCarbs, userFood.totalCarbs) == 0 && Double.compare(totalFats, userFood.totalFats) == 0 && id == userFood.id && Objects.equals(date, userFood.date) && Objects.equals(mealTime, userFood.mealTime) && Objects.equals(food, userFood.food) && Objects.equals(user, userFood.user);
+        return id == userFood.id && servingSize == userFood.servingSize && Double.compare(totalCalories, userFood.totalCalories) == 0 && Double.compare(totalProtein, userFood.totalProtein) == 0 && Double.compare(totalCarbs, userFood.totalCarbs) == 0 && Double.compare(totalFats, userFood.totalFats) == 0 && Objects.equals(date, userFood.date) && Objects.equals(mealTime, userFood.mealTime) && Objects.equals(food, userFood.food) && Objects.equals(user, userFood.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, foodId, date, servingSize, mealTime, totalCalories, totalProtein, totalCarbs, totalFats, id, food, user);
+        return Objects.hash(id, date, servingSize, mealTime, totalCalories, totalProtein, totalCarbs, totalFats, food, user);
     }
 }
