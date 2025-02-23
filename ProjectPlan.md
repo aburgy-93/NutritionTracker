@@ -13,7 +13,7 @@
 - [X] Write project plan
 - [X] Document user stories and select MVP stories
 - [X] Confirm MVP stories meet Ent Java indie project objectives
-- [X] Design screens - make sure all MVP user stories are covered
+- [X] Design screens—make sure all MVP user stories are covered
 - [X] Triple-check for Checkpoint 1
 - [X] Update journal/time log/reflection
 
@@ -44,15 +44,28 @@
 - [ ] Create JSP for meal history page
 - [ ] Create JSP for meal edit page
 - [ ] Create JSP for user profile page
+- [X] Implement Hibernate
+- [X] Create Generic DAO
+- [X] Refactor Entities to use the Generic Dao
+- [X] Write tests to make sure Generic Dao works 
+- [X] Update database to accept the correct data
+
+### Week 6
+#### This week my focus: AWS and JSPs
+- [ ] Create JSP for Dashboard
+- [ ] Create JSP for meal logging page
+- [ ] Create JSP for meal history page
+- [ ] Create JSP for meal edit page
+- [ ] Create JSP for user profile page
 - [ ] MealController
   -   /add-meal → Handles adding a meal.
   -  /edit-meal → Handles meal editing.
   -  /delete-meal → Handles meal deletion.
   -  /meal-history → Retrieves logged meals for a user.
-  -  /copy-meal → Copies a meal from a previous day. 
+  -  /copy-meal → Copies a meal from a previous day.
 - [ ] UserController
   -   /profile → Loads user profile.
-  -   /update-profile → Updates user nutrition goals. 
+  -   /update-profile → Updates user nutrition goals.
 - [ ] DashboardController
   -  /dashboard → Displays a user's daily macro progress.
 - [ ] Implement authentication with AWS Cognito.

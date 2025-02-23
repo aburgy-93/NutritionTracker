@@ -48,3 +48,19 @@ Not too many issues or roadbeds this week.
 Mostly getting used to working with hibernate and setting up the DOAs for each of the classes I created. I need to next
 work on setting up the JSP and controllers for each webpage. I also need to make sure I figure out how to properly
 assign the userId to the added food item. 
+
+#### Week 5
+2/23/2025
+
+Task completed:
+* Implemented Hibernate 
+* Created a Generic Dao file
+* Refactored old DAOs to that the entities use the Generic Dao file
+* Refactored tests to use the Generic Dao file
+* Refactored some items in the test DB. The columns with the total of a nutrient added up now have decimals 
+* Worked on implementing calculating totals on the fly.
+
+The biggest task this week that I worked on was getting the Generic Dao file set up and then using it to be able to get 
+rid of all the DAOs I had made previously. 
+At the same time also making sure the tests for each entity work with the Generic Dao.
+Also worked on implementing Hibernate and being able to query the databases without writing SQL. 
