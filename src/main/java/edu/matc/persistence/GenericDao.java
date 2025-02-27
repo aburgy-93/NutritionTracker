@@ -69,12 +69,15 @@ public class GenericDao<T> {
      * @throws InvocationTargetException the invocation target exception
      * @throws IllegalAccessException    the illegal access exception
      */
+    // ask about this method and retrieving the id of the inserted object
     public int insert(T entity) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         int id = 0;
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.persist(entity);
         transaction.commit();
+
+        // this id
         id = (int) entity.getClass().getMethod("getId").invoke(entity);
         session.close();
         return id;
