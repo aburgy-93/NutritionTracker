@@ -52,3 +52,4 @@ database.properties
 /logs
 /dba
 /src/test/resources/cleanDB.sql
+node_modules
