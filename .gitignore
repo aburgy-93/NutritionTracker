@@ -49,3 +49,6 @@ crashlytics-build.properties
 fabric.properties
 
 database.properties
+/logs
+/dba
+/src/test/resources/cleanDB.sql
