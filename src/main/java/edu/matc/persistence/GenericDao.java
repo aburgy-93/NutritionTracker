@@ -109,7 +109,7 @@ public class GenericDao<T> {
         Root<T> root = query.from(type);
         List<T> list = session.createSelectionQuery( query ).getResultList();
 
-        logger.debug("The lis of users " + list);
+        logger.debug("The list of " + list);
         session.close();
 
         return list;
