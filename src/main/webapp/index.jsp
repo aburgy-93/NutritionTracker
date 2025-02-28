@@ -108,16 +108,15 @@
         <table>
             <tbody>
             <tr>
-                <td>Age</td>
+                <td><label for="user-age">Age</label></td>
                 <td>
-                    <input type="text" id="age" name="age" value="25">
+                    <input type="text" id="user-age" name="age" value="25">
                     ages 18-80
                 </td>
             </tr>
             <tr>
-                <td>Gender</td>
+                <td><label for="sex1"></label>Gender</td>
                 <td>
-                    <label for="sex1"></label>
                     <input type="radio" id="sex1" name="sex1" value="m">
                 </td>
             </tr>
