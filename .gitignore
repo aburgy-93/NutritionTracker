@@ -52,7 +52,5 @@ database.properties
 /logs
 /dba
 /src/test/resources/cleanDB.sql
-<<<<<<< HEAD
 node_modules
-=======
->>>>>>> 26e74ff768b76dca8411393375d8482f104d74c2
+
