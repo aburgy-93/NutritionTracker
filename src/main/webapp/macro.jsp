@@ -1,16 +1,32 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alex
-  Date: 2/27/2025
-  Time: 3:40 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="head.jsp" />
+
 <html>
-<head>
-    <title>Results</title>
-</head>
 <body>
-  <h2>YOUR RESULTS</h2>
+  <div class="container">
+      <div class="content">
+          <h2>Your Results</h2>
+          <table id="results-table">
+              <tbody>
+              <tr>
+                  <td class="title-box">Protein</td>
+                  <td class="results-box">PLACEHOLDER grams/day</td>
+              </tr>
+              <tr>
+                  <td class="title-box">Carbs</td>
+                  <td class="results-box">PLACEHOLDER grams/day</td>
+              </tr>
+              <tr>
+                  <td class="title-box">Fat</td>
+                  <td class="results-box">PLACEHOLDER grams/day</td>
+              </tr>
+              <tr>
+                  <td class="title-box">Calories</td>
+                  <td class="results-box">PLACEHOLDER Calories/day</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
 </body>
 </html>
