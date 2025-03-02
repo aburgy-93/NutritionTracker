@@ -1,6 +1,6 @@
 ## Problem Statement
 
-Nutrition Tracker determines the user's daily macronutrient needs (carbohydrates, protein, and 
+The Nutrition Tracker determines the user's daily macronutrient needs (carbohydrates, protein, and 
 fat in grams) based on their fitness goals, whether it's weight loss, muscle gain, or 
 maintenance. Users can log the foods they eat throughout the day, and the app provides a 
 running total of each macronutrient consumed.

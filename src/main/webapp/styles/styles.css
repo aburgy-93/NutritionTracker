@@ -26,7 +26,8 @@ body {
     margin-right: 20px;
 }
 
-input {
+label input {
     margin-left: auto;
+    width: 110px;
+    border-radius: 20px;
 }
-
