@@ -42,11 +42,11 @@ public class MacroCalculator extends HttpServlet {
 
             request.setAttribute("results",results);
             request.setAttribute("title", "Results");
-            RequestDispatcher rd = request.getRequestDispatcher("/macro.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/macroResults.jsp");
             rd.forward(request, response);
             logger.info(results);
         } catch (Exception e) {
-            log("Error processing request: " + e.getMessage(), e);
+            logger.debug("Error processing request: {}", e.getMessage(), e);
         }
     }
 }
