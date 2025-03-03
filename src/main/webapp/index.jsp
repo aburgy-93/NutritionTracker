@@ -28,7 +28,7 @@
                             <td>Gender</td>
                             <td>
                                 <label for="msex">
-                                    <input id="msex" type="radio" name="gender" value="m">
+                                    <input id="msex" type="radio" name="gender" value="m" checked>
                                     male
                                 </label>
 

@@ -10,19 +10,19 @@
               <tbody>
               <tr>
                   <td class="title-box">Protein</td>
-                  <td class="results-box">PLACEHOLDER grams/day</td>
+                  <td class="results-box">${results.Protein} grams/day</td>
               </tr>
               <tr>
                   <td class="title-box">Carbs</td>
-                  <td class="results-box">PLACEHOLDER grams/day</td>
+                  <td class="results-box">${results.Carbohydrate} grams/day</td>
               </tr>
               <tr>
                   <td class="title-box">Fat</td>
-                  <td class="results-box">PLACEHOLDER grams/day</td>
+                  <td class="results-box">${results.Fats} grams/day</td>
               </tr>
               <tr>
                   <td class="title-box">Calories</td>
-                  <td class="results-box">PLACEHOLDER Calories/day</td>
+                  <td class="results-box">${results.Calories} Calories/day</td>
               </tr>
               </tbody>
           </table>
