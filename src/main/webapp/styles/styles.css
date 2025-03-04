@@ -27,6 +27,11 @@ body {
 
 .cal-instructions {
     display: flex;
+    padding: 10px;
+    justify-content: center;
+
+    /*TEMPORARY*/
+    background-color: aqua;
 }
 
 .cal-instructions img {
@@ -35,6 +40,13 @@ body {
 
 .container p {
     margin-right: 20px;
+}
+
+/* FORM */
+.form-div {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: lightgray;
 }
 
 label input {

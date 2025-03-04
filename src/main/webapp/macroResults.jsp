@@ -3,9 +3,9 @@
 
 <html>
 <body>
+  <c:import url="navBar.jsp" />
   <div class="container">
       <div class="content">
-          <c:import url="navBar.jsp" />
           <h2>Your Results</h2>
           <table id="results-table">
               <tbody>
