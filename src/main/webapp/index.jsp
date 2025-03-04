@@ -3,6 +3,7 @@
 
 <html>
 <body>
+    <c:import url="navBar.jsp" />
     <div class="container">
         <div class="content">
             <h2>Macro Calculator</h2>

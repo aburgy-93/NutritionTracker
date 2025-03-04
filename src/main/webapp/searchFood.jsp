@@ -5,6 +5,6 @@
 <html>
 <body>
     <c:import url="navBar.jsp" />
-    <h2>Your Meals</h2>
+    <h2>Search for Foods</h2>
 </body>
 </html>
