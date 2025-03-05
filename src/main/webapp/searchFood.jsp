@@ -6,16 +6,18 @@
 <body>
     <c:import url="navBar.jsp" />
     <div class="container">
-        <h2>Search for Foods</h2>
+        <div class="content">
+            <h2>Search for Foods</h2>
+            <form action="search-food" method="GET" id="searchFood">
+                <label for="searchTerm">Search by Food Name</label>
+                <div>
+                    <input type="text" id="searchTerm" name="searchTerm" value="${searchTerm}">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
 
-        <form action="search-food" method="GET">
-            <label for="searchTerm">Search by Food Name</label>
-            <input type="text" id="searchTerm" name="searchTerm" value="${searchTerm}">
-            <input type="submit" value="Submit">
-        </form>
-
-        <table id="foodTable" class="">
-            <thead>
+            <table id="foodTable" class="display">
+                <thead>
                 <th>Food Name</th>
                 <th>Food Type</th>
                 <th>Serving Size</th>
@@ -24,8 +26,8 @@
                 <th>Protein</th>
                 <th>Carbs</th>
                 <th>Fat</th>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <c:forEach var="food" items="${foods}">
                     <tr>
                         <td>${food.foodName}</td>
@@ -38,8 +40,9 @@
                         <td>${food.fat}</td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

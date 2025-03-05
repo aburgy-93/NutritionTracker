@@ -116,6 +116,9 @@ class FoodDaoTest {
         assertNull(genericDao.getById(2));
     }
 
+    /**
+     * Gets by property like.
+     */
     @Test
     void getByPropertyLike() {
         List<Food> foods = genericDao.getByPropertyLike("foodName", "Chicken");

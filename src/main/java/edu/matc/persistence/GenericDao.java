@@ -71,7 +71,7 @@ public class GenericDao<T> {
      * @throws InvocationTargetException the invocation target exception
      * @throws IllegalAccessException    the illegal access exception
      */
-    // ask about this method and retrieving the id of the inserted object
+// ask about this method and retrieving the id of the inserted object
     public int insert(T entity) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         int id = 0;
         Session session = getSession();
@@ -117,6 +117,13 @@ public class GenericDao<T> {
         return list;
     }
 
+    /**
+     * Gets by property like.
+     *
+     * @param propertyName the property name
+     * @param value        the value
+     * @return the by property like
+     */
     public List<T> getByPropertyLike(String propertyName, String value) {
         Session session = getSession();
 

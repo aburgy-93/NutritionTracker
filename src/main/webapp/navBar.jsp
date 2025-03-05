@@ -1,5 +1,5 @@
 <nav class="topnav">
-    <a href="${pageContext.request.contextPath}/NutritionTracker_war/">Food Tracker</a>
+    <a href="/NutritionTracker_war/">Food Tracker</a>
     <div>
         <ul class="links">
             <li>
