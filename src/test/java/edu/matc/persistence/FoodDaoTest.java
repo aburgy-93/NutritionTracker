@@ -115,4 +115,11 @@ class FoodDaoTest {
         genericDao.deleteEntity(foodToDelete);
         assertNull(genericDao.getById(2));
     }
+
+    @Test
+    void getByPropertyLike() {
+        List<Food> foods = genericDao.getByPropertyLike("foodName", "Chicken");
+
+        assertEquals(1, foods.size());
+    }
 }

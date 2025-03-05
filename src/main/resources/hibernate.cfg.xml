@@ -4,7 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://awseb-e-pvkxr3imnw-stack-awsebrdsdatabase-gyc2gvohouzu.cr6auw686qal.us-east-2.rds.amazonaws.com:3306/nutrition_tracker</property>
+<!--        <property name="connection.url">jdbc:mysql://awseb-e-pvkxr3imnw-stack-awsebrdsdatabase-gyc2gvohouzu.cr6auw686qal.us-east-2.rds.amazonaws.com:3306/nutrition_tracker</property>-->
+        <property name="connection.url">jdbc:mysql://localhost:3306/nutrition_test</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
         <property name="connection.username">root</property>

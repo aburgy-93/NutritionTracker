@@ -1,7 +1,9 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.User;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -112,6 +114,23 @@ public class GenericDao<T> {
         logger.debug("The list of " + list);
         session.close();
 
+        return list;
+    }
+
+    public List<T> getByPropertyLike(String propertyName, String value) {
+        Session session = getSession();
+
+        logger.debug("Searching for order with " + propertyName + " = " + value);
+
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<String> property = root.get(propertyName);
+
+        query.where(builder.like(property, "%" + value + "%"));
+        List<T> list = session.createQuery(query).getResultList();
+
+        session.close();
         return list;
     }
 }
