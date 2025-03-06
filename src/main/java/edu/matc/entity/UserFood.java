@@ -75,56 +75,6 @@ public class UserFood {
     }
 
     /**
-     * Get date of meal
-     *
-     * @return the date of meal eaten
-     */
-    public String getDate() {return date;}
-
-    /**
-     * Set the meal date
-     *
-     * @param date the meal date
-     */
-    public void setDate(String date) {this.date = date;}
-
-    /**
-     * Get the serving size
-     *
-     * @return the serving size
-     */
-    public double getServingSize() {return servingSize;}
-
-    /**
-     * Set the serving size
-     *
-     * @param servingSize the serving size
-     */
-    public void setServingSize(double servingSize) {this.servingSize = servingSize;}
-
-
-    /**
-     * Get the meal time (breakfast, lunch, dinner, snack)
-     *
-     * @return the name of the mealtime
-     */
-    public String getMealTime() {return mealTime;}
-
-    /**
-     * Set the mealtime name
-     *
-     * @param mealTime the name of the meal time
-     */
-    public void setMealTime(String mealTime) {this.mealTime = mealTime;}
-
-    /**
-     * Get the total amount of calories
-     *
-     * @return the total amount of calories
-     */
-    public double getTotalCalories() {return totalCalories;}
-
-    /**
      * Set the total amount of calories based on calories and serving size
      *
      * @param calories    number of calories in a food
@@ -243,3 +193,4 @@ public class UserFood {
         return Objects.hash(id, date, servingSize, mealTime, totalCalories, totalProtein, totalCarbs, totalFats, food, user);
     }
 }
+

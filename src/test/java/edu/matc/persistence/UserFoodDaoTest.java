@@ -112,11 +112,37 @@ class UserFoodDaoTest {
      */
     @Test
     // deletes everything a user tracked
-    void deleteUserFood() {
-        userFoodDao.deleteEntity(userFoodDao.getById(2));
-        assertNull(userFoodDao.getById(2));
-    }
+    void deleteUserFood() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        // Step 1: Create and insert food entry
+        Food food = new Food("Ground Beef", "Meat", 1, "Ounce", 93, 8, 0, 4);
+        foodDao.insert(food);
+        int foodId = foodDao.getById(1).getId();
 
+        // Step 2: Create and insert user
+        User user = new User("user", "Jim", "Bobert", "email@email.com", 185, "1993-05-22");
+        int userId = userDao.insert(user);
+
+        UserFood tracker = new UserFood(user, food, "2025-02-22", 5, "Lunch");
+        int trackerId = userFoodDao.insert(tracker);
+
+        // Check that things are inserted properly
+        assertNotNull(userDao.getById(userId));
+        assertNotNull(foodDao.getById(foodId));
+        assertEquals(3, userFoodDao.getAll().size());
+
+        // Delete user
+        userFoodDao.deleteEntity(userFoodDao.getById(userId));
+
+        // Verify user deletion
+        assertNull(userFoodDao.getById(userId));
+
+        // Verify associated food tracker entries are deleted
+        assertNull(userFoodDao.getById(userId));
+
+        // Verify food still exists in food table
+        assertNotNull(foodDao.getById(trackerId));
+        assertEquals("Ground Beef", food.getFoodName());
+    }
     /**
      * Gets all user food.
      */

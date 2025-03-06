@@ -189,3 +189,5 @@ public class User {
         return Objects.hash(accessPrivileges, firstName, lastName, email, userWeight, birthDate, id);
     }
 }
+
+
