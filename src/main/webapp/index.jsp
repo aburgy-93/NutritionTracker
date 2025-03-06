@@ -36,6 +36,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 75%;
             padding: 10px;
             margin-bottom: 20px;
             background-color: #007BFF;
@@ -55,14 +56,14 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            table-layout: fixed;  /* Ensures that table cells are evenly spaced */
+            table-layout: fixed;
         }
 
         th, td {
             padding: 12px;
             border-bottom: 1px solid #ddd;
             text-align: left;
-            vertical-align: middle; /* Ensures vertical alignment of content */
+            vertical-align: middle;
         }
 
         th {
@@ -72,7 +73,7 @@
 
         /* Table Cell Width */
         td {
-            width: 50%; /* Ensures equal width for all td elements */
+            width: 50%;
         }
 
         /* Input and Select Styling */
@@ -106,7 +107,7 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            margin-right: 15px; /* space between label and next input */
+            margin-right: 15px;
         }
 
         /* Button Styling */

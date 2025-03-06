@@ -101,11 +101,31 @@
             <tbody>
                 <tr>
                     <td>Calories (cals)</td>
-                    <td><input type="text" name="calories" value="93" required> cals</td>
+                        <td>
+                            <label for="calories"></label>
+                            <input id="calories" type="text" name="calories" value="93" required>
+                        </td>
                 </tr>
                 <tr>
                     <td>Protein (g)</td>
-                    <td><input type="text" name="protein" value="4" required> g</td>
+                    <td>
+                        <label for="protein"></label>
+                        <input id="protein" type="text" name="protein" value="4" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carbs (g)</td>
+                    <td>
+                        <label for="carbs"></label>
+                        <input id="carbs" type="text" name="carbs" value="0" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fat (g)</td>
+                    <td>
+                        <label for="fat"></label>
+                        <input id="fat" type="text" name="fat" value="8" required>
+                    </td>
                 </tr>
             </tbody>
         </table>
