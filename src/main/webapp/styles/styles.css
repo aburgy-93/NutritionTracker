@@ -1,3 +1,4 @@
+/* Resetting margin, padding, and box-sizing for consistency */
 html, body {
     margin: 0;
     padding: 0;
@@ -5,63 +6,34 @@ html, body {
     height: 100%;
 }
 
+/* Basic layout for the entire page */
 body {
     margin: 0 auto;
     height: 100vh;
 }
 
+/* Main container styles (applies to all pages) */
 .container {
     display: flex;
     flex-direction: column;
-    width: 1100px;
-    padding-top: 5px;
+    width: 100%;
+    max-width: 1100px;
+    padding-top: 20px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
     overflow: auto;
 }
 
+/* Basic content area layout */
 .content {
     display: flex;
     flex-direction: column;
-    width: 720px;
+    width: 100%;
+    max-width: 720px;
 }
 
-.cal-instructions {
-    display: flex;
-    padding: 10px;
-    justify-content: center;
-
-    /*TEMPORARY*/
-    background-color: aqua;
-}
-
-.cal-instructions img {
-    margin-right: 10px;
-}
-
-.container p {
-    margin-right: 20px;
-}
-
-/* FORM */
-#searchFood {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-div {
-    padding: 10px;
-    margin-top: 10px;
-    background-color: lightgray;
-}
-
-label input {
-    margin-left: auto;
-    width: 110px;
-}
-
-/* NAV BAR */
+/* Styling for navigation bar (applies to all pages with nav bar) */
 .topnav {
     background-color: #333 !important;
 }
@@ -70,6 +42,7 @@ label input {
     color: white !important;
 }
 
+/* Styling for the links in the navbar */
 .links {
     list-style: none;
     display: flex;
@@ -79,22 +52,80 @@ label input {
     padding: 10px;
 }
 
-/* RESULTS PAGE */
-#results-table {
-    text-align: left;
+/* Ensure that the radio buttons and text are aligned in a row */
+label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px; /* Add some spacing between the labels */
+}
+
+/* Optional: Adjust space between radio button and label text */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Styling form inputs */
+input[type="number"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-size: 16px;
 }
 
-.title-box, .results-box {
-    border: 1px solid grey;
-    text-align: center;
-    padding: 10px;
+input[type="radio"] {
+    margin-right: 5px;
 }
 
-.title-box {
-    background-color: lightgray;
+input[type="submit"],
+input[type="button"],
+button[type="reset"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    transition: background 0.3s;
 }
 
-.results-box {
-    background-color: lightblue;
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button[type="reset"]:hover {
+    background-color: #0056b3;
+}
+
+button[type="reset"] {
+    background-color: #888;
+}
+
+button[type="reset"]:hover {
+    background-color: #666;
+}
+
+/* Table styling - global use across pages */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }

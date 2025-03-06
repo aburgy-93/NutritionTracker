@@ -2,132 +2,282 @@
 <c:import url="head.jsp" />
 
 <html>
+<head>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px !important;
+            margin: 40px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+        }
+
+        .cal-instructions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #007BFF;
+        }
+
+        .cal-instructions p {
+            color: white;
+            margin: 0px;
+        }
+
+        .cal-instructions img {
+            margin-right: 8px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            table-layout: fixed;  /* Ensures that table cells are evenly spaced */
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            vertical-align: middle; /* Ensures vertical alignment of content */
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        /* Table Cell Width */
+        td {
+            width: 50%; /* Ensures equal width for all td elements */
+        }
+
+        /* Input and Select Styling */
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Flexbox for consistent spacing in height and gender rows */
+        div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        span {
+            margin-left: 5px;
+        }
+
+        /* Radio Button Styling */
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 15px; /* space between label and next input */
+        }
+
+        /* Button Styling */
+        .submit-btn, .clear-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn {
+            background: #007BFF;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+
+        .clear-btn {
+            background: #888;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .clear-btn:hover {
+            background: #666;
+        }
+
+        /* General Input Styling for Consistency */
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        /* Consistent Margin and Padding Reset */
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        /* Hover Effect for Table Rows */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
 <body>
-    <c:import url="navBar.jsp" />
-    <div class="container">
-        <div class="content">
-            <h2>Macro Calculator</h2>
-            <p>This calculator can help determine a person's macronutrient and Calorie needs under normal conditions.</p>
-            <div class="cal-instructions">
-                <img width="25" height="25" src="images/down-arrow.svg" alt="drop down arrow to change input units">
-                <p>Modify the values and click the Calculate button to use.</p>
-            </div>
-            <div class="form-div">
-                <form action="macro-results" method="GET" class="form">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td width="78">Age</td>
-                            <td width="372">
-                                <label for="age">
-                                    <input id="age" class="" type="text" name="age" value="25" required>
-                                </label>
-                                ages 18-80
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Gender</td>
-                            <td>
-                                <label for="msex">
-                                    <input id="msex" type="radio" name="gender" value="m" checked>
-                                    male
-                                </label>
+<c:import url="navBar.jsp" />
 
-                                <label for="fsex">
-                                    <input id="fsex" type="radio" name="gender" value="f">
-                                    female
-                                </label>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+<div class="container">
+    <h2>Macro Calculator</h2>
+    <p>This calculator helps determine daily macronutrient and calorie needs.</p>
 
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td width="78">Height</td>
-                            <td width="372">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <label for="heightFeet">
-                                                <input type="text" id="heightFeet" name="heightFeet" value="5" required>
-                                                <span>feet</span>
-                                            </label>
-                                        </td>
-                                        <td></td>
-                                        <td>
-                                            <label for="heightInches">
-                                                <input type="text" id="heightInches" name="heightInches" value="10" required>
-                                                <span>inches</span>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Weight</td>
-                            <td>
-                                <label for="weight">
-                                    <input type="text" id="weight" name="weight" value="165" required>
-                                    <span>pounds</span>
-                                </label>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td width="80">Activity</td>
-                            <td width="500">
-                                <label for="activity">
-                                    <select name="activity" id="activity" required>
-                                        <option value="1">Basal Metabolic Rate</option>
-                                        <option value="1.2">Sedentary: Little to no exercise </option>
-                                        <option value="1.375">Light: exercise 1-3 days/week</option>
-                                        <option value="1.465">Moderate: exercise 4-5 days/week</option>
-                                        <option value="1.55">Active: daily exercise or intense exercise 3-4 times/week</option>
-                                        <option value="1.725">Very Active: intense exercise 6-7 times/week</option>
-                                        <option value="1.9">Extra Active: very intense exercise daily, or physical job</option>
-                                    </select>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="80">Your Goal</td>
-                            <td width="500">
-                                <label for="goal" >
-                                    <select name="goal" id="goal" required>
-                                        <option value="m">Maintain Weight</option>
-                                        <option value="l">Mild weight loss of 0.5 lb per week</option>
-                                        <option value="l1">Weight loss of 1 lb per week</option>
-                                        <option value="l2">Extreme weight loss of 2 lb per week</option>
-                                        <option value="g">Mild weight gain of 0.5 lb per week</option>
-                                        <option value="g1">Weight gain of 1 lb per week</option>
-                                        <option value="g2">Extreme weight gain of 2 lb per week</option>
-                                    </select>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input type="submit" name="submit" value="Calculate">
-                                <input type="button" value="clear">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
-        </div>
+    <div class="cal-instructions">
+        <img width="20" height="20" src="images/down-arrow.svg" alt="drop down arrow to change input units">
+        <p>Modify values and click "Calculate" to proceed.</p>
     </div>
+
+    <form action="macro-results" method="GET">
+
+        <!-- Age and Gender -->
+        <table>
+            <tbody>
+            <tr>
+                <td>Age</td>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="number" name="age" value="25" required>
+                        <small>Ages 18-80</small>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="gender" value="m" checked> Male
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="f"> Female
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Height and Weight -->
+        <table>
+            <tbody>
+            <tr>
+                <td>Height</td>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="number" name="heightFeet" value="5" required>
+                        <span>ft</span>
+                        <input type="number" name="heightInches" value="10" required>
+                        <span>in</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td>
+                    <input type="number" name="weight" value="165" required> lbs
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Activity Level -->
+        <table>
+            <tbody>
+            <tr>
+                <td>Activity Level</td>
+                <td>
+                    <select name="activity" required>
+                        <option value="1">Basal Metabolic Rate</option>
+                        <option value="1.2">Sedentary: Little to no exercise</option>
+                        <option value="1.375">Light: Exercise 1-3 days/week</option>
+                        <option value="1.465">Moderate: Exercise 4-5 days/week</option>
+                        <option value="1.55">Active: Daily exercise or intense exercise 3-4 times/week</option>
+                        <option value="1.725">Very Active: Intense exercise 6-7 times/week</option>
+                        <option value="1.9">Extra Active: Very intense exercise daily or physical job</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Goal Selection -->
+        <table>
+            <tbody>
+            <tr>
+                <td>Your Goal</td>
+                <td>
+                    <select name="goal" required>
+                        <option value="m">Maintain Weight</option>
+                        <option value="l">Mild weight loss (0.5 lb/week)</option>
+                        <option value="l1">Weight loss (1 lb/week)</option>
+                        <option value="l2">Extreme weight loss (2 lb/week)</option>
+                        <option value="g">Mild weight gain (0.5 lb/week)</option>
+                        <option value="g1">Weight gain (1 lb/week)</option>
+                        <option value="g2">Extreme weight gain (2 lb/week)</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Submit and Clear Buttons -->
+        <button type="submit" class="submit-btn">Calculate</button>
+        <button type="reset" class="clear-btn">Clear</button>
+
+    </form>
+</div>
 </body>
 </html>
-
-

@@ -143,6 +143,7 @@ class UserFoodDaoTest {
         assertNotNull(foodDao.getById(trackerId));
         assertEquals("Ground Beef", food.getFoodName());
     }
+
     /**
      * Gets all user food.
      */
