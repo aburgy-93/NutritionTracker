@@ -82,13 +82,29 @@
             <tbody>
                 <tr>
                     <td>Food Name</td>
-                    <label for="food_name"></label>
-                    <td><input id="food_name" type="text" name="food_name" value="Ground Beef" required></td>
+                    <label for="food_name">
+                        <td><input id="food_name" type="text" name="food_name" placeholder="Ground Beef" required></td>
+                    </label>
                 </tr>
                 <tr>
                     <td>Food Type</td>
-                    <label for="food_type"></label>
-                    <td><input id="food_type" type="text" name="food_type" value="Meat" required></td>
+                    <label for="food_type">
+                        <td><input id="food_type" type="text" name="food_type" placeholder="Meat" required></td>
+                    </label>
+                </tr>
+                <tr>
+                    <td>Serving Size</td>
+                    <td>
+                        <div style="display: flex; align-items: flex-start">
+                            <label for="serving_size">
+                                <input id="serving_size" type="text" name="serving_size" placeholder="1" required>
+                            </label>
+
+                            <label for="serving_unit">
+                                <input id="serving_unit" type="text" name="serving_unit" placeholder="oz" required>
+                            </label>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -105,28 +121,28 @@
                     <td>Calories (cals)</td>
                         <td>
                             <label for="calories"></label>
-                            <input id="calories" type="text" name="calories" value="93" required>
+                            <input id="calories" type="text" name="calories" placeholder="93" required>
                         </td>
                 </tr>
                 <tr>
                     <td>Protein (g)</td>
                     <td>
                         <label for="protein"></label>
-                        <input id="protein" type="text" name="protein" value="4" required>
+                        <input id="protein" type="text" name="protein" placeholder="4" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Carbs (g)</td>
                     <td>
                         <label for="carbs"></label>
-                        <input id="carbs" type="text" name="carbs" value="0" required>
+                        <input id="carbs" type="text" name="carbs" placeholder="0" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Fat (g)</td>
                     <td>
                         <label for="fat"></label>
-                        <input id="fat" type="text" name="fat" value="8" required>
+                        <input id="fat" type="text" name="fat" placeholder="8" required>
                     </td>
                 </tr>
             </tbody>

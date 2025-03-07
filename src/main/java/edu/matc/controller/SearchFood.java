@@ -32,7 +32,7 @@ public class SearchFood extends HttpServlet {
                 request.setAttribute("foods", genericDao.getByPropertyLike("foodName", searchTerm));
             } else {
                 request.setAttribute("foods", genericDao.getAll());
-                request.setAttribute("title", "Search for Foods");
+                request.setAttribute("title", "Foods");
             }
 
             request.setAttribute("searchTerm", searchTerm);
@@ -53,12 +53,23 @@ public class SearchFood extends HttpServlet {
             double carbs = Double.parseDouble(request.getParameter("carbs"));
             double fat = Double.parseDouble(request.getParameter("fat"));
 
-            request.setAttribute("title", "Foods");
-            request.setAttribute("foods", genericDao.getAll());
+            if(isNullOrEmptyString(foodName) || isNullOrEmptyString(foodType) || calories < 0 || protein < 0 ||
+                    carbs < 0 || fat < 0) {
+                request.setAttribute("title", "Foods");
+                request.setAttribute("foods", genericDao.getAll());
+            } else {
+                Food newFood = new Food();
+            }
+
+
             RequestDispatcher rd = request.getRequestDispatcher("/searchFood.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             logger.debug(e);
         }
+    }
+
+    private boolean isNullOrEmptyString(String str) {
+        return str == null || str.isEmpty();
     }
 }
