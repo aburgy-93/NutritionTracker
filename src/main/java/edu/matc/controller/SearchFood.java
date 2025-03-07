@@ -55,8 +55,8 @@ public class SearchFood extends HttpServlet {
             double carbs = Double.parseDouble(request.getParameter("carbs"));
             double fat = Double.parseDouble(request.getParameter("fat"));
 
-            if (!isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType) && servings >= 0 &&
-                    !isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
+            if (isNullOrEmptyString(foodName) && isNullOrEmptyString(foodType) && servings >= 0 &&
+                    isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
                 Food newFood = new Food(foodName, foodType, servings, servingsUnits, calories, protein, carbs, fat);
                 request.setAttribute("newFood", genericDao.insert(newFood));
             }
@@ -71,6 +71,6 @@ public class SearchFood extends HttpServlet {
     }
 
     private boolean isNullOrEmptyString(String str) {
-        return str == null || str.isEmpty();
+        return str != null && !str.isEmpty();
     }
 }

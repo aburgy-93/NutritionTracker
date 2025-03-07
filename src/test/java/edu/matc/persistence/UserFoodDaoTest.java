@@ -109,6 +109,10 @@ class UserFoodDaoTest {
 
     /**
      * Delete user food.
+     *
+     * @throws InvocationTargetException the invocation target exception
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws IllegalAccessException    the illegal access exception
      */
     @Test
     // deletes everything a user tracked

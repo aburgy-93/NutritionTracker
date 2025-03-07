@@ -7,8 +7,17 @@ import java.util.List;
  * The type Calculator.
  */
 public class Calculator {
+    /**
+     * The Calories per gram of protein.
+     */
     static final double CALORIES_PER_GRAM_OF_PROTEIN = 4.0;
+    /**
+     * The Calories per gram of carbs.
+     */
     static final double CALORIES_PER_GRAM_OF_CARBS = 4.0;
+    /**
+     * The Calories per gram of fat.
+     */
     static final double CALORIES_PER_GRAM_OF_FAT = 9.0;
 
     private int age;
@@ -294,7 +303,6 @@ public class Calculator {
      *
      * @return the string
      */
-
     public HashMap<String, Double> calculateMacros() {
         HashMap<String, Double> hashMap = new HashMap<>();
 

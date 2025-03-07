@@ -19,6 +19,9 @@ class FoodDaoTest {
      * The Generic dao.
      */
     GenericDao<Food> genericFoodDao;
+    /**
+     * The Generic user food dao.
+     */
     GenericDao<UserFood> genericUserFoodDao;
 
     /**

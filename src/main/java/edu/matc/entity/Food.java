@@ -64,9 +64,9 @@ public class Food {
      * @param servingSize the serving size
      * @param servingUnit the serving unit
      * @param calories    the calories
-     * @param fat         the fat
-     * @param carbs       the carbs
      * @param protein     the protein
+     * @param carbs       the carbs
+     * @param fat         the fat
      */
     public Food(String foodName, String foodType, double servingSize, String servingUnit,
                 int calories, double protein, double carbs, double fat) {
