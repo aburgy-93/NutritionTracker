@@ -9,10 +9,10 @@
         form {
             display: flex;
             align-items: center;
-            gap: 15px; /* Space between elements */
-            justify-content: space-between; /* Distribute items and push the submit button to the right */
-            flex-wrap: nowrap; /* Prevent wrapping */
-            width: 100%; /* Ensure the form takes up the full width */
+            gap: 15px;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            width: 100%;
         }
 
         /* Ensure the input and label are aligned properly */
@@ -20,7 +20,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            width: 100%; /* Ensure the div spans the full width */
+            width: 100%;
         }
 
         /* Form input field */
@@ -30,15 +30,15 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
-            width: 350px; /* Fixed width for the search box */
+            width: 350px;
         }
 
         /* Submit button styling */
         input[type="submit"] {
-            padding: 8px 16px; /* Smaller padding for half-size button */
-            font-size: 14px; /* Smaller text for the button */
+            padding: 8px 16px;
+            font-size: 14px;
             cursor: pointer;
-            margin-left: auto; /* Push the button to the right */
+            margin-left: auto;
             width: 200px
         }
 
@@ -46,7 +46,7 @@
         label {
             margin-right: 10px;
             font-size: 14px;
-            white-space: nowrap; /* Prevent the label from wrapping */
+            white-space: nowrap;
         }
 
         /* Table styling for food results */
@@ -73,16 +73,16 @@
 
         @media screen and (max-width: 768px) {
             form {
-                flex-direction: column; /* Stack the form elements vertically on smaller screens */
-                align-items: stretch; /* Stretch elements to full width */
+                flex-direction: column;
+                align-items: stretch;
             }
 
             input[type="text"] {
-                width: 100%; /* Full width for input on small screens */
+                width: 100%;
             }
 
             .submit-btn, .clear-btn {
-                width: 100%; /* Full width for buttons on small screens */
+                width: 100%;
             }
         }
     </style>
@@ -112,6 +112,8 @@
                 <th>Protein</th>
                 <th>Carbs</th>
                 <th>Fat</th>
+                <th></th>
+                <th></th>
                 </thead>
                 <tbody>
                 <c:forEach var="food" items="${foods}">
@@ -124,6 +126,24 @@
                         <td>${food.protein}</td>
                         <td>${food.carbs}</td>
                         <td>${food.fat}</td>
+                        <td>
+                            <form action="edit-food" method="POST" onsubmit="return confirmDelete()">
+                                <input type="hidden" name="food_to_edit" value="${food.id}">
+                                <input type="hidden" name="_method" value="EDIT">
+                                <button type="submit">
+                                    <img src="images/edit-svgrepo-com.svg" alt="edit" height="15px" width="15px">
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="delete-food" method="POST" onsubmit="return confirmDelete()">
+                                <input type="hidden" name="food_to_delete" value="${food.id}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit">
+                                    <img src="images/trash-alt-svgrepo-com.svg" alt="delete" height="15px" width="15px">
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -131,4 +151,9 @@
         </div>
     </div>
 </body>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this food item?");
+        }
+    </script>
 </html>
