@@ -69,15 +69,15 @@ public class Food {
      * @param protein     the protein
      */
     public Food(String foodName, String foodType, double servingSize, String servingUnit,
-                int calories, double fat, double carbs, double protein) {
+                int calories, double protein, double carbs, double fat) {
         this.foodName = foodName;
         this.foodType = foodType;
         this.servingSize = servingSize;
         this.servingUnit = servingUnit;
         this.calories = calories;
-        this.fat = fat;
-        this.carbs = carbs;
         this.protein = protein;
+        this.carbs = carbs;
+        this.fat = fat;
     }
 
     /**

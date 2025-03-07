@@ -48,19 +48,20 @@ public class SearchFood extends HttpServlet {
             GenericDao<Food> genericDao = new GenericDao<>(Food.class);
             String foodName = request.getParameter("food_name");
             String foodType = request.getParameter("food_type");
+            int servings = Integer.parseInt(request.getParameter("servings"));
+            String servingsUnits = request.getParameter("serving_units");
             int calories = Integer.parseInt(request.getParameter("calories"));
             double protein = Double.parseDouble(request.getParameter("protein"));
             double carbs = Double.parseDouble(request.getParameter("carbs"));
             double fat = Double.parseDouble(request.getParameter("fat"));
 
-            if(isNullOrEmptyString(foodName) || isNullOrEmptyString(foodType) || calories < 0 || protein < 0 ||
-                    carbs < 0 || fat < 0) {
-                request.setAttribute("title", "Foods");
-                request.setAttribute("foods", genericDao.getAll());
-            } else {
-                Food newFood = new Food();
+            if (!isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType) && servings >= 0 &&
+                    !isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
+                Food newFood = new Food(foodName, foodType, servings, servingsUnits, calories, protein, carbs, fat);
+                request.setAttribute("newFood", genericDao.insert(newFood));
             }
-
+            request.setAttribute("title", "Foods");
+            request.setAttribute("foods", genericDao.getAll());
 
             RequestDispatcher rd = request.getRequestDispatcher("/searchFood.jsp");
             rd.forward(request, response);

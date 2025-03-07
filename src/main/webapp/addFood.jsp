@@ -96,12 +96,12 @@
                     <td>Serving Size</td>
                     <td>
                         <div style="display: flex; align-items: flex-start">
-                            <label for="serving_size">
-                                <input id="serving_size" type="text" name="serving_size" placeholder="1" required>
+                            <label for="servings">
+                                <input id="servings" type="text" name="servings" placeholder="1" required>
                             </label>
 
-                            <label for="serving_unit">
-                                <input id="serving_unit" type="text" name="serving_unit" placeholder="oz" required>
+                            <label for="serving_units">
+                                <input id="serving_units" type="text" name="serving_units" placeholder="oz" required>
                             </label>
                         </div>
                     </td>
