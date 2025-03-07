@@ -16,9 +16,9 @@ import java.io.IOException;
 
 public class AddFood extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-
             request.setAttribute("title", "Add Food");
             RequestDispatcher rd = request.getRequestDispatcher("/addFood.jsp");
             rd.forward(request, response);

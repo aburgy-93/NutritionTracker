@@ -28,7 +28,7 @@ public class SearchFood extends HttpServlet {
             GenericDao<Food> genericDao = new GenericDao<>(Food.class);
 
             if (searchTerm != null && !searchTerm.isEmpty()) {
-                request.setAttribute("title", "Search for Foods");
+                request.setAttribute("title", "Foods");
                 request.setAttribute("foods", genericDao.getByPropertyLike("foodName", searchTerm));
             } else {
                 request.setAttribute("foods", genericDao.getAll());
@@ -40,6 +40,25 @@ public class SearchFood extends HttpServlet {
             dispatcher.forward(request, response);
         } catch (Exception e) {
             logger.error(e);
+        }
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+            String foodName = request.getParameter("food_name");
+            String foodType = request.getParameter("food_type");
+            int calories = Integer.parseInt(request.getParameter("calories"));
+            double protein = Double.parseDouble(request.getParameter("protein"));
+            double carbs = Double.parseDouble(request.getParameter("carbs"));
+            double fat = Double.parseDouble(request.getParameter("fat"));
+
+            request.setAttribute("title", "Foods");
+            request.setAttribute("foods", genericDao.getAll());
+            RequestDispatcher rd = request.getRequestDispatcher("/searchFood.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            logger.debug(e);
         }
     }
 }

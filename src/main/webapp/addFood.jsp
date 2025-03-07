@@ -70,7 +70,7 @@
 <c:import url="navBar.jsp" />
 <div class="container">
     <h2>Add Food</h2>
-    <form action="macro-results" method="POST">
+    <form action="search-food" method="POST">
 
         <!-- Food Information -->
         <table>
@@ -82,11 +82,13 @@
             <tbody>
                 <tr>
                     <td>Food Name</td>
-                    <td><input type="text" name="food_name" value="Ground Beef" required></td>
+                    <label for="food_name"></label>
+                    <td><input id="food_name" type="text" name="food_name" value="Ground Beef" required></td>
                 </tr>
                 <tr>
                     <td>Food Type</td>
-                    <td><input type="text" name="food_type" value="Meat" required></td>
+                    <label for="food_type"></label>
+                    <td><input id="food_type" type="text" name="food_type" value="Meat" required></td>
                 </tr>
             </tbody>
         </table>
