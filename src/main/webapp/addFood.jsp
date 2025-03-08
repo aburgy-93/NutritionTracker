@@ -149,6 +149,7 @@
         </table>
 
         <!-- Submit Button -->
+        <input type="hidden" name="_method" value="ADD">
         <button type="submit" class="submit-btn">Submit</button>
     </form>
 </div>

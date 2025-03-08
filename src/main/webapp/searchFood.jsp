@@ -127,7 +127,7 @@
                         <td>${food.carbs}</td>
                         <td>${food.fat}</td>
                         <td>
-                            <form action="edit-food" method="POST" onsubmit="return confirmDelete()">
+                            <form action="search-food" method="POST" onsubmit="return confirmEdit()">
                                 <input type="hidden" name="food_to_edit" value="${food.id}">
                                 <input type="hidden" name="_method" value="EDIT">
                                 <button type="submit">
@@ -136,7 +136,7 @@
                             </form>
                         </td>
                         <td>
-                            <form action="delete-food" method="POST" onsubmit="return confirmDelete()">
+                            <form action="search-food" method="POST" onsubmit="return confirmDelete()">
                                 <input type="hidden" name="food_to_delete" value="${food.id}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit">
@@ -154,6 +154,10 @@
     <script>
         function confirmDelete() {
             return confirm("Are you sure you want to delete this food item?");
+        }
+
+        function confirmEdit() {
+            return confirm("Are you sure you want to edit this food item?");
         }
     </script>
 </html>
