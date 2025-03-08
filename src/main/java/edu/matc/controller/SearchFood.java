@@ -23,6 +23,9 @@ import java.lang.reflect.InvocationTargetException;
 
 public class SearchFood extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
+
+    // This function will get all the foods that match the food name
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String searchTerm = request.getParameter("searchTerm");
@@ -44,6 +47,10 @@ public class SearchFood extends HttpServlet {
         }
     }
 
+    // This function will get a _method value from either a form submit from an ADD, EDIT or DELETE submission
+    // The search button, edit button;
+    // delete buttons have a _method value attached to them to know what HTTP Verb we want
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String method = request.getParameter("_method");
@@ -51,8 +58,10 @@ public class SearchFood extends HttpServlet {
                 doAdd(request, response);
             } else if ("EDIT".equals(method)) {
                 doPut(request, response);
-            } else {
+            } else if("DELETE".equals(method)) {
                 doDelete(request, response);
+            } else {
+                doUpdate(request, response);
             }
 
         } catch (Exception e) {
@@ -60,6 +69,21 @@ public class SearchFood extends HttpServlet {
         }
     }
 
+    /**
+     * Do add.
+     * If _method == "ADD" we get all the data from the response and put the data into a new Food object.
+     * Check to make sure none of the values are empty/null.
+     * Set the title of the request and set "foods" to hold the data for all the foods.
+     * Forward the request to searchFood.jsp
+     *
+     * @param request  the request
+     * @param response the response
+     * @throws ServletException          the servlet exception
+     * @throws IOException               the io exception
+     * @throws InvocationTargetException the invocation target exception
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws IllegalAccessException    the illegal access exception
+     */
     public void doAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         GenericDao<Food> genericDao = new GenericDao<>(Food.class);
         String foodName = request.getParameter("food_name");
@@ -71,8 +95,8 @@ public class SearchFood extends HttpServlet {
         double carbs = Double.parseDouble(request.getParameter("carbs"));
         double fat = Double.parseDouble(request.getParameter("fat"));
 
-        if (isNullOrEmptyString(foodName) && isNullOrEmptyString(foodType) && servings >= 0 &&
-                isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
+        if (!isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType) && servings >= 0 &&
+                !isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
             Food newFood = new Food(foodName, foodType, servings, servingsUnits, calories, protein, carbs, fat);
             request.setAttribute("newFood", genericDao.insert(newFood));
         }
@@ -83,15 +107,97 @@ public class SearchFood extends HttpServlet {
         rd.forward(request, response);
     }
 
+    /*
+    * current issue, we get the correct food object and pass that object to the editFood.jsp
+    * In the jsp we submit the change to the existing food and use the doAdd (but we may need a doUpdate and call the update
+    * function from the GenericDao), this then causes a new food to be added rather than the food being updated.
+    *
+    */
+
+    /**
+     * Do put.
+     * If _method == "EDIT" we get the foodId from the button click.
+     * Get the food object from the genericDao with getById method with foodId as a parameter.
+     * Add that foodToEdit to the request attributes, same with the title.
+     * Then forward the foodId to the editFood.jsp.
+     * Then get the foodToEdit data from the food object.
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
         try {
             String foodId = request.getParameter("food_to_edit");
-            logger.debug("Editing Food: " + foodId);
-            request.setAttribute("foodId", foodId);
+            Food foodToEdit = genericDao.getById(Integer.parseInt(foodId));
 
-            RequestDispatcher rd = request.getRequestDispatcher("editFood.jsp");
+            logger.debug("Editing Food: " + foodId);
+            request.setAttribute("editFood", foodToEdit);
+            request.setAttribute("title", "Edit Food");
+
+            RequestDispatcher rd = request.getRequestDispatcher("/editFood.jsp");
             rd.forward(request, response);
         } catch (Exception e ) {
+            logger.error(e);
+        }
+    }
+
+    /**
+     * Do update.
+     * Get the id of a food entity you want to edit.
+     * Get the actual food object by using the getById method from the genericDao.
+     * Then get each parameter from the request that needs to set on the existing food object (We do not want to create
+     * a new food object, but keep the old one and just update it).
+     * Then call the update method on the genericDao object and pass in the updated foodToEdit Food object.
+     * Then redirect back to the searchFood page.
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
+    public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        try {
+            // get id of food entity to edit
+            int foodId = Integer.parseInt(request.getParameter("food_to_edit"));
+            logger.debug("Editing Food: " + foodId);
+
+            // get that entity from the table
+            Food foodToEdit = genericDao.getById(foodId);
+            logger.debug("Food to Edit: " + foodToEdit);
+
+            // set the new values
+            foodToEdit.setFoodName(request.getParameter("foodName"));
+            logger.debug(request.getParameter("foodName"));
+
+            foodToEdit.setFoodType(request.getParameter("foodType"));
+            logger.debug(request.getParameter("foodType"));
+
+            foodToEdit.setServingSize((int) Double.parseDouble(request.getParameter("servingSize")));
+            logger.debug(request.getParameter("servingSize"));
+
+            foodToEdit.setServingUnit(request.getParameter("servingUnit"));
+            logger.debug(request.getParameter("servingUnit"));
+
+            foodToEdit.setCalories(Integer.parseInt(request.getParameter("calories")));
+            logger.debug(request.getParameter("calories"));
+
+            foodToEdit.setProtein(Double.parseDouble(request.getParameter("protein")));
+            logger.debug(request.getParameter("protein"));
+
+            foodToEdit.setCarbs(Double.parseDouble(request.getParameter("carbs")));
+            logger.debug(request.getParameter("carbs"));
+
+            foodToEdit.setFat(Double.parseDouble(request.getParameter("fat")));
+            logger.debug(request.getParameter("fat"));
+
+            // pass an updated food object to the update table method
+            genericDao.update(foodToEdit);
+
+            // Redirect back to the searchFood page
+            response.sendRedirect("search-food");
+        } catch (Exception e) {
             logger.error(e);
         }
     }
@@ -107,7 +213,7 @@ public class SearchFood extends HttpServlet {
             request.setAttribute("title", "Foods");
             request.setAttribute("foods", genericDao.getAll());
 
-            RequestDispatcher rd = request.getRequestDispatcher("searchFood.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/searchFood.jsp");
             rd.forward(request, response);
         } catch (Exception e ) {
             logger.error(e);
@@ -115,6 +221,7 @@ public class SearchFood extends HttpServlet {
     }
 
     private boolean isNullOrEmptyString(String str) {
-        return str != null && !str.isEmpty();
+        return str == null || str.isEmpty();
     }
+
 }
