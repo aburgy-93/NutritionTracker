@@ -24,7 +24,18 @@ import java.lang.reflect.InvocationTargetException;
 public class SearchFood extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    // This function will get all the foods that match the food name
+    /**
+     * Do get.
+     * This method will get the searchTerm entered the search box.
+     * Check to make sure the searchTerm is not empty. If not then on the genericDao call the getByPropertyLike method and
+     * pass in the searchTerm (in this case, we are looking up foodNames, but it could be any property in theory).
+     * If the searchTerm is null, then get all the foods.
+     * Then forward the request and response off to searchFood.jsp.
+     * @param request the request
+     * @param response the response
+     * @throws ServletException the servlet exception
+     * @throws IOException the io exception
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -107,13 +118,6 @@ public class SearchFood extends HttpServlet {
         rd.forward(request, response);
     }
 
-    /*
-    * current issue, we get the correct food object and pass that object to the editFood.jsp
-    * In the jsp we submit the change to the existing food and use the doAdd (but we may need a doUpdate and call the update
-    * function from the GenericDao), this then causes a new food to be added rather than the food being updated.
-    *
-    */
-
     /**
      * Do put.
      * If _method == "EDIT" we get the foodId from the button click.
@@ -121,10 +125,10 @@ public class SearchFood extends HttpServlet {
      * Add that foodToEdit to the request attributes, same with the title.
      * Then forward the foodId to the editFood.jsp.
      * Then get the foodToEdit data from the food object.
-     * @param request
-     * @param response
-     * @throws IOException
-     * @throws ServletException
+     * @param request the request
+     * @param response the response
+     * @throws IOException the io exception
+     * @throws ServletException the servlet exception
      */
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         GenericDao<Food> genericDao = new GenericDao<>(Food.class);
@@ -151,10 +155,10 @@ public class SearchFood extends HttpServlet {
      * a new food object, but keep the old one and just update it).
      * Then call the update method on the genericDao object and pass in the updated foodToEdit Food object.
      * Then redirect back to the searchFood page.
-     * @param request
-     * @param response
-     * @throws IOException
-     * @throws ServletException
+     * @param request the request
+     * @param response the response
+     * @throws IOException the io exception
+     * @throws ServletException the servlet exception
      */
     public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         GenericDao<Food> genericDao = new GenericDao<>(Food.class);
@@ -202,6 +206,19 @@ public class SearchFood extends HttpServlet {
         }
     }
 
+    /**
+     * Do delete.
+     * This method will get the foodId from the request with the name of food_to_delete in the searchFood.jsp.
+     * Set the foodId to the response.
+     * Call the deleteEntity function from the genericDao and pass in the returned object from the getById method also
+     * in the genericDao.
+     * Set tje attrbutes on the request.
+     * Forward the request, response to /searchFood.jsp
+     * @param request the request
+     * @param response the response
+     * @throws IOException the io exception
+     * @throws ServletException the servlet exception
+     */
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         GenericDao<Food> genericDao = new GenericDao<>(Food.class);
         try {
@@ -220,6 +237,11 @@ public class SearchFood extends HttpServlet {
         }
     }
 
+    /**
+     * checks to see if the string values passed in are null or empty
+     * @param str the string
+     * @return null or true if empty
+     */
     private boolean isNullOrEmptyString(String str) {
         return str == null || str.isEmpty();
     }
