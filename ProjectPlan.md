@@ -75,7 +75,7 @@
 
 ### Week 7
 #### Checkpoint 2 is Due: Database designed and created, at least one DAO with full CRUD (create, read, update, delete)
-#### Wokred on implementing the JSPs, layouts for JSPs, and servlet functionality
+#### Worked on implementing the JSPs, layouts for JSPs, and servlet functionality
 implemented with Hibernate, DAO is fully unit tested, Log4J is implemented (no System.out.printlns)
 
 - [X] Create JSP for NavBar
@@ -93,26 +93,28 @@ implemented with Hibernate, DAO is fully unit tested, Log4J is implemented (no S
 - [X] Create a servlet for food tracker
 - [X] Create a servlet for macro calculator 
 - [X] Create a servlet for searching for a food
+- [X] Add database logic for meals and users.
+  - had to remove to avoid charges from AWS, will reinstate for final project
+- [X] Implement services for CRUD operations.
+- [X] Write unit tests for controllers and DAOs.
+- [X] Double-check all checkpoint 2 items (above) are complete and visible in github.
+- [X] Create project DB on AWS.
+- [X] Deploy a project to AWS
+  - removed due to charges being added to an AWS account
+- [X] Add a deployed link to indie project list in student repo
+  - will need to get another link when deployed for the real project on AWS
+
+
+### Week 8
+### Work on using AWS with current project. 
 - [ ] UserController
   -   /profile → Loads user profile.
   -   /update-profile → Updates user nutrition goals.
 - [ ] DashboardController
   -  /dashboard → Displays a user's daily macro progress.
-
 - [ ] Implement authentication with AWS Cognito.
-- [X] Add database logic for meals and users.
-  - had to remove to avoid charges from AWS, will reinstate for final project
-- [ ] Implement services for CRUD operations.
-- [X] Write unit tests for controllers and DAOs.
-
-- [X] Double-check all checkpoint 2 items (above) are complete and visible in github.
 - [ ] Set up Authentication in the indie project (more tasks coming for this)
-- [X] Create project DB on AWS.
 - [ ] Update project config files for AWS as needed
-- [X] Deploy a project to AWS
-  - removed due to charges being added to an AWS account
-- [X] Add a deployed link to indie project list in student repo
-  - will need to get another link when deployed for the real project on AWS
 
 
 ### Week 9 (Start of the team project)
