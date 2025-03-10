@@ -131,7 +131,7 @@
                                 <input type="hidden" name="food_to_edit" value="${food.id}">
                                 <input type="hidden" name="_method" value="EDIT">
                                 <button type="submit">
-                                    <img src="images/edit-svgrepo-com.svg" alt="edit" height="15px" width="15px">
+                                    <img src="images/" alt="edit" height="15px" width="15px">
                                 </button>
                             </form>
                         </td>
