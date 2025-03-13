@@ -48,8 +48,10 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-src/main/resources/database.properties
+# Secrets
 .env
+
+src/main/resources/database.properties
 /logs
 /dba
 /src/test/resources/cleanDB.sql
