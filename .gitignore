@@ -49,8 +49,12 @@ crashlytics-build.properties
 fabric.properties
 
 src/main/resources/database.properties
+.env
 /logs
 /dba
 /src/test/resources/cleanDB.sql
 /node_modules/
 
+src/test/java/org/alexburgy/persistance/SWAPIDAOTest.java
+src/main/java/com/swapi
+src/main/java/com/alexburgy/persistance/SWAPIDAO.java
