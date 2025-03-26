@@ -29,21 +29,10 @@
 - [X] Create unit tests for the Food Data Access Objects(DAO)
 - [X] Create unit tests for the User Data Access Objects(DAO)
 - [X] Create unit tests for the UserFood Data Access Objects(DAO)
-- [ ] Create a class for the DB connection business
-- [ ] Create JSP for Nutrition Calculator page
-- [ ] Create JSP for Nutrition Calculator Results page
-- [ ] Create JSP for User Dashboard
-- [ ] Create controller for Food Entry Processing
-- [ ] Create controller for User Dashboard
 - [X] Update weekly reflection
 
 ### Week 5 
 #### This week my focus
-- [ ] Create JSP for Dashboard
-- [ ] Create JSP for meal logging page
-- [ ] Create JSP for meal history page
-- [ ] Create JSP for meal edit page
-- [ ] Create JSP for user profile page
 - [X] Implement Hibernate
 - [X] Create Generic DAO
 - [X] Refactor Entities to use the Generic Dao
@@ -52,31 +41,20 @@
 
 ### Week 6
 #### This week my focus: AWS and JSPs
-- [ ] Create JSP for Dashboard
-- [ ] Create JSP for meal logging page
-- [ ] Create JSP for meal history page
-- [ ] Create JSP for meal edit page
-- [ ] Create JSP for user profile page
-- [ ] MealController
+- [X] MealController
   -   /add-meal → Handles adding a meal.
   -  /edit-meal → Handles meal editing.
   -  /delete-meal → Handles meal deletion.
   -  /meal-history → Retrieves logged meals for a user.
   -  /copy-meal → Copies a meal from a previous day.
-- [ ] UserController
-  -   /profile → Loads user profile.
-  -   /update-profile → Updates user nutrition goals.
-- [ ] DashboardController
-  -  /dashboard → Displays a user's daily macro progress.
-- [ ] Implement authentication with AWS Cognito.
-- [ ] Add database logic for meals and users.
-- [ ] Implement services for CRUD operations.
-- [ ] Write unit tests for controllers and DAOs.
+- [X] Add database logic for meals and users.
+- [X] Implement services for CRUD operations.
+- [X] Write unit tests for controllers and DAOs.
 
 ### Week 7
 #### Checkpoint 2 is Due: Database designed and created, at least one DAO with full CRUD (create, read, update, delete)
 #### Worked on implementing the JSPs, layouts for JSPs, and servlet functionality
-implemented with Hibernate, DAO is fully unit tested, Log4J is implemented (no System.out.printlns)
+implemented with Hibernate, DAO is fully unit tested; Log4J is implemented (no System.out.printlns)
 
 - [X] Create JSP for NavBar
 - [X] Create JSP for macro calculator

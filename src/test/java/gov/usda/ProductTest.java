@@ -26,7 +26,7 @@ public class ProductTest {
     public void testswapiJSON() throws Exception {
         Client client = ClientBuilder.newClient();
         WebTarget target =
-                client.target("https://api.nal.usda.gov/fdc/v1/food/2095236?api_key=" + apiKey);
+                client.target("https://api.nal.usda.gov/fdc/v1/food/2095236?api_key=QsBQXUsRUxK5bCTPj2PpXc34Y0QOIOpYV2JpWXeP");
         String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
 
         ObjectMapper mapper = new ObjectMapper();
