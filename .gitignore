@@ -50,6 +50,7 @@ fabric.properties
 
 # Secrets
 .env
+cognitio.properties
 
 src/main/resources/database.properties
 /logs

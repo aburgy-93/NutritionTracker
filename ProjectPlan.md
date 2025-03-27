@@ -85,6 +85,15 @@ implemented with Hibernate, DAO is fully unit tested; Log4J is implemented (no S
 
 ### Week 8
 ### Work on using AWS with current project. 
+- I got assigned a take home project from an internship, so my attention was on completing that.
+
+
+### Week 9 (Start of the team project)
+#### Checkpoint 3 is Due: Deployed to AWS, at least one JSP that displays data from the database is implemented,
+authentication implemented, add AWS deployed app link to indie project list in student repo.
+- [X] Double-check all checkpoint 3 items (above) are complete and visible in github.
+- [ ] need to create a client Dao and test that Dao. 
+  - Essentially a refactor of what I have currently for the USDA API.
 - [ ] UserController
   -   /profile → Loads user profile.
   -   /update-profile → Updates user nutrition goals.
@@ -93,12 +102,6 @@ implemented with Hibernate, DAO is fully unit tested; Log4J is implemented (no S
 - [ ] Implement authentication with AWS Cognito.
 - [ ] Set up Authentication in the indie project (more tasks coming for this)
 - [ ] Update project config files for AWS as needed
-
-
-### Week 9 (Start of the team project)
-#### Checkpoint 3 is Due: Deployed to AWS, at least one JSP that displays data from the database is implemented,
-authentication implemented, add AWS deployed app link to indie project list in student repo.
-- [ ] Double-check all checkpoint 3 items (above) are complete and visible in github.
 
 ### Week 15
 - [ ] Implement Feedback from Week 14 review

@@ -35,11 +35,11 @@ public class ProductTest {
 
         String expectedProductName = "CHEDDAR CHEESE";
         int id = 2095236;
+
         // Validate foodNutrients list
         List<FoodNutrientsItem> foodNutrients = foodResponse.getFoodNutrients();
         assertNotNull(foodNutrients);
         assertFalse(foodNutrients.isEmpty());
-
 
         assertEquals(expectedProductName, foodResponse.getDescription());
         assertEquals(id, foodResponse.getFdcId());

@@ -24,7 +24,7 @@ class CalculatorTest {
         // When I implement saving a user's numbers, I will have to use a User entity to get/save their data
         // Since it is just used currently to calculate BMR/TDEE/Goal calories and not saved,
         // I have to use hardcoded data
-        assertEquals(calculator.calculateBMRForMales(), 1749);
+        assertEquals(1749, calculator.calculateBMRForMales());
     }
 
     @Test
@@ -38,7 +38,7 @@ class CalculatorTest {
         // When I implement saving a user's numbers, I will have to use a User entity to get/save their data
         // Since it is just used currently to calculate BMR/TDEE/Goal calories and not saved,
         // I have to use hardcoded data
-        assertEquals(calculator.calculateBMRForFemales(), 1397.0);
+        assertEquals(1397.0, calculator.calculateBMRForFemales());
     }
 
     @Test

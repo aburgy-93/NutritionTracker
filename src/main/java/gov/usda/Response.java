@@ -77,6 +77,17 @@ public class Response{
 	@JsonProperty("foodAttributes")
 	private List<FoodAttributesItem> foodAttributes;
 
+	@JsonProperty("householdServingFullText")
+	private String householdServingFullText;
+
+	public String getHouseholdServingFullText() {
+		return householdServingFullText;
+	}
+
+	public void setHouseholdServingFullText(String householdServingFullText) {
+		this.householdServingFullText = householdServingFullText;
+	}
+
 	public void setMarketCountry(String marketCountry){
 		this.marketCountry = marketCountry;
 	}
