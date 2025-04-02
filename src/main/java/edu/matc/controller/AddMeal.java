@@ -1,5 +1,7 @@
 package edu.matc.controller;
 
+import edu.matc.entity.Food;
+import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,8 +25,15 @@ public class AddMeal extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            request.setAttribute("title", "Add Meal");
+        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        try {
+            String foodId = request.getParameter("add_food_to_meal");
+            Food foodToAdd = genericDao.getById(Integer.parseInt(foodId));
+
+            logger.debug("Food to add: " + foodToAdd);
+            request.setAttribute("foodToAdd", foodToAdd);
+            request.setAttribute("title", "Add a Food");
+
             RequestDispatcher rd = request.getRequestDispatcher("/addMeal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
