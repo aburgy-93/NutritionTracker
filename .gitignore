@@ -48,9 +48,16 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Secrets
+.env
+cognito.properties
+
 src/main/resources/database.properties
 /logs
 /dba
 /src/test/resources/cleanDB.sql
 /node_modules/
 
+src/test/java/org/alexburgy/persistance/SWAPIDAOTest.java
+src/main/java/com/swapi
+src/main/java/com/alexburgy/persistance/SWAPIDAO.java

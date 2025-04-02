@@ -1,7 +1,6 @@
 package edu.matc.entity;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * The type Calculator.
@@ -223,7 +222,12 @@ public class Calculator {
         double heightFeetInCentimeters = getHeightFeet() * 30.48;
         double heightInchesInCentimeters = getHeightInches() * 2.54;
         double totalHeightInCentimeters = heightFeetInCentimeters + heightInchesInCentimeters;
-        return 88.362 + (13.397 * weightInKilograms) + (4.799 * totalHeightInCentimeters) - (5.677 * getAge());
+
+        double bmr = 88.362 + (13.397 * weightInKilograms)
+                + (4.799 * totalHeightInCentimeters)
+                - (5.677 * getAge());
+
+        return Math.round(bmr);
     }
 
     /**
@@ -236,7 +240,12 @@ public class Calculator {
         double heightFeetInCentimeters = getHeightFeet() * 30.48;
         double heightInchesInCentimeters = getHeightInches() * 2.54;
         double totalHeightInCentimeters = heightFeetInCentimeters + heightInchesInCentimeters;
-        return 447.593 + (9.247 * weightInKilograms) + (3.098 * totalHeightInCentimeters) - (4.330 * getAge());
+
+        double bmr = 447.593 + (9.247 * weightInKilograms)
+                + (3.098 * totalHeightInCentimeters)
+                - (4.330 * getAge());
+
+        return Math.round(bmr);
     }
 
     /**
@@ -309,6 +318,7 @@ public class Calculator {
         double calories = Math.round(calculateMacroNutrients(getGender(), getActivity(), getGoal()));
 
         // Adjusted macro distribution: 30% protein, 40% carbs, 30% fats
+        // Future endeavors would be allowing people to adjust to a custom amount
         double protein = Math.round((calories * ((double) 30 / 100)) / CALORIES_PER_GRAM_OF_PROTEIN);
         double carbohydrate = Math.round((calories * ((double) 40 / 100)) / CALORIES_PER_GRAM_OF_CARBS);
         double fats = Math.round((calories * ((double) 30 / 100)) / CALORIES_PER_GRAM_OF_FAT);

@@ -29,21 +29,10 @@
 - [X] Create unit tests for the Food Data Access Objects(DAO)
 - [X] Create unit tests for the User Data Access Objects(DAO)
 - [X] Create unit tests for the UserFood Data Access Objects(DAO)
-- [ ] Create a class for the DB connection business
-- [ ] Create JSP for Nutrition Calculator page
-- [ ] Create JSP for Nutrition Calculator Results page
-- [ ] Create JSP for User Dashboard
-- [ ] Create controller for Food Entry Processing
-- [ ] Create controller for User Dashboard
 - [X] Update weekly reflection
 
 ### Week 5 
 #### This week my focus
-- [ ] Create JSP for Dashboard
-- [ ] Create JSP for meal logging page
-- [ ] Create JSP for meal history page
-- [ ] Create JSP for meal edit page
-- [ ] Create JSP for user profile page
 - [X] Implement Hibernate
 - [X] Create Generic DAO
 - [X] Refactor Entities to use the Generic Dao
@@ -52,31 +41,20 @@
 
 ### Week 6
 #### This week my focus: AWS and JSPs
-- [ ] Create JSP for Dashboard
-- [ ] Create JSP for meal logging page
-- [ ] Create JSP for meal history page
-- [ ] Create JSP for meal edit page
-- [ ] Create JSP for user profile page
-- [ ] MealController
+- [X] MealController
   -   /add-meal → Handles adding a meal.
   -  /edit-meal → Handles meal editing.
   -  /delete-meal → Handles meal deletion.
   -  /meal-history → Retrieves logged meals for a user.
   -  /copy-meal → Copies a meal from a previous day.
-- [ ] UserController
-  -   /profile → Loads user profile.
-  -   /update-profile → Updates user nutrition goals.
-- [ ] DashboardController
-  -  /dashboard → Displays a user's daily macro progress.
-- [ ] Implement authentication with AWS Cognito.
-- [ ] Add database logic for meals and users.
-- [ ] Implement services for CRUD operations.
-- [ ] Write unit tests for controllers and DAOs.
+- [X] Add database logic for meals and users.
+- [X] Implement services for CRUD operations.
+- [X] Write unit tests for controllers and DAOs.
 
 ### Week 7
 #### Checkpoint 2 is Due: Database designed and created, at least one DAO with full CRUD (create, read, update, delete)
-#### Wokred on implementing the JSPs, layouts for JSPs, and servlet functionality
-implemented with Hibernate, DAO is fully unit tested, Log4J is implemented (no System.out.printlns)
+#### Worked on implementing the JSPs, layouts for JSPs, and servlet functionality
+implemented with Hibernate, DAO is fully unit tested; Log4J is implemented (no System.out.printlns)
 
 - [X] Create JSP for NavBar
 - [X] Create JSP for macro calculator
@@ -93,32 +71,37 @@ implemented with Hibernate, DAO is fully unit tested, Log4J is implemented (no S
 - [X] Create a servlet for food tracker
 - [X] Create a servlet for macro calculator 
 - [X] Create a servlet for searching for a food
-- [ ] UserController
-  -   /profile → Loads user profile.
-  -   /update-profile → Updates user nutrition goals.
-- [ ] DashboardController
-  -  /dashboard → Displays a user's daily macro progress.
-
-- [ ] Implement authentication with AWS Cognito.
 - [X] Add database logic for meals and users.
   - had to remove to avoid charges from AWS, will reinstate for final project
-- [ ] Implement services for CRUD operations.
+- [X] Implement services for CRUD operations.
 - [X] Write unit tests for controllers and DAOs.
-
 - [X] Double-check all checkpoint 2 items (above) are complete and visible in github.
-- [ ] Set up Authentication in the indie project (more tasks coming for this)
 - [X] Create project DB on AWS.
-- [ ] Update project config files for AWS as needed
 - [X] Deploy a project to AWS
   - removed due to charges being added to an AWS account
 - [X] Add a deployed link to indie project list in student repo
   - will need to get another link when deployed for the real project on AWS
 
 
+### Week 8
+### Work on using AWS with current project. 
+- I got assigned a take home project from an internship, so my attention was on completing that.
+
+
 ### Week 9 (Start of the team project)
 #### Checkpoint 3 is Due: Deployed to AWS, at least one JSP that displays data from the database is implemented,
 authentication implemented, add AWS deployed app link to indie project list in student repo.
-- [ ] Double-check all checkpoint 3 items (above) are complete and visible in github.
+- [X] Double-check all checkpoint 3 items (above) are complete and visible in github.
+- [ ] need to create a client Dao and test that Dao. 
+  - Essentially a refactor of what I have currently for the USDA API.
+- [ ] UserController
+  -   /profile → Loads user profile.
+  -   /update-profile → Updates user nutrition goals.
+- [ ] DashboardController
+  -  /dashboard → Displays a user's daily macro progress.
+- [ ] Implement authentication with AWS Cognito.
+- [ ] Set up Authentication in the indie project (more tasks coming for this)
+- [ ] Update project config files for AWS as needed
 
 ### Week 15
 - [ ] Implement Feedback from Week 14 review

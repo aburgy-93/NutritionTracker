@@ -1,5 +1,8 @@
 package edu.matc.persistence;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -19,14 +22,13 @@ public interface PropertiesLoader {
      * @return a populated Properties instance or an empty Properties instance if
      * the file path was not found.
      */
-    default Properties loadProperties(String propertiesFilePath){
+    default Properties loadProperties(String propertiesFilePath) throws Exception {
+        final Logger logger = LogManager.getLogger(this.getClass());
         Properties properties = new Properties();
         try {
             properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
         } catch (IOException ioException) {
-            ioException.printStackTrace();
-        } catch (Exception exception) {
-            exception.printStackTrace();
+            logger.error(ioException);
         }
         return properties;
     }
