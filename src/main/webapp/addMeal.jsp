@@ -98,6 +98,7 @@
                     <div style="display: flex; align-items: flex-start">
                         <label for="servings">
                             <input id="servings" type="text" name="servings" value=${foodToAdd.servingSize} required>
+                            <input type="hidden" id="foodServingSize" value="${foodToAdd.servingSize}">
                         </label>
 
                         <label for="serving_units">
@@ -131,6 +132,7 @@
                 <td>
                     <label for="calories"></label>
                     <input id="calories" type="text" name="calories" value=${foodToAdd.calories} required>
+                    <input type="hidden" id="foodCalories" value="${foodToAdd.calories}">
                 </td>
             </tr>
             <tr>
@@ -138,6 +140,7 @@
                 <td>
                     <label for="protein"></label>
                     <input id="protein" type="text" name="protein" value=${foodToAdd.protein} required>
+                    <input type="hidden" id="foodProtein" value="${foodToAdd.protein}">
                 </td>
             </tr>
             <tr>
@@ -145,6 +148,7 @@
                 <td>
                     <label for="carbs"></label>
                     <input id="carbs" type="text" name="carbs" value=${foodToAdd.carbs} required>
+                    <input type="hidden" id="foodCarbs" value="${foodToAdd.carbs}">
                 </td>
             </tr>
             <tr>
@@ -152,6 +156,7 @@
                 <td>
                     <label for="fat"></label>
                     <input id="fat" type="text" name="fat" value=${foodToAdd.fat} required>
+                    <input type="hidden" id="foodFat" value="${foodToAdd.fat}">
                 </td>
             </tr>
             </tbody>
@@ -162,32 +167,6 @@
 <%--        <button type="submit" class="submit-btn">Submit</button>--%>
     </form>
 </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const serving = document.getElementById("servings");
-            const calories = document.getElementById("calories");
-            const protein = document.getElementById("protein");
-            const carbs = document.getElementById("carbs");
-            const fat = document.getElementById("fat");
-
-            // Ensure JSP values are properly converted to JavaScript Numbers
-            let originalServingSize = parseFloat(${foodToAdd.servingSize}) || 1;
-            let originalCalories = parseFloat(${foodToAdd.calories}) || 0;
-            let originalProtein = parseFloat(${foodToAdd.protein}) || 0;
-            let originalCarbs = parseFloat(${foodToAdd.carbs}) || 0;
-            let originalFat = parseFloat(${foodToAdd.fat}) || 0;
-
-            serving.addEventListener("input", function () {
-                let newServingSize = parseFloat(serving.value) || 1;
-
-                if (!isNaN(newServingSize) && originalServingSize > 0) {
-                    calories.value = ((newServingSize / originalServingSize) * originalCalories).toFixed(2);
-                    protein.value = ((newServingSize / originalServingSize) * originalProtein).toFixed(2);
-                    carbs.value = ((newServingSize / originalServingSize) * originalCarbs).toFixed(2);
-                    fat.value = ((newServingSize / originalServingSize) * originalFat).toFixed(2);
-                }
-            })
-        })
-    </script>
+<script src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
 </html>
