@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Response{
 
+	@JsonProperty("totalHits")
+	private int totalHits;
+
 	@JsonProperty("marketCountry")
 	private String marketCountry;
 
@@ -87,6 +90,10 @@ public class Response{
 	public void setHouseholdServingFullText(String householdServingFullText) {
 		this.householdServingFullText = householdServingFullText;
 	}
+
+	public void setTotalHits(int totalHits) {this.totalHits = totalHits;}
+
+	public int getTotalHits() {return totalHits;}
 
 	public void setMarketCountry(String marketCountry){
 		this.marketCountry = marketCountry;

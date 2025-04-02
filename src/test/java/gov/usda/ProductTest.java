@@ -1,48 +1,44 @@
 package gov.usda;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
-import java.util.List;
-
-import static org.junit.Assert.assertFalse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import edu.matc.persistence.USDADao;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import usda.FoodsItem;
+
+import java.util.List;
 
 public class ProductTest {
+    USDADao dao;
+
+    @BeforeEach
+    void setUp() {
+        dao = new USDADao();
+    }
+
     private static final Dotenv dotenv = Dotenv.load();
     String apiKey = dotenv.get("USDA_API_KEY");
+    String searchUrl = dotenv.get("USDA_SEARCH_STRING");
 
     @Test
     public void getAPIKey() throws Exception{
         assertEquals(apiKey, dotenv.get("USDA_API_KEY"));
+        assertNotNull(searchUrl, dotenv.get("USDA_SEARCH_STRING"));
     }
 
     @Test
-    public void testswapiJSON() throws Exception {
-        Client client = ClientBuilder.newClient();
-        WebTarget target =
-                client.target("https://api.nal.usda.gov/fdc/v1/food/2095236?api_key=QsBQXUsRUxK5bCTPj2PpXc34Y0QOIOpYV2JpWXeP");
-        String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
+    public void testSearch() throws JsonProcessingException {
+        String searchQuery = "cheese";
 
-        ObjectMapper mapper = new ObjectMapper();
-        Response foodResponse = mapper.readValue(response, Response.class);
+        List<FoodsItem> expectedFoodsList = dao.searchFood(searchQuery).getFoods();
+        List<FoodsItem> actualFoodsList = dao.getFoodsList(searchQuery);
 
-
-        String expectedProductName = "CHEDDAR CHEESE";
-        int id = 2095236;
-
-        // Validate foodNutrients list
-        List<FoodNutrientsItem> foodNutrients = foodResponse.getFoodNutrients();
-        assertNotNull(foodNutrients);
-        assertFalse(foodNutrients.isEmpty());
-
-        assertEquals(expectedProductName, foodResponse.getDescription());
-        assertEquals(id, foodResponse.getFdcId());
-        assertEquals(foodNutrients, foodResponse.getFoodNutrients());
+        assertNotNull(actualFoodsList);
+        assertEquals(expectedFoodsList, actualFoodsList);
     }
 }

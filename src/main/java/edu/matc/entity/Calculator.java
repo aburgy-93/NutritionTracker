@@ -1,7 +1,6 @@
 package edu.matc.entity;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * The type Calculator.
