@@ -19,6 +19,7 @@ import java.io.IOException;
 
 public class AddFood extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {

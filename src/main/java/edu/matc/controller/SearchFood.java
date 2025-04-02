@@ -130,6 +130,7 @@ public class SearchFood extends HttpServlet {
      * @throws IOException the io exception
      * @throws ServletException the servlet exception
      */
+    @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         GenericDao<Food> genericDao = new GenericDao<>(Food.class);
         try {
@@ -221,6 +222,7 @@ public class SearchFood extends HttpServlet {
      */
     // I'll need to delete the food objects that are being deleted from the food table to be removed from any and all
     // instances in a user's foodTracker
+    @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         GenericDao<Food> genericDao = new GenericDao<>(Food.class);
         try {
