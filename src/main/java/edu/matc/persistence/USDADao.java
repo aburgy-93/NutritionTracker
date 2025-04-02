@@ -25,7 +25,7 @@ public class USDADao {
     public Search searchFood(String searchString) throws JsonProcessingException {
         Client client = ClientBuilder.newClient();
         WebTarget target =
-                client.target(searchUrl + "cheddar%20cheese&dataType=Branded&pageSize=25&pageNumber=2&sortBy=dataType.keyword&sortOrder=asc" + apiKey);
+                client.target(searchUrl + searchString +"&dataType=Branded&pageSize=25&pageNumber=2&sortBy=dataType.keyword&sortOrder=asc" + apiKey);
         String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
 
         ObjectMapper mapper = new ObjectMapper();
