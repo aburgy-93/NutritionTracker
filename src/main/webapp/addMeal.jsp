@@ -70,7 +70,24 @@
 <c:import url="navBar.jsp" />
 <div class="container">
     <h2>${title}</h2>
-    <form action="search-food" method="POST">
+    <form action="add-meal" method="POST">
+        <input type="hidden" name="food_id" value="${foodToAdd.id}">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <!-- Food Information -->
+                <td>Add Date:</td>
+                <label for="date">
+                    <td> <input type="date" id="date" name="date" required></td>
+                </label>
+            </tr>
+            </tbody>
+        </table>
 
         <!-- Food Information -->
         <table>
@@ -117,6 +134,18 @@
                 <th colspan="2">Meal Time</th>
             </tr>
             </thead>
+            <tbody>
+            <tr>
+                <label for="meal_times">
+                    <td><select name="meal_times" id="meal_times">
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="snack">Snack</option>
+                    </select></td>
+                </label>
+            </tr>
+            </tbody>
         </table>
 
         <!-- Nutrition Information -->
@@ -163,8 +192,7 @@
         </table>
 
         <!-- Submit Button -->
-        <input type="hidden" name="_method" value="ADD_MEAL">
-<%--        <button type="submit" class="submit-btn">Submit</button>--%>
+        <button type="submit" class="submit-btn">Submit</button>
     </form>
 </div>
 <script src="${pageContext.request.contextPath}/js/script.js"></script>
