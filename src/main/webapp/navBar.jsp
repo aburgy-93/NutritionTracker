@@ -13,9 +13,6 @@
                     <a href="meal-display">Your Meals</a>
                 </li>
                 <li>
-                    <a href="add-meal">Add a Meal</a>
-                </li>
-                <li>
                     <a href="add-food">Add Food</a>
                 </li>
             </ul>

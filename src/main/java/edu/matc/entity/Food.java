@@ -35,7 +35,7 @@ public class Food {
     private String servingUnit;
 
     @Column(name = "calories")
-    private int calories;
+    private double calories;
 
     @Column(name = "fat")
     private double fat;
@@ -69,7 +69,7 @@ public class Food {
      * @param fat         the fat
      */
     public Food(String foodName, String foodType, double servingSize, String servingUnit,
-                int calories, double protein, double carbs, double fat) {
+                double calories, double protein, double carbs, double fat) {
         this.foodName = foodName;
         this.foodType = foodType;
         this.servingSize = servingSize;
@@ -141,7 +141,7 @@ public class Food {
      *
      * @return calories of food
      */
-    public int getCalories() {return calories;}
+    public double getCalories() {return calories;}
 
     /**
      * Sets the calories of the food

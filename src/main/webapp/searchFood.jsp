@@ -125,7 +125,6 @@
 
                             <form id="postForm${food.id}" action="add-meal" method="GET" style="display: none">
                                 <input type="hidden" name="add_food_to_meal" value="${food.id}">
-                                <input type="hidden" name="_method" value="ADD_TO_MEAL">
                             </form>
                         </td>
                         <td>${food.foodType}</td>

@@ -185,15 +185,6 @@
 <div class="meal-container">
     <div class="meal-content">
         <h2>Your Meals</h2>
-        <!-- Form -->
-<%--        <form action="search-food" method="GET" id="searchFood">--%>
-<%--            <div>--%>
-<%--                <label for="searchTerm">Search by Food Name</label>--%>
-<%--                <input type="text" id="searchTerm" name="searchTerm" value="${searchTerm}">--%>
-<%--                <input type="submit" value="Submit">--%>
-<%--            </div>--%>
-<%--        </form>--%>
-
         <div class="calendar">
             <% for (String date : (List<String>) request.getAttribute("weekDates")) { %>
                 <div class="day" onclick="">
