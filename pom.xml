@@ -183,7 +183,7 @@
   </dependencies>
 
   <build>
-    <finalName>Week3Exercise</finalName>
+    <finalName>NutritionTracker</finalName>
     <pluginManagement>
       <plugins>
         <plugin>
