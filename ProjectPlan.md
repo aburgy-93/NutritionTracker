@@ -92,16 +92,23 @@ implemented with Hibernate, DAO is fully unit tested; Log4J is implemented (no S
 #### Checkpoint 3 is Due: Deployed to AWS, at least one JSP that displays data from the database is implemented,
 authentication implemented, add AWS deployed app link to indie project list in student repo.
 - [X] Double-check all checkpoint 3 items (above) are complete and visible in github.
-- [ ] need to create a client Dao and test that Dao. 
+- [?] need to create a client Dao and test that Dao. 
   - Essentially a refactor of what I have currently for the USDA API.
-- [ ] UserController
+  - I believe I got this mostly done, but haven't had any feedback on it yet.
+- [X] Implement authentication with AWS Cognito.
+- [X] Set up Authentication in the indie project (more tasks coming for this)
+
+### Week 10
+- [X] UI for adding a meal
+- [X] Add backend logic for adding a meal
+
+### Week 11
+- [ ] User`Controller
   -   /profile → Loads user profile.
   -   /update-profile → Updates user nutrition goals.
 - [ ] DashboardController
   -  /dashboard → Displays a user's daily macro progress.
-- [ ] Implement authentication with AWS Cognito.
-- [ ] Set up Authentication in the indie project (more tasks coming for this)
-- [ ] Update project config files for AWS as needed
+- [ ] Implement the search food feature from the USDA API
 
 ### Week 15
 - [ ] Implement Feedback from Week 14 review
