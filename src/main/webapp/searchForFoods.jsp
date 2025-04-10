@@ -86,7 +86,7 @@
             }
         }
     </style>
-    <title>${title}</title>
+    <title>Test</title>
 </head>
 <body>
     <c:import url="navBar.jsp" />
