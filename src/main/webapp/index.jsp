@@ -178,7 +178,7 @@
     <c:otherwise>
         <c:import url="navBar.jsp" />
         <div class="container">
-            <h2>Macro Calculator</h2>
+            <h2>${title}</h2>
             <p>This calculator helps determine daily macronutrient and calorie needs.</p>
 
             <div class="cal-instructions">

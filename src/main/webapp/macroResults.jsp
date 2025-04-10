@@ -6,7 +6,7 @@
   <c:import url="navBar.jsp" />
   <div class="container">
       <div class="content">
-          <h2>Your Results</h2>
+          <h2>${title}</h2>
           <table id="results-table">
               <tbody>
               <tr>

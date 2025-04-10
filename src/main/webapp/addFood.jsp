@@ -69,7 +69,7 @@
 <body>
 <c:import url="navBar.jsp" />
 <div class="container">
-    <h2>Add Food</h2>
+    <h2>${title}</h2>
     <form action="search-food" method="POST">
 
         <!-- Food Information -->

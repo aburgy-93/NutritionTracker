@@ -184,7 +184,7 @@
 <c:import url="navBar.jsp" />
 <div class="meal-container">
     <div class="meal-content">
-        <h2>Your Meals</h2>
+        <h2>${title}</h2>
         <div class="calendar">
             <% for (String date : (List<String>) request.getAttribute("weekDates")) { %>
                 <div class="day" onclick="">

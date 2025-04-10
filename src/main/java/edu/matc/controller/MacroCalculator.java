@@ -44,7 +44,7 @@ public class MacroCalculator extends HttpServlet {
             HashMap<String, Double> results = calculator.calculateMacros();
 
             request.setAttribute("results",results);
-            request.setAttribute("title", "Results");
+            request.setAttribute("title", "Macro Calculator");
             RequestDispatcher rd = request.getRequestDispatcher("/macroResults.jsp");
             rd.forward(request, response);
             logger.info(results);

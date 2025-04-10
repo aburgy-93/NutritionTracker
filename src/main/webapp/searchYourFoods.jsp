@@ -91,7 +91,7 @@
     <c:import url="navBar.jsp" />
     <div class="container">
         <div class="content">
-            <h2>Search for Foods</h2>
+            <h2>${title}</h2>
             <!-- Form -->
             <form action="search-food" method="GET" id="searchFood">
                 <div>

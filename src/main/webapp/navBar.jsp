@@ -7,7 +7,10 @@
                     <a href="#">Profile</a>
                 </li>
                 <li>
-                    <a href="search-food">Search Foods</a>
+                    <a href="search-food">Search Your Foods</a>
+                </li>
+                <li>
+                    <a href="search">Search Foods</a>
                 </li>
                 <li>
                     <a href="meal-display">Your Meals</a>
