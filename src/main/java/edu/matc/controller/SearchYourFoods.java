@@ -21,7 +21,7 @@ import java.lang.reflect.InvocationTargetException;
         urlPatterns = {"/search-food"}
 )
 
-public class SearchFood extends HttpServlet {
+public class SearchYourFoods extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
@@ -30,7 +30,7 @@ public class SearchFood extends HttpServlet {
      * Check to make sure the searchTerm is not empty. If not then on the genericDao call the getByPropertyLike method and
      * pass in the searchTerm (in this case, we are looking up foodNames, but it could be any property in theory).
      * If the searchTerm is null, then get all the foods.
-     * Then forward the request and response off to searchFood.jsp.
+     * Then forward the request and response off to searchYourFoods.jsp.
      * @param request the request
      * @param response the response
      * @throws ServletException the servlet exception
@@ -43,15 +43,15 @@ public class SearchFood extends HttpServlet {
             GenericDao<Food> genericDao = new GenericDao<>(Food.class);
 
             if (searchTerm != null && !searchTerm.isEmpty()) {
-                request.setAttribute("title", "Foods");
+                request.setAttribute("title", "Search Your Foods");
                 request.setAttribute("foods", genericDao.getByPropertyLike("foodName", searchTerm));
             } else {
                 request.setAttribute("foods", genericDao.getAll());
-                request.setAttribute("title", "Foods");
+                request.setAttribute("title", "Search Your Foods");
             }
 
             request.setAttribute("searchTerm", searchTerm);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/searchFood.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/searchYourFoods.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             logger.error(e);
@@ -85,7 +85,7 @@ public class SearchFood extends HttpServlet {
      * If _method == "ADD" we get all the data from the response and put the data into a new Food object.
      * Check to make sure none of the values are empty/null.
      * Set the title of the request and set "foods" to hold the data for all the foods.
-     * Forward the request to searchFood.jsp
+     * Forward the request to searchYourFoods.jsp
      *
      * @param request  the request
      * @param response the response
@@ -115,7 +115,7 @@ public class SearchFood extends HttpServlet {
             request.setAttribute("title", "Foods");
             request.setAttribute("foods", genericDao.getAll());
 
-            RequestDispatcher rd = request.getRequestDispatcher("/searchFood.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/searchYourFoods.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             logger.error(e);
@@ -213,12 +213,12 @@ public class SearchFood extends HttpServlet {
 
     /**
      * Do delete.
-     * This method will get the foodId from the request with the name of food_to_delete in the searchFood.jsp.
+     * This method will get the foodId from the request with the name of food_to_delete in the searchYourFoods.jsp.
      * Set the foodId to the response.
      * Call the deleteEntity function from the genericDao and pass in the returned object from the getById method also
      * in the genericDao.
      * Set tje attrbutes on the request.
-     * Forward the request, response to /searchFood.jsp
+     * Forward the request, response to /searchYourFoods.jsp
      * @param request the request
      * @param response the response
      * @throws IOException the io exception
@@ -238,7 +238,7 @@ public class SearchFood extends HttpServlet {
             request.setAttribute("title", "Foods");
             request.setAttribute("foods", genericDao.getAll());
 
-            RequestDispatcher rd = request.getRequestDispatcher("/searchFood.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/searchYourFoods.jsp");
             rd.forward(request, response);
         } catch (Exception e ) {
             logger.error(e);

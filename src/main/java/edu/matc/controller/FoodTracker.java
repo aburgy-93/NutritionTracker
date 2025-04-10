@@ -38,7 +38,7 @@ public class FoodTracker extends HttpServlet {
                 weekDates.add(formattedDate);
             }
 
-            request.setAttribute("title", "Meals Display");
+            request.setAttribute("title", "Your Meals");
             request.setAttribute("weekDates", weekDates);
             RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
             rd.forward(request, response);
