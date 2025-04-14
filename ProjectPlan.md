@@ -105,7 +105,7 @@ authentication implemented, add AWS deployed app link to indie project list in s
 ### Week 11
 - [ ] User`Controller
   -   /profile → Loads user profile.
-  -   /update-profile → Updates user nutrition goals.
+  -   /update-profile → Updates user nutritionResponse goals.
 - [ ] DashboardController
   -  /dashboard → Displays a user's daily macro progress.
 - [ ] Implement the search food feature from the USDA API

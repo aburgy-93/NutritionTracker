@@ -24,7 +24,7 @@ Tasks Completed:
  * Updated user stories and denoted MVPs
  * Updated readme with possible technologies 
  * Brainstormed screen designs
- * Looked into food nutrition APIs
+ * Looked into food nutritionResponse APIs
    * this is giving me some issues as most food APIs are a paid service 
    * may have to instead have each user manually input their food(s)/meal(s) into local database,
    * then they can query that database. 
@@ -32,7 +32,7 @@ Tasks Completed:
 
 I have a pretty good idea of where I want to go with this project. I still need to design some wireframes
 of what each page will/might look like and will get them done before the 2/12 due date. 
-Need to keep researching if there are any free/easy to use APIs with food/nutrition data. If all else fails
+Need to keep researching if there are any free/easy to use APIs with food/nutritionResponse data. If all else fails
 users can create their own local database with food they have entered themselves and can re-use those items
 over and over again.
 

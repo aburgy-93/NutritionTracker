@@ -105,14 +105,21 @@
                 <thead>
                    <tr>
                        <th>Food Name</th>
-                       <th>Food ID</th>
                    </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="product" items="${products}">
                     <tr>
-                        <td>${product.title}</td>
-                        <td>${product.id}</td>
+                        <td>
+                            <a href="#" onclick="document.getElementById('postForm${product.id}').submit(); return false;">
+                                    ${product.title}
+                                <c:if test="${not empty product.id}">
+                                    <form id="postForm${product.id}" action="add-searched-meal" method="GET" style="display: none">
+                                        <input type="hidden" name="add_searched_food_to_meal" value="${product.id}">
+                                        <input type="hidden" name="searched_food_name" value="${product.title}">
+                                    </form>
+                                </c:if>
+                        </td>
                     </tr>
                 </c:forEach>
                 <c:if test="${empty products}">

@@ -2,6 +2,9 @@ package com;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.matc.persistence.SpoontacularDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -14,6 +17,7 @@ import java.util.List;
 
 public class ResponseTest {
     SpoontacularDao dao;
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     @BeforeEach
     void setUp() {
@@ -21,33 +25,86 @@ public class ResponseTest {
     }
 
     private static final Dotenv dotenv = Dotenv.load();
-    String searchUrl = dotenv.get("SPOONTACULAR_SEARCH_STRING");
     String apiKey = dotenv.get("SPOONTACULAR_API_KEY");
+    String searchUrl = dotenv.get("SPOONTACULAR_SEARCH_STRING");
+    String nutritionUrl = dotenv.get("SPOONTACULAR_NUTRITION_URL");
 
     @Test
     public void getAPIKey() throws JsonProcessingException {
-        assertNotNull(searchUrl, dotenv.get("SPOONTACULAR_SEARCH_STRING"));
         assertEquals(apiKey, dotenv.get("SPOONTACULAR_API_KEY"));
+        assertEquals(searchUrl, dotenv.get("SPOONTACULAR_SEARCH_STRING"));
+        assertEquals(nutritionUrl, dotenv.get("SPOONTACULAR_NUTRITION_URL"));
     }
 
     @Test
     @Disabled
-    public void getProductsList() throws JsonProcessingException {
+    public void getProductsFromResponse() throws JsonProcessingException {
         String searchQuery = "chicken%20breast";
 
         List<Product> foodResponse = dao.searchProduct(searchQuery).getProducts();
 
-        assertNotNull(foodResponse);
+        Assertions.assertNotNull(foodResponse);
         assertEquals(8074580, foodResponse);
     }
 
     @Test
-    public void getProduct() throws JsonProcessingException {
+    @Disabled
+    public void getProductInResponse() throws JsonProcessingException {
         String searchQuery = "chicken%20breast";
 
         List<Product> foodResponse = dao.searchProduct(searchQuery).getProducts();
 
-        assertNotNull(foodResponse);
+        Assertions.assertNotNull(foodResponse);
         assertEquals(8074580, foodResponse.get(0).getId());
+    }
+
+    @Test
+    @Disabled
+    public void getNutritionFromResponse() throws JsonProcessingException {
+        int ID = 22347;
+
+        NutritionResponse nutritionResponse = dao.getNutrition(ID);
+        assertNotNull(nutritionResponse);
+        assertEquals(ID, nutritionResponse.getId());
+    }
+
+    @Test
+    @Disabled
+    public void getCarbs() throws JsonProcessingException {
+        int ID = 22347;
+
+        List<NutrientsItem> returnedNutrients = dao.getNutrients(ID);
+        Assertions.assertNotNull(returnedNutrients);
+        assertEquals("Carbohydrates", returnedNutrients.get(0).getName());
+    }
+
+    @Test
+    @Disabled
+    public void getCalories() throws JsonProcessingException {
+        int ID = 22347;
+
+        List<NutrientsItem> returnedNutrients = dao.getNutrients(ID);
+        Assertions.assertNotNull(returnedNutrients);
+        assertEquals("Calories", returnedNutrients.get(1).getName());
+    }
+
+    @Test
+    @Disabled
+    public void getFats() throws JsonProcessingException {
+        int ID = 22347;
+
+        List<NutrientsItem> returnedNutrients = dao.getNutrients(ID);
+        Assertions.assertNotNull(returnedNutrients);
+        assertEquals("Fat", returnedNutrients.get(2).getName());
+    }
+
+    @Test
+    @Disabled
+    public void getProtein() throws JsonProcessingException {
+        int ID = 22347;
+
+        List<NutrientsItem> returnedNutrients = dao.getNutrients(ID);
+        Assertions.assertNotNull(returnedNutrients);
+        assertEquals("Protein", returnedNutrients.get(3).getName());
     }
 }
