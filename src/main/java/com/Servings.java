@@ -8,13 +8,13 @@ public class Servings{
 	private Object number;
 
 	@JsonProperty("unit")
-	private Object unit;
+	private String unit;
 
 	@JsonProperty("size")
 	private Object size;
 
 	@JsonProperty("raw")
-	private Object raw;
+	private String raw;
 
 	public void setNumber(Object number){
 		this.number = number;
@@ -24,11 +24,11 @@ public class Servings{
 		return number;
 	}
 
-	public void setUnit(Object unit){
+	public void setUnit(String unit){
 		this.unit = unit;
 	}
 
-	public Object getUnit(){
+	public String getUnit(){
 		return unit;
 	}
 
@@ -40,11 +40,11 @@ public class Servings{
 		return size;
 	}
 
-	public void setRaw(Object raw){
+	public void setRaw(String raw){
 		this.raw = raw;
 	}
 
-	public Object getRaw(){
+	public String getRaw(){
 		return raw;
 	}
 

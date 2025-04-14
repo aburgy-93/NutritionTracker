@@ -1,12 +1,9 @@
 package com;
 
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Product {
+public class NutritionResponse{
 
 	@JsonProperty("image")
 	private String image;
@@ -15,7 +12,7 @@ public class Product {
 	private List<String> images;
 
 	@JsonProperty("description")
-	private Object description;
+	private String description;
 
 	@JsonProperty("upc")
 	private String upc;
@@ -27,13 +24,22 @@ public class Product {
 	private String title;
 
 	@JsonProperty("aisle")
-	private String aisle;
+	private Object aisle;
 
 	@JsonProperty("badges")
 	private List<String> badges;
 
 	@JsonProperty("generatedText")
-	private String generatedText;
+	private Object generatedText;
+
+	@JsonProperty("nutrition")
+	private Nutrition nutrition;
+
+	@JsonProperty("servings")
+	private Servings servings;
+
+	@JsonProperty("credits")
+	private Credits credits;
 
 	@JsonProperty("price")
 	private Object price;
@@ -45,7 +51,7 @@ public class Product {
 	private Object usdaCode;
 
 	@JsonProperty("ingredients")
-	private List<Object> ingredients;
+	private List<IngredientsItem> ingredients;
 
 	@JsonProperty("spoonacularScore")
 	private Object spoonacularScore;
@@ -60,7 +66,7 @@ public class Product {
 	private String imageType;
 
 	@JsonProperty("brand")
-	private Object brand;
+	private String brand;
 
 	@JsonProperty("breadcrumbs")
 	private List<String> breadcrumbs;
@@ -87,11 +93,11 @@ public class Product {
 		return images;
 	}
 
-	public void setDescription(Object description){
+	public void setDescription(String description){
 		this.description = description;
 	}
 
-	public Object getDescription(){
+	public String getDescription(){
 		return description;
 	}
 
@@ -119,11 +125,11 @@ public class Product {
 		return title;
 	}
 
-	public void setAisle(String aisle){
+	public void setAisle(Object aisle){
 		this.aisle = aisle;
 	}
 
-	public String getAisle(){
+	public Object getAisle(){
 		return aisle;
 	}
 
@@ -135,12 +141,36 @@ public class Product {
 		return badges;
 	}
 
-	public void setGeneratedText(String generatedText){
+	public void setGeneratedText(Object generatedText){
 		this.generatedText = generatedText;
 	}
 
-	public String getGeneratedText(){
+	public Object getGeneratedText(){
 		return generatedText;
+	}
+
+	public void setNutrition(Nutrition nutrition){
+		this.nutrition = nutrition;
+	}
+
+	public Nutrition getNutrition(){
+		return nutrition;
+	}
+
+	public void setServings(Servings servings){
+		this.servings = servings;
+	}
+
+	public Servings getServings(){
+		return servings;
+	}
+
+	public void setCredits(Credits credits){
+		this.credits = credits;
+	}
+
+	public Credits getCredits(){
+		return credits;
 	}
 
 	public void setPrice(Object price){
@@ -167,11 +197,11 @@ public class Product {
 		return usdaCode;
 	}
 
-	public void setIngredients(List<Object> ingredients){
+	public void setIngredients(List<IngredientsItem> ingredients){
 		this.ingredients = ingredients;
 	}
 
-	public List<Object> getIngredients(){
+	public List<IngredientsItem> getIngredients(){
 		return ingredients;
 	}
 
@@ -207,11 +237,11 @@ public class Product {
 		return imageType;
 	}
 
-	public void setBrand(Object brand){
+	public void setBrand(String brand){
 		this.brand = brand;
 	}
 
-	public Object getBrand(){
+	public String getBrand(){
 		return brand;
 	}
 
@@ -242,7 +272,7 @@ public class Product {
 	@Override
  	public String toString(){
 		return 
-			"Response{" + 
+			"NutritionResponse{" + 
 			"image = '" + image + '\'' + 
 			",images = '" + images + '\'' + 
 			",description = '" + description + '\'' + 
@@ -251,7 +281,10 @@ public class Product {
 			",title = '" + title + '\'' + 
 			",aisle = '" + aisle + '\'' + 
 			",badges = '" + badges + '\'' + 
-			",generatedText = '" + generatedText + '\'' +
+			",generatedText = '" + generatedText + '\'' + 
+			",nutrition = '" + nutrition + '\'' + 
+			",servings = '" + servings + '\'' + 
+			",credits = '" + credits + '\'' + 
 			",price = '" + price + '\'' + 
 			",ingredientList = '" + ingredientList + '\'' + 
 			",usdaCode = '" + usdaCode + '\'' + 
