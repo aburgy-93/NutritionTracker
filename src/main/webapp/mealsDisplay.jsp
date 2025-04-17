@@ -15,6 +15,21 @@
             width: auto;
             height: auto;
         }
+
+        .weekButtons{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #previousButton{
+            margin-right: 18px;
+        }
+
+        #nextButton{
+
+        }
+
         /* Flexbox for form layout */
         form {
             display: flex;
@@ -185,6 +200,18 @@
 <div class="meal-container">
     <div class="meal-content">
         <h2>${title}</h2>
+            <%
+                int currentOffSet = (Integer) request.getAttribute("weekOffSet");
+            %>
+            <div class="weekButtons">
+                <button id="previousButton">
+                    <a href="http://localhost:8080/NutritionTracker_war/meal-display?weekOffSet=<%= currentOffSet - 1 %>">&lArr; Previous Week</a>
+                </button>
+
+                <button id="nextButton">
+                    <a href="http://localhost:8080/NutritionTracker_war/meal-display?weekOffSet=<%= currentOffSet + 1 %>">Next Week &rArr;</a>
+                </button>
+            </div>
         <div class="calendar">
             <% for (String date : (List<String>) request.getAttribute("weekDates")) { %>
                 <div class="day" onclick="">
