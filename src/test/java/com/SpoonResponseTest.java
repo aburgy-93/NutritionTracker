@@ -15,7 +15,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.List;
 
-public class ResponseTest {
+public class SpoonResponseTest {
     SpoontacularDao dao;
     private final Logger logger = LogManager.getLogger(this.getClass());
 
