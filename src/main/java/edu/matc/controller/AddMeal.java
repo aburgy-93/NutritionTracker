@@ -90,10 +90,6 @@ public class AddMeal extends HttpServlet {
                 // Insert the new food entry into the database
                 userFoodDao.insert(foodEnteredByUser);
 
-                // Pass attributes to the request for feedback (success message, meal info, etc.)
-//                request.setAttribute("newFood", foodEnteredByUser);
-//                request.setAttribute("message", "Food entry added successfully!");
-
                 // Redirect to the meals display page
                 response.sendRedirect(request.getContextPath() + "/meal-display");
 

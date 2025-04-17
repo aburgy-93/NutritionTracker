@@ -160,9 +160,10 @@ public class SearchYourFoods extends HttpServlet {
      * a new food object, but keep the old one and just update it).
      * Then call the update method on the genericDao object and pass in the updated foodToEdit Food object.
      * Then redirect back to the searchFood page.
-     * @param request the request
+     *
+     * @param request  the request
      * @param response the response
-     * @throws IOException the io exception
+     * @throws IOException      the io exception
      * @throws ServletException the servlet exception
      */
     public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

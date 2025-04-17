@@ -21,6 +21,9 @@ import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
+/**
+ * The type Add searched food.
+ */
 @WebServlet(
         urlPatterns = {"/add-searched-meal"}
 )

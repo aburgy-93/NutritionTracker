@@ -1,7 +1,5 @@
 package edu.matc.controller;
 
-import edu.matc.entity.Food;
-import edu.matc.persistence.GenericDao;
 import edu.matc.persistence.SpoontacularDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * The type Search food.
