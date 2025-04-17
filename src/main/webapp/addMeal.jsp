@@ -115,7 +115,7 @@
                     <div style="display: flex; align-items: flex-start">
                         <label for="servings">
                             <input id="servings" type="text" name="servings" value=${foodToAdd.servingSize} required>
-                            <input type="hidden" id="foodServingSize" value="${foodToAdd.servingSize}">
+                            <input type="hidden" id="foodServingSize" data-nutrition="servings" value="${foodToAdd.servingSize}">
                         </label>
 
                         <label for="serving_units">
@@ -161,7 +161,7 @@
                 <td>
                     <label for="calories"></label>
                     <input id="calories" type="text" name="calories" value=${foodToAdd.calories} required>
-                    <input type="hidden" id="foodCalories" value="${foodToAdd.calories}">
+                    <input type="hidden" id="foodCalories" data-nutrition="calories" value="${foodToAdd.calories}">
                 </td>
             </tr>
             <tr>
@@ -169,7 +169,7 @@
                 <td>
                     <label for="protein"></label>
                     <input id="protein" type="text" name="protein" value=${foodToAdd.protein} required>
-                    <input type="hidden" id="foodProtein" value="${foodToAdd.protein}">
+                    <input type="hidden" id="foodProtein" data-nutrition="protein" value="${foodToAdd.protein}">
                 </td>
             </tr>
             <tr>
@@ -177,7 +177,7 @@
                 <td>
                     <label for="carbs"></label>
                     <input id="carbs" type="text" name="carbs" value=${foodToAdd.carbs} required>
-                    <input type="hidden" id="foodCarbs" value="${foodToAdd.carbs}">
+                    <input type="hidden" id="foodCarbs" data-nutrition="carbs" value="${foodToAdd.carbs}">
                 </td>
             </tr>
             <tr>
@@ -185,7 +185,7 @@
                 <td>
                     <label for="fat"></label>
                     <input id="fat" type="text" name="fat" value=${foodToAdd.fat} required>
-                    <input type="hidden" id="foodFat" value="${foodToAdd.fat}">
+                    <input type="hidden" id="foodFat" data-nutrition="fat" value="${foodToAdd.fat}">
                 </td>
             </tr>
             </tbody>
@@ -195,6 +195,6 @@
         <button type="submit" class="submit-btn">Submit</button>
     </form>
 </div>
-<script src="${pageContext.request.contextPath}/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/js/formUpdateScript.js"></script>
 </body>
 </html>

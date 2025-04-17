@@ -116,12 +116,12 @@
         <td>
           <div style="display: flex; align-items: flex-start">
             <label for="servings">
-              <input id="servings" type="text" name="servings" value="${SearchedFoodServings.size}" required>
-              <input type="hidden" id="foodServingSize" value="${SearchedFoodServings.size}">
+              <input id="servings" type="text" name="servings" value="${empty SearchedFoodServings.size ? '1.0' : SearchedFoodServings.size}" required>
+              <input type="hidden" id="foodServingSize" data-nutrition="servings" value="${empty SearchedFoodServings.size ? "1.0" : SearchedFoodServing.size}">
             </label>
 
             <label for="serving_units">
-              <input id="serving_units" type="text" name="serving_units" value="${fn:toLowerCase(SearchedFoodServings.unit)}" required>
+              <input id="serving_units" type="text" name="serving_units" value="${empty fn:toLowerCase(SearchedFoodServings.unit) ? "oz" : fn:toLowerCase(SearchedFoodServings.unit)}" required>
             </label>
           </div>
         </td>
@@ -163,7 +163,7 @@
         <td>
           <label for="calories"></label>
           <input id="calories" type="text" name="calories" value="${calories}" required>
-          <input type="hidden" id="foodCalories" value="${calories}">
+          <input type="hidden" id="foodCalories" data-nutrition="calories" value="${calories}">
         </td>
       </tr>
       <tr>
@@ -171,7 +171,7 @@
         <td>
           <label for="protein"></label>
           <input id="protein" type="text" name="protein" value="${protein}" required>
-          <input type="hidden" id="foodProtein" value="${protein}">
+          <input type="hidden" id="foodProtein" data-nutrition="protein" value="${protein}">
         </td>
       </tr>
       <tr>
@@ -179,7 +179,7 @@
         <td>
           <label for="carbs"></label>
           <input id="carbs" type="text" name="carbs" value="${carbs}" required>
-          <input type="hidden" id="foodCarbs" value="${carbs}">
+          <input type="hidden" id="foodCarbs" data-nutrition="carbs" value="${carbs}">
         </td>
       </tr>
       <tr>
@@ -187,7 +187,7 @@
         <td>
           <label for="fat"></label>
           <input id="fat" type="text" name="fat" value="${fat}" required>
-          <input type="hidden" id="foodFat" value="${fat}">
+          <input type="hidden" id="foodFat" data-nutrition="fat" value="${fat}">
         </td>
       </tr>
       </tbody>
@@ -200,6 +200,6 @@
 
 </div>
 
-<%--<script src="${pageContext.request.contextPath}/js/script.js"></script>--%>
+<script src="${pageContext.request.contextPath}/js/formUpdateScript.js"></script>
 </body>
 </html>

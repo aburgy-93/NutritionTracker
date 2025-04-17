@@ -54,12 +54,12 @@ public class AddMeal extends HttpServlet {
 
             // Get form data
             String date = request.getParameter("date");
-            String foodIdStr = request.getParameter("food_id");  // Retrieve the foodId
+            String foodIdStr = request.getParameter("food_id");
             String foodName = request.getParameter("food_name");
             String foodType = request.getParameter("food_type");
             String servingsStr = request.getParameter("servings");
             String servingsUnits = request.getParameter("serving_units");
-            String mealTime = request.getParameter("meal_times"); // Corrected the name to "meal_times"
+            String mealTime = request.getParameter("meal_times");
             String caloriesStr = request.getParameter("calories");
             String proteinStr = request.getParameter("protein");
             String carbsStr = request.getParameter("carbs");
@@ -79,9 +79,7 @@ public class AddMeal extends HttpServlet {
 
                 // Get the food item from the database using the foodId
                 GenericDao<Food> foodDao = new GenericDao<>(Food.class);
-                Food foodToAdd = foodDao.getById(Integer.parseInt(foodIdStr));  // Fetch the food by foodId
-
-
+                Food foodToAdd = foodDao.getById(Integer.parseInt(foodIdStr));
 
                 // TODO: Retrieve the actual user ID from the session (or Cognito)
                 User user = userDao.getById(1);  // For testing, this is hardcoded
@@ -92,9 +90,9 @@ public class AddMeal extends HttpServlet {
                 // Insert the new food entry into the database
                 userFoodDao.insert(foodEnteredByUser);
 
-                // Optionally, pass attributes to the request for feedback (success message, meal info, etc.)
-                request.setAttribute("newFood", foodEnteredByUser);
-                request.setAttribute("message", "Food entry added successfully!");
+                // Pass attributes to the request for feedback (success message, meal info, etc.)
+//                request.setAttribute("newFood", foodEnteredByUser);
+//                request.setAttribute("message", "Food entry added successfully!");
 
                 // Redirect to the meals display page
                 response.sendRedirect(request.getContextPath() + "/meal-display");

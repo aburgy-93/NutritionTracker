@@ -1,7 +1,5 @@
 package edu.matc.persistence;
 
-import edu.matc.entity.User;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
