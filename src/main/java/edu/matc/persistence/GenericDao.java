@@ -1,5 +1,6 @@
 package edu.matc.persistence;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
@@ -133,6 +134,22 @@ public class GenericDao<T> {
         Expression<String> property = root.get(propertyName);
 
         query.where(builder.like(property, "%" + value + "%"));
+        List<T> list = session.createQuery(query).getResultList();
+
+        session.close();
+        return list;
+    }
+
+    /**
+     * Return a list of all meals by a user and their dates
+     */
+    public List<T> getMealsByMealType(String propertyName, String mealType) {
+        Session session = getSession();
+        logger.debug("Searching for meals with " + propertyName + " = " + mealType);
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        query.where(builder.equal(root.get(propertyName), mealType));
         List<T> list = session.createQuery(query).getResultList();
 
         session.close();

@@ -5,10 +5,15 @@ import edu.matc.entity.User;
 import edu.matc.entity.UserFood;
 import edu.matc.util.Database;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +34,8 @@ class UserFoodDaoTest {
      */
     GenericDao<UserFood> userFoodDao;
 
+    UserfoodDao listFoodDao;
+
 
     /**
      * Sets up.
@@ -38,6 +45,7 @@ class UserFoodDaoTest {
         userFoodDao = new GenericDao<>(UserFood.class);
         foodDao = new GenericDao<>(Food.class);
         userDao = new GenericDao<>(User.class);
+        listFoodDao = new UserfoodDao();
 
         Database database = new Database();
         database.runSQL("cleanDB.sql");
@@ -156,5 +164,48 @@ class UserFoodDaoTest {
         List<UserFood> foods = userFoodDao.getAll();
         assertNotNull(foods);
         assertEquals(2, foods.size());
+    }
+
+    @Test
+    void getMealsByMealType(){
+        List<UserFood> retrievedMeals = userFoodDao.getMealsByMealType( "mealTime","lunch");
+        retrievedMeals.sort(Comparator.comparing(meal -> LocalDate.parse(meal.getDate())));
+
+        assertNotNull(retrievedMeals);
+        assertEquals("2025-02-15", retrievedMeals.get(0).getDate());
+    }
+
+    // TODO: Test this method
+    @Test
+    void listMealsGroupedByMealTypeAndSortedByDate() {
+        Map<String, List<UserFood>> meals = listFoodDao.getMealsGroupedByMealTimeSortedByDate(1);
+
+        // TODO: Case sensitive!!!
+        List<UserFood> lunchMeals = meals.get("Lunch");
+        assertNotNull(lunchMeals);
+        assertTrue(lunchMeals.size() > 0);
+        assertEquals("2025-02-15", lunchMeals.get(0).getDate());
+    }
+
+    @Test
+    void getUserFoodDate() {
+        UserFood retrievedUserFood = userFoodDao.getById(1);
+        String date = retrievedUserFood.getDate();
+        assertNotNull(date);
+        assertEquals("2025-02-15", date);
+    }
+
+    @Test
+    @Disabled
+    void listMealsByDate() {
+        User retrievedUser = userDao.getById(1);
+
+        // get all meals made by the user in food_tracker table
+        List<UserFood> usersFoods = retrievedUser.getFoodTracker();
+
+        // organize meals by date
+        Map<String, List<UserFood>> mealsByDate = usersFoods.stream().collect(Collectors.groupingBy(UserFood::getDate));
+
+        assertEquals("???", mealsByDate);
     }
 }

@@ -74,6 +74,22 @@ public class UserFood {
         setTotalFats(food.getFat(), servingSize);
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getMealTime() {
+        return mealTime;
+    }
+
+    public void setMealTime(String mealTime) {
+        this.mealTime = mealTime;
+    }
+
     /**
      * Set the total amount of calories based on calories and serving size
      *
@@ -82,6 +98,10 @@ public class UserFood {
      */
     public void setTotalCalories(double calories, double servingSize) {
         this.totalCalories = calories * servingSize;
+    }
+
+    public double getTotalCalories() {
+        return totalCalories;
     }
 
     /**
