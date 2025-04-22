@@ -1,5 +1,10 @@
 package edu.matc.controller;
 
+import edu.matc.entity.Food;
+import edu.matc.entity.User;
+import edu.matc.entity.UserFood;
+import edu.matc.persistence.GenericDao;
+import edu.matc.persistence.UserfoodDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +19,10 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * The type Food tracker.
@@ -49,11 +57,17 @@ public class FoodTracker extends HttpServlet {
             // Set the beginning date to be monday plus the offset
             LocalDate monday = today.with(DayOfWeek.MONDAY).plusWeeks(weekOffSet);
 
-            // Create a list of strings that are dates
+            // Create a list of strings that are dates and with day of week
             List<String> weekDates = new ArrayList<>();
 
-            // Set up the formatter to format the date
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            // Create a list of strings that are just dates
+            List<String> isoWeekDates = new ArrayList<>();
+
+            // Set up the formatter to format the date with day of week
+            DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("EEEE, MM/dd/yyyy");
+
+            // Set up the formatter to format the date without the day of week
+            DateTimeFormatter isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
             // In a for loop, loop over the dates starting from 0 but less than 7.
             // For each dat get the current day by calculating the number of days from monday.
@@ -61,14 +75,32 @@ public class FoodTracker extends HttpServlet {
             // Add the formatted dates to the weekDates list.
             for (int day = 0; day < 7; day++) {
                 LocalDate currentDay = monday.plusDays(day);
-                String formattedDate = currentDay.getDayOfWeek() + ", " + currentDay.format(formatter);
-                weekDates.add(formattedDate);
+                weekDates.add(currentDay.format(displayFormatter));
+                isoWeekDates.add(currentDay.format(isoFormatter));
             }
+
+            // get all meals by user from food tracker
+            GenericDao<User> userDao = new GenericDao<>(User.class);
+            UserfoodDao listFoodDao = new UserfoodDao();
+
+            // TODO: get current user based on who is logged in
+            // get the user
+            User retrievedUser = userDao.getById(1);
+            int userId = retrievedUser.getId();
+
+            // get all meals made by the user in food_tracker table, organize meals by date
+
+            Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
+
+            logger.debug(mealsByDate);
 
             // Set the attributes and forward the request.
             request.setAttribute("title", "Your Meals");
             request.setAttribute("weekDates", weekDates);
+            request.setAttribute("isoWeekDates", isoWeekDates);
             request.setAttribute("weekOffSet", weekOffSet);
+            request.setAttribute("meals", mealsByDate);
+
             RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

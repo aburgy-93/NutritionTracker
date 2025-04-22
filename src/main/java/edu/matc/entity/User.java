@@ -65,6 +65,10 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    public List<UserFood> getFoodTracker() {
+        return foodTracker;
+    }
+
     /**
      * Gets user's access privileges
      *

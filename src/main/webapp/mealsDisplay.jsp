@@ -1,8 +1,9 @@
-<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="head.jsp" />
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <style>
@@ -78,6 +79,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
             margin: 0;
         }
 
@@ -93,6 +95,10 @@
         th {
             background-color: #007BFF;
             color: white;
+        }
+
+        .meal_table {
+            width: 100%;
         }
 
         #meal_date {
@@ -140,11 +146,18 @@
         }
 
         .meal_facts {
+            display: flex;
             border-bottom: 1px solid #ddd;
+            padding-left: 10px;
         }
 
         .meal_facts:hover {
             background-color: #f1f1f1;
+        }
+
+        .meal_facts td {
+            display: flex;
+            flex-direction: column;
         }
 
         /*CALENDAR*/
@@ -162,7 +175,7 @@
             text-align: center;
             cursor: pointer;
             box-sizing: border-box;
-            min-width: 120px;
+            min-width: 160px;
             height: 100%;
         }
 
@@ -213,124 +226,72 @@
                 </button>
             </div>
         <div class="calendar">
-            <% for (String date : (List<String>) request.getAttribute("weekDates")) { %>
-                <div class="day" onclick="">
+            <c:forEach var="i" begin="0" end="${fn:length(weekDates) - 1}">
+                <c:set var="displayDate" value="${weekDates[i]}" />
+                <c:set var="isoDate" value="${isoWeekDates[i]}" />
+
+                <div class="day">
                     <div id="meal_date">
-                        <span> <%= date %></span>
+                        <span>${displayDate}</span>
                         <form action="search-food" method="POST" onsubmit="return confirmEdit()">
                             <input type="hidden" name="food_to_edit" value="${food.id}">
                             <input type="hidden" name="_method" value="EDIT">
-                            <button type="submit" >
+                            <button type="submit">
                                 <img src="images/edit-white.svg" alt="edit" height="20px" width="20px">
                             </button>
                         </form>
                     </div>
-                    <!-- Table for displaying search results -->
-                    <table id="mealTable" class="display">
+
+                    <!-- Meal Table for each day -->
+                    <table class="meal_table">
                         <tbody>
-                        <tr id="" class="nutrition_progress">
-                            <td>
-                                <div>
-                                    <span>Calories:</span>
-                                    <span>1000/2191</span> cals
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <span>Protein:</span>
-                                    <span>100/185</span> g
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <span>Carbs:</span>
-                                    <span>150/256</span> g
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <span>Fat:</span>
-                                    <span>25/54</span> g
-                                </div>
-                            </td>
-                        </tr>
+                        <c:forEach var="entry" items="${meals}">
+                            <c:set var="mealTime" value="${entry.key}" />
+                            <c:set var="hasMealsForThisDay" value="false"/>
+                            <c:forEach var="mealItem" items="${entry.value}">
+                                <c:if test="${mealItem.date == isoDate}">
+                                    <c:if test="${!hasMealsForThisDay}">
+                                            <td colspan="4"><strong>${mealTime}</strong></td>
+                                        <c:set var="hasMealsForThisDay" value="true" />
+                                    </c:if>
 
-                        <tr class="meal_nutrition_facts">
-                            <td>Breakfast</td>
-                            <td class="meal_facts">
-                                <div>
-                                    <span>Whole Milk</span>
-                                    <div>
-                                        <span>8P</span>
-                                        <span>12C</span>
-                                        <span>8F</span>
-                                    </div>
-                                </div>
-                                <div>1 Cup</div>
-                            </td>
-                            <td class="meal_facts">
-                                <div>
-                                    <span>Protein, MM</span>
-                                    <div>
-                                        <span>25P</span>
-                                        <span>3C</span>
-                                        <span>1.5F</span>
-                                    </div>
-                                </div>
-                                <div>1 Scoop</div>
-                            </td>
-                        </tr>
-
-                        <%--TEMPORARY! FIGURING OUT LAYOUT FIRST--%>
-                        <%--            <c:forEach var="food" items="${foods}">--%>
-                        <%--                <tr>--%>
-                        <%--                    <td>Breakfast</td>--%>
-                        <%--                    <td>--%>
-                        <%--                        <div>--%>
-                        <%--                            <span>Whole Milk</span>--%>
-                        <%--                            <div>--%>
-                        <%--                                <span>8P</span>--%>
-                        <%--                                <span>12C</span>--%>
-                        <%--                                <span>8F</span>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                        <div>1 Cup</div>--%>
-                        <%--                    </td>--%>
-                        <%--                    <td>--%>
-                        <%--                        <div>--%>
-                        <%--                            <span>Protein, MM</span>--%>
-                        <%--                            <div>--%>
-                        <%--                                <span>25P</span>--%>
-                        <%--                                <span>3C</span>--%>
-                        <%--                                <span>1.5F</span>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                        <div>1 Scoop</div>--%>
-                        <%--                    </td>--%>
-                        <%--                    <td>--%>
-                        <%--                        <form action="search-food" method="POST" onsubmit="return confirmEdit()">--%>
-                        <%--                            <input type="hidden" name="food_to_edit" value="${food.id}">--%>
-                        <%--                            <input type="hidden" name="_method" value="EDIT">--%>
-                        <%--                            <button type="submit">--%>
-                        <%--                                <img src="images/" alt="edit" height="15px" width="15px">--%>
-                        <%--                            </button>--%>
-                        <%--                        </form>--%>
-                        <%--                    </td>--%>
-                        <%--                    <td>--%>
-                        <%--                        <form action="search-food" method="POST" onsubmit="return confirmDelete()">--%>
-                        <%--                            <input type="hidden" name="food_to_delete" value="${food.id}">--%>
-                        <%--                            <input type="hidden" name="_method" value="DELETE">--%>
-                        <%--                            <button type="submit">--%>
-                        <%--                                <img src="images/trash-alt-svgrepo-com.svg" alt="delete" height="15px" width="15px">--%>
-                        <%--                            </button>--%>
-                        <%--                        </form>--%>
-                        <%--                    </td>--%>
-                        <%--                </tr>--%>
-                        <%--            </c:forEach>--%>
+                                    <tr class="meal_facts">
+                                        <td>
+                                            ${mealItem.totalProtein}
+                                            <span>Protein</span>
+                                        </td>
+                                        <td>
+                                            ${mealItem.totalCarbs}
+                                            <span>Carbs</span>
+                                        </td>
+                                        <td>
+                                            ${mealItem.totalFats}
+                                            <span>Fat</span>
+                                        </td>
+                                        <td>
+                                            ${mealItem.totalCalories}
+                                            <span>Cals</span>
+                                        </td>
+<%--                                        <td>--%>
+<%--                                            <form action="edit-meal" method="POST">--%>
+<%--                                                <input type="hidden" name="mealId" value="${mealItem.id}" />--%>
+<%--                                                <button type="submit">Edit</button>--%>
+<%--                                            </form>--%>
+<%--                                        </td>--%>
+<%--                                        <td>--%>
+<%--                                            <form action="delete-meal" method="POST" onsubmit="return confirmDelete()">--%>
+<%--                                                <input type="hidden" name="mealId" value="${mealItem.id}" />--%>
+<%--                                                <button type="submit">Delete</button>--%>
+<%--                                            </form>--%>
+<%--                                        </td>--%>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
-            <% } %>
+            </c:forEach>
         </div>
     </div>
 </div>
