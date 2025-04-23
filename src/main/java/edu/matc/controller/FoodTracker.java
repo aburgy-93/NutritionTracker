@@ -92,7 +92,7 @@ public class FoodTracker extends HttpServlet {
 
             Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
 
-            logger.debug(mealsByDate);
+            logger.debug("Retrieved user food list: " + mealsByDate );
 
             // Set the attributes and forward the request.
             request.setAttribute("title", "Your Meals");
