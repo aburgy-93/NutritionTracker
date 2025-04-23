@@ -115,49 +115,101 @@
             padding: 10px 0 10px 0;
         }
 
-        #meal_date button {
-            background-color: #007BFF;
-            border: none;
-        }
+        /*#meal_date button {*/
+        /*    background-color: #007BFF;*/
+        /*    border: none;*/
+        /*}*/
 
-        #meal_date:hover {
-            background-color: #3399FF;
-        }
+        /*#meal_date:hover {*/
+        /*    background-color: #3399FF;*/
+        /*}*/
 
-        #meal_date:hover button {
-            background-color: #3399FF; !important;
-        }
+        /*#meal_date:hover button {*/
+        /*    background-color: #3399FF; !important;*/
+        /*}*/
 
         #meal_date form {
             flex: 0;
         }
 
-        .nutrition_progress, .meal_nutrition_facts {
+        .total_meal_nutrition_facts td {
+            padding: 8px;
+        }
+
+        .nutrient-line {
             display: flex;
-            flex-direction: column;
-        }
-
-        .nutrition_progress{
-
-        }
-
-        .meal_nutrition_facts td{
-            border-bottom: 1px solid #ddd;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 14px;
+            font-weight: bold;
         }
 
         .meal_facts {
-            display: flex;
             border-bottom: 1px solid #ddd;
-            padding-left: 10px;
+        }
+
+        .meal_facts td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+
+        .meal_facts td > span {
+            display: block;
+            font-size: 0.85em;
+            color: gray;
         }
 
         .meal_facts:hover {
             background-color: #f1f1f1;
         }
 
-        .meal_facts td {
+        .actions-bottom {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+
+        .actions-bottom form {
+            display: inline-block;
+        }
+
+        .actions-bottom form button {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        .actions-bottom form button img {
+            height: 20px;
+            width: 20px;
+        }
+
+        .edit-btn {
+            background-color: #28a745;
+        }
+
+        .edit-btn:hover {
+            background-color: #218838;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        button[type="submit"] {
+
         }
 
         /*CALENDAR*/
@@ -233,57 +285,81 @@
                 <div class="day">
                     <div id="meal_date">
                         <span>${displayDate}</span>
-                        <form action="search-food" method="POST" onsubmit="return confirmEdit()">
-                            <input type="hidden" name="food_to_edit" value="${food.id}">
-                            <input type="hidden" name="_method" value="EDIT">
-                            <button type="submit">
-                                <img src="images/edit-white.svg" alt="edit" height="20px" width="20px">
-                            </button>
-                        </form>
                     </div>
 
-                    <!-- Meal Table for each day -->
                     <table class="meal_table">
                         <tbody>
+                        <tr class="total_meal_nutrition_facts">
+                            <td colspan="4">
+                                <div class="nutrient-line">
+                                    <span>Protein:</span>
+                                    <span class="dailyTotalProtein">${dailyTotalProtein}/X</span>
+                                </div>
+
+                                <div class="nutrient-line">
+                                    <span>Carbs:</span>
+                                    <span class="dailyTotalCarbs">${dailyTotalCarbs}/X</span>
+                                </div>
+
+                                <div class="nutrient-line">
+                                    <span>Fat:</span>
+                                    <span class="dailyTotalFat">${dailyTotalFat}/X</span>
+                                </div>
+
+                                <div class="nutrient-line">
+                                    <span>Calories:</span>
+                                    <span class="dailyTotalCalories">${dailyTotalCalories}/X</span>
+                                </div>
+                            </td>
+                        </tr>
+
                         <c:forEach var="entry" items="${meals}">
                             <c:set var="mealTime" value="${entry.key}" />
                             <c:set var="hasMealsForThisDay" value="false"/>
                             <c:forEach var="mealItem" items="${entry.value}">
                                 <c:if test="${mealItem.date == isoDate}">
                                     <c:if test="${!hasMealsForThisDay}">
-                                            <td colspan="4"><strong>${mealTime}</strong></td>
+                                            <td colspan="4"><strong>${mealTime.substring(0,1).toUpperCase()}${ mealTime.substring(1)}</strong></td>
                                         <c:set var="hasMealsForThisDay" value="true" />
                                     </c:if>
 
                                     <tr class="meal_facts">
-                                        <td>
+                                        <td class="meal-protein">
                                             ${mealItem.totalProtein}
                                             <span>Protein</span>
                                         </td>
-                                        <td>
+                                        <td class="meal-carbs">
                                             ${mealItem.totalCarbs}
                                             <span>Carbs</span>
                                         </td>
-                                        <td>
+                                        <td class="meal-fat">
                                             ${mealItem.totalFats}
                                             <span>Fat</span>
                                         </td>
-                                        <td>
+                                        <td class="meal-calories">
                                             ${mealItem.totalCalories}
                                             <span>Cals</span>
                                         </td>
-<%--                                        <td>--%>
-<%--                                            <form action="edit-meal" method="POST">--%>
-<%--                                                <input type="hidden" name="mealId" value="${mealItem.id}" />--%>
-<%--                                                <button type="submit">Edit</button>--%>
-<%--                                            </form>--%>
-<%--                                        </td>--%>
-<%--                                        <td>--%>
-<%--                                            <form action="delete-meal" method="POST" onsubmit="return confirmDelete()">--%>
-<%--                                                <input type="hidden" name="mealId" value="${mealItem.id}" />--%>
-<%--                                                <button type="submit">Delete</button>--%>
-<%--                                            </form>--%>
-<%--                                        </td>--%>
+                                    </tr>
+                                    <tr class="action-row">
+                                        <td colspan="4">
+                                            <div class="actions-bottom">
+                                                <form action="edit-meal" method="POST">
+                                                    <input type="hidden" name="mealId" value="${mealItem.id}" />
+                                                    <button class="edit-btn" type="submit">
+                                                        <span>Edit</span>
+                                                        <img src="images/edit-blackl.svg" alt="edit" >
+                                                    </button>
+                                                </form>
+                                                <form action="delete-meal" method="POST" onsubmit="return confirmDelete()">
+                                                    <input type="hidden" name="mealId" value="${mealItem.id}" />
+                                                    <button class="delete-btn" type="submit">
+                                                        <span>Delete</span>
+                                                        <img src="images/trash-alt-svgrepo-com.svg" alt="delete" >
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -295,6 +371,7 @@
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/js/foodTrackerScript.js"></script>
 </body>
 <script>
     function confirmDelete() {
