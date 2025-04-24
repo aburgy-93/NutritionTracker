@@ -344,7 +344,7 @@
                                     <tr class="action-row">
                                         <td colspan="4">
                                             <div class="actions-bottom">
-                                                <form action="edit-meal" method="POST">
+                                                <form action="edit-meal" method="GET">
                                                     <input type="hidden" name="mealId" value="${mealItem.id}" />
                                                     <button class="edit-btn" type="submit">
                                                         <span>Edit</span>
@@ -352,7 +352,8 @@
                                                     </button>
                                                 </form>
                                                 <form action="delete-meal" method="POST" onsubmit="return confirmDelete()">
-                                                    <input type="hidden" name="mealId" value="${mealItem.id}" />
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="food_to_delete" value="${mealItem.id}" />
                                                     <button class="delete-btn" type="submit">
                                                         <span>Delete</span>
                                                         <img src="images/trash-alt-svgrepo-com.svg" alt="delete" >

@@ -98,7 +98,7 @@ public class AddMeal extends HttpServlet {
 
             } else {
                 // If validation fails, log an error
-                logger.warn("Invalid input detected, unable to add meal.");
+                logger.debug("Invalid input detected, unable to add meal.");
                 request.setAttribute("error", "Invalid input. Please check your form data.");
                 request.getRequestDispatcher("/addMeal.jsp").forward(request, response);
             }

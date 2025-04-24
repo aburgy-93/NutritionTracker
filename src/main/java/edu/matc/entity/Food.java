@@ -148,7 +148,7 @@ public class Food {
      *
      * @param calories calories in food
      */
-    public void setCalories(int calories) {this.calories = calories;}
+    public void setCalories(double calories) {this.calories = calories;}
 
     /**
      * Gets fat in food
