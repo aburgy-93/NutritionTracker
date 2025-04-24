@@ -72,6 +72,7 @@ public class UserFood {
         setTotalProtein(food.getProtein(), servingSize);
         setTotalCarbs(food.getCarbs(), servingSize);
         setTotalFats(food.getFat(), servingSize);
+        setFoodType(food.getFoodType());
     }
 
     public String getDate() {
@@ -89,6 +90,25 @@ public class UserFood {
     public void setMealTime(String mealTime) {
         this.mealTime = mealTime;
     }
+
+    public double getServingSize() {return servingSize;}
+
+    public void setServingSize(double servingSize) {this.servingSize = servingSize;}
+
+    public void setFoodType(String foodType) {this.food.setFoodType(foodType);}
+
+    public String getFoodType() {return food.getFoodType();}
+
+    public String getServingUnit() {return food.getServingUnit();}
+
+    public void setServingUnit(String servingUnit) {this.food.setServingUnit(servingUnit);}
+
+    // TESTING //
+    public void setUpdatedCalories(double updatedCalories) {this.totalCalories = updatedCalories;}
+    public void setUpdatedProtein(double updatedProtein) {this.totalProtein = updatedProtein;}
+    public void setUpdatedCarbs(double updatedCarbs) {this.totalCarbs = updatedCarbs;}
+    public void setUpdatedFats(double updatedFats) {this.totalFats = updatedFats;}
+    // END TESTING //
 
     /**
      * Set the total amount of calories based on calories and serving size

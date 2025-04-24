@@ -69,7 +69,10 @@ public class SearchYourFoods extends HttpServlet {
                 doAdd(request, response);
             } else if ("EDIT".equals(method)) {
                 doPut(request, response);
-            } else if("DELETE".equals(method)) {
+            } else if ("UPDATE".equals(method)) {
+                doUpdate(request, response);
+            }
+            else if("DELETE".equals(method)) {
                 doDelete(request, response);
             } else {
                 doUpdate(request, response);
@@ -190,7 +193,7 @@ public class SearchYourFoods extends HttpServlet {
             foodToEdit.setServingUnit(request.getParameter("servingUnit"));
             logger.debug(request.getParameter("servingUnit"));
 
-            foodToEdit.setCalories(Integer.parseInt(request.getParameter("calories")));
+            foodToEdit.setCalories(Double.parseDouble(request.getParameter("calories")));
             logger.debug(request.getParameter("calories"));
 
             foodToEdit.setProtein(Double.parseDouble(request.getParameter("protein")));
