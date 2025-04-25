@@ -18,13 +18,26 @@ import java.io.IOException;
 )
 
 public class AddFood extends HttpServlet {
+    // Create the logger for debugging
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * Do Get
+     * This method will direct a user to the add food form.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws IOException
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            // Set the title of the JSP
             request.setAttribute("title", "Add Food");
+
+            // Tell the server where the request is going to
             RequestDispatcher rd = request.getRequestDispatcher("/addFood.jsp");
+
+            // Forward the request
             rd.forward(request, response);
         } catch (Exception e) {
             logger.debug(e);

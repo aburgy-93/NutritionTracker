@@ -32,16 +32,28 @@ import java.util.stream.Collectors;
 )
 
 public class FoodTracker extends HttpServlet {
+    // Create the logger for debugging
     private final Logger logger = LogManager.getLogger(this.getClass());
+
+    /**
+     * Do Get
+     * This method will set the current week to be displayed in the calendar.
+     * It can also take in an offset value to go forward or back a week in the calendar.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             // Get offset from url
             String offsetParam = request.getParameter("weekOffSet");
 
-            // initalize offset to 0
+            // initialize offset to 0
             int weekOffSet = 0;
 
-            // check that offsetParam is not null, if a number set weekOffSet to the passed in param
+            // Check that offsetParam is not null, if a number set weekOffSet to the passed in param
             // if not a number, set to 0
             if (offsetParam != null) {
                 try {
@@ -51,7 +63,7 @@ public class FoodTracker extends HttpServlet {
                 }
             }
 
-            // get today's date
+            // Get today's date
             LocalDate today = LocalDate.now();
 
             // Set the beginning date to be monday plus the offset
@@ -79,19 +91,19 @@ public class FoodTracker extends HttpServlet {
                 isoWeekDates.add(currentDay.format(isoFormatter));
             }
 
-            // get all meals by user from food tracker
+            // Get all meals by user from food tracker
             GenericDao<User> userDao = new GenericDao<>(User.class);
             UserfoodDao listFoodDao = new UserfoodDao();
 
             // TODO: get current user based on who is logged in
-            // get the user
-            User retrievedUser = userDao.getById(1);
+            // Get the user
+            User retrievedUser = userDao.getById(1); // Hardcoded for testing
             int userId = retrievedUser.getId();
 
-            // get all meals made by the user in food_tracker table, organize meals by date
-
+            // Get all meals made by the user in food_tracker table, organize meals by date
             Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
 
+            // Log the list of foods for debugging
             logger.debug("Retrieved user food list: " + mealsByDate );
 
             // Set the attributes and forward the request.
@@ -101,7 +113,10 @@ public class FoodTracker extends HttpServlet {
             request.setAttribute("weekOffSet", weekOffSet);
             request.setAttribute("meals", mealsByDate);
 
+            // Tell the server where the request is going
             RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
+
+            // Forward the reqeust and response
             rd.forward(request, response);
         } catch (Exception e) {
             logger.debug("Error processing request: {}", e.getMessage(), e);

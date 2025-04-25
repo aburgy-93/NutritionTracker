@@ -12,12 +12,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * The type Userfood dao.
+ */
 public class UserfoodDao {
     private final Logger logger = LogManager.getLogger(this.getClass());
     private Session getSession() {
         return SessionFactoryProvider.getSessionFactory().openSession();
     }
 
+    /**
+     * Gets meals grouped by meal time sorted by date.
+     *
+     * @param userId the user id
+     * @return the meals grouped by meal time sorted by date
+     */
     public Map<String, List<UserFood>> getMealsGroupedByMealTimeSortedByDate(int userId) {
         Map<String, List<UserFood>> groupedMeals = new HashMap<>();
 

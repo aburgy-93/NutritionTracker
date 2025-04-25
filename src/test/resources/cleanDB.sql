@@ -54,21 +54,21 @@ DROP TABLE IF EXISTS `food_tracker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `food_tracker` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `food_id` int NOT NULL,
-  `date` date NOT NULL,
-  `serving_size` int NOT NULL,
-  `meal_time` varchar(50) NOT NULL,
-  `total_calories` double NOT NULL,
-  `total_protein` decimal(5,2) NOT NULL,
-  `total_carbs` decimal(5,2) NOT NULL,
-  `total_fat` decimal(5,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `food_id` (`food_id`),
-  CONSTRAINT `food_tracker_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `food_user` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `food_tracker_ibfk_2` FOREIGN KEY (`food_id`) REFERENCES `food_table` (`id`) ON DELETE CASCADE
+`id` int NOT NULL AUTO_INCREMENT,
+`user_id` int NOT NULL,
+`food_id` int NOT NULL,
+`date` date NOT NULL,
+`serving_size` int NOT NULL,
+`meal_time` varchar(50) NOT NULL,
+`total_calories` double NOT NULL,
+`total_protein` decimal(5,2) NOT NULL,
+`total_carbs` decimal(5,2) NOT NULL,
+`total_fat` decimal(5,2) NOT NULL,
+PRIMARY KEY (`id`),
+KEY `user_id` (`user_id`),
+KEY `food_id` (`food_id`),
+CONSTRAINT `food_tracker_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `food_user` (`id`) ON DELETE CASCADE,
+CONSTRAINT `food_tracker_ibfk_2` FOREIGN KEY (`food_id`) REFERENCES `food_table` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -90,14 +90,14 @@ DROP TABLE IF EXISTS `food_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `food_user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `access_privileges` varchar(55) NOT NULL DEFAULT 'user',
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `user_weight` int DEFAULT NULL,
-  `birthDate` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+`id` int NOT NULL AUTO_INCREMENT,
+`access_privileges` varchar(55) NOT NULL DEFAULT 'user',
+`first_name` varchar(255) NOT NULL,
+`last_name` varchar(255) NOT NULL,
+`email` varchar(50) DEFAULT NULL,
+`user_weight` int DEFAULT NULL,
+`birthDate` varchar(15) DEFAULT NULL,
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

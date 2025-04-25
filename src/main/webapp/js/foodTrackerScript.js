@@ -6,15 +6,22 @@ document.addEventListener("DOMContentLoaded", function () {
         let dailyTotalCalories = 0;
 
         dayDiv.querySelectorAll('.meal_facts').forEach(function (row) {
-            let protein = parseFloat(row.querySelector('.meal-protein').textContent) || 0;
-            let carbs = parseFloat(row.querySelector('.meal-carbs').textContent) || 0;
-            let fat = parseFloat(row.querySelector('.meal-fat').textContent) || 0;
-            let calories = parseFloat(row.querySelector('.meal-calories').textContent) || 0;
+            let proteinEl = row.querySelector('.meal-protein');
+            let carbsEl = row.querySelector('.meal-carbs');
+            let fatEl = row.querySelector('.meal-fat');
+            let caloriesEl = row.querySelector('.meal-calories');
 
-            dailyTotalProtein += protein;
-            dailyTotalCarbs += carbs;
-            dailyTotalFat += fat;
-            dailyTotalCalories += calories;
+            if(proteinEl && carbsEl && fatEl && caloriesEl) {
+                let protein = parseFloat(proteinEl.textContent) || 0;
+                let carbs = parseFloat(carbsEl.textContent) || 0;
+                let fat = parseFloat(fatEl.textContent) || 0;
+                let calories = parseFloat(caloriesEl.textContent) || 0;
+
+                dailyTotalProtein += protein;
+                dailyTotalCarbs += carbs;
+                dailyTotalFat += fat;
+                dailyTotalCalories += calories;
+            }
         });
 
         const proteinSpan = dayDiv.querySelector(".dailyTotalProtein");

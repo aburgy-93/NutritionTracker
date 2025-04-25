@@ -29,29 +29,53 @@ import static java.lang.Double.parseDouble;
 )
 
 public class AddSearchedFood extends HttpServlet {
+    // Create the logger for debugging
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * Do Get
+     * This method will get the food information from the spoonactular API with the search term
+     * a user enters, and when a user clicks on the food, the nutrition information will be populated in a form.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Instantiate the SpoontactularDao
             SpoontacularDao spoontacularDao = new SpoontacularDao();
+
+            // Get the id of the searched for food from the request
             String idParam = request.getParameter("add_searched_food_to_meal");
+
+            // Get the name of the searched for food from the request
             String foodName = request.getParameter("searched_food_name");
 
+            // Log the id of the searched for food for debugging
             System.out.println("Received ID: " + idParam);
+
             try {
+                // Parse the id to an integer
                 int foodId = Integer.parseInt(idParam);
 
+                // From the spoontacularDao get the servings of the food from the foodId
                 Servings servings = spoontacularDao.getServings(foodId);
+
+                // Create a list containing the food's nutrients and map it to the NutrientsItem entity based on foodId
                 List<NutrientsItem> nutrientsItemList = spoontacularDao.getNutrients(foodId);
+
+                // Log the list for debuggin
                 logger.debug("Nutrients returned: " + nutrientsItemList);
 
-
+                // From the list cast the nutrient information to a double and save to local variables
                 double calories = (double) nutrientsItemList.get(1).getAmount();
                 double protein = (double) nutrientsItemList.get(3).getAmount();
                 double carbs = (double) nutrientsItemList.get(0).getAmount();
                 double fat = (double) nutrientsItemList.get(2).getAmount();
 
+                // Set the attributes for the food on the request
                 request.setAttribute("calories", calories);
                 request.setAttribute("protein", protein);
                 request.setAttribute("carbs", carbs);
@@ -61,11 +85,14 @@ public class AddSearchedFood extends HttpServlet {
                 request.setAttribute("SearchedFoodServings", servings);
                 request.setAttribute("title", "Track Your Food");
 
+                // Tell the server where the request will be sent to
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/addSearchedForFood.jsp");
+
+                // forward the request
                 dispatcher.forward(request, response);
             } catch (NumberFormatException e) {
-                //TODO: change to logger
-                System.err.println("Invalid number submitted: " + idParam);
+                // Log any errors
+                logger.error("Invalid number submitted: " + idParam);
             }
 
         } catch (Exception e) {
@@ -73,15 +100,24 @@ public class AddSearchedFood extends HttpServlet {
         }
     }
 
+    /**
+     * Do Post
+     * This method will add the food a user entered in the form to their food table to be used again in the future.
+     * The new food will be stored in the food database.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Instantiate DAOs
+            // Instantiate DAOs with their respective entities
             GenericDao<UserFood> userFoodDao = new GenericDao<>(UserFood.class);
             GenericDao<Food> foodDao = new GenericDao<>(Food.class);
             GenericDao<User> userDao = new GenericDao<>(User.class);
 
-            // Get form data
+            // Get the form data
             String date = request.getParameter("date");
             String foodIdStr = request.getParameter("searched_food_id");
             String foodName = request.getParameter("food_name");
@@ -137,7 +173,7 @@ public class AddSearchedFood extends HttpServlet {
                 // Insert new meal into the database
                 userFoodDao.insert(mealEnteredByUser);
 
-                // Redirect to the meals display page
+                // Redirect to the meals' display page
                 response.sendRedirect(request.getContextPath() + "/meal-display");
 
                 // Log the success
