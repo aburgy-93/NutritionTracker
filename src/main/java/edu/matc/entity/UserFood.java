@@ -75,38 +75,111 @@ public class UserFood {
         setFoodType(food.getFoodType());
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * Gets meal time.
+     *
+     * @return the meal time
+     */
     public String getMealTime() {
         return mealTime;
     }
 
+    /**
+     * Sets meal time.
+     *
+     * @param mealTime the meal time
+     */
     public void setMealTime(String mealTime) {
         this.mealTime = mealTime;
     }
 
+    /**
+     * Gets serving size.
+     *
+     * @return the serving size
+     */
     public double getServingSize() {return servingSize;}
 
+    /**
+     * Sets serving size.
+     *
+     * @param servingSize the serving size
+     */
     public void setServingSize(double servingSize) {this.servingSize = servingSize;}
 
+    /**
+     * Sets food type.
+     *
+     * @param foodType the food type
+     */
     public void setFoodType(String foodType) {this.food.setFoodType(foodType);}
 
+    /**
+     * Gets food type.
+     *
+     * @return the food type
+     */
     public String getFoodType() {return food.getFoodType();}
 
+    /**
+     * Gets serving unit.
+     *
+     * @return the serving unit
+     */
     public String getServingUnit() {return food.getServingUnit();}
 
+    /**
+     * Sets serving unit.
+     *
+     * @param servingUnit the serving unit
+     */
     public void setServingUnit(String servingUnit) {this.food.setServingUnit(servingUnit);}
 
-    // TESTING //
+    /**
+     * Sets updated calories.
+     *
+     * @param updatedCalories the updated calories
+     */
+// TESTING //
     public void setUpdatedCalories(double updatedCalories) {this.totalCalories = updatedCalories;}
+
+    /**
+     * Sets updated protein.
+     *
+     * @param updatedProtein the updated protein
+     */
     public void setUpdatedProtein(double updatedProtein) {this.totalProtein = updatedProtein;}
+
+    /**
+     * Sets updated carbs.
+     *
+     * @param updatedCarbs the updated carbs
+     */
     public void setUpdatedCarbs(double updatedCarbs) {this.totalCarbs = updatedCarbs;}
+
+    /**
+     * Sets updated fats.
+     *
+     * @param updatedFats the updated fats
+     */
     public void setUpdatedFats(double updatedFats) {this.totalFats = updatedFats;}
     // END TESTING //
 
@@ -120,6 +193,11 @@ public class UserFood {
         this.totalCalories = calories * servingSize;
     }
 
+    /**
+     * Gets total calories.
+     *
+     * @return the total calories
+     */
     public double getTotalCalories() {
         return totalCalories;
     }

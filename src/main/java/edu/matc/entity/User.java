@@ -65,6 +65,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    /**
+     * Gets food tracker.
+     *
+     * @return the food tracker
+     */
     public List<UserFood> getFoodTracker() {
         return foodTracker;
     }

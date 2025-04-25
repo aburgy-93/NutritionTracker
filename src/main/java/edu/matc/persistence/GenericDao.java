@@ -142,6 +142,10 @@ public class GenericDao<T> {
 
     /**
      * Return a list of all meals by a user and their dates
+     *
+     * @param propertyName the property name
+     * @param mealType     the meal type
+     * @return the meals by meal type
      */
     public List<T> getMealsByMealType(String propertyName, String mealType) {
         Session session = getSession();

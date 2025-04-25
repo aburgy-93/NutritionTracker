@@ -324,6 +324,12 @@
                                     </c:if>
 
                                     <tr class="meal_facts">
+                                        <td colspan="4">
+                                            <span>${mealItem.foodName}</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="meal_facts">
                                         <td class="meal-protein">
                                             ${mealItem.totalProtein}
                                             <span>Protein</span>

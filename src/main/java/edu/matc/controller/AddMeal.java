@@ -25,30 +25,62 @@ import static java.lang.Double.parseDouble;
 )
 
 public class AddMeal extends HttpServlet {
+    // Create the logger for debugging
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * Do Get
+     * This method will get the food information from the database based on the id of the food clicked on.
+     * The information will then be placed in a form for a user to add to their tracker.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Create a new instance of the GenericDao with the Food class entity
             GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+
+            // Get the food id from the request parameter
             String foodId = request.getParameter("add_food_to_meal");
+
+            // Get the food by calling the getById method and pass in the foodId
             Food foodToAdd = genericDao.getById(Integer.parseInt(foodId));
 
+            // Log the added food data for debugging
             logger.debug("Food to add: " + foodToAdd);
+
+            // Add the foodToAdd as an attribute to the request
             request.setAttribute("foodToAdd", foodToAdd);
+
+            // Set the title for the jsp
             request.setAttribute("title", "Track Your Food");
 
+            // Tell the server where the request is going to
             RequestDispatcher rd = request.getRequestDispatcher("/addMeal.jsp");
+
+            // Forward the request
             rd.forward(request, response);
         } catch (Exception e) {
             logger.error(e);
         }
     }
 
+    /**
+     * Do Post
+     * This method will get the information submitted from the form, by the user.
+     * It will parse the data to create a new UserFood object to be inserted into the food_tracker database.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Retrieve DAOs
+            // Retrieve DAOs for the UserFood and User entities
             GenericDao<UserFood> userFoodDao = new GenericDao<>(UserFood.class);
             GenericDao<User> userDao = new GenericDao<>(User.class);
 
@@ -90,7 +122,7 @@ public class AddMeal extends HttpServlet {
                 // Insert the new food entry into the database
                 userFoodDao.insert(foodEnteredByUser);
 
-                // Redirect to the meals display page
+                // Redirect to the meals' display page
                 response.sendRedirect(request.getContextPath() + "/meal-display");
 
                 // Log the success

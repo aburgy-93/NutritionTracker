@@ -18,37 +18,72 @@ import java.io.IOException;
 )
 
 public class EditMeal extends HttpServlet {
+    // Create the logger for debugging
     private final Logger logger = LogManager.getLogger(this.getClass());
+
+    // Instantiate the GenericDao with the UserFood entity
     GenericDao<UserFood> genericDao = new GenericDao<>(UserFood.class);
 
+    /**
+     * Do Get
+     * This method will get the food information of a passed in id if it exists to be edited.
+     * It will populate the food nutrition information into a form.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // TODO: Check for null!
+            // Get the mealId from the request
             String mealId = request.getParameter("mealId");
+
+            // Get the meal from UserFood based on the mealId passed in
             UserFood foodToEdit = genericDao.getById(Integer.parseInt(mealId));
 
+            // Log meal for debugging
             logger.debug("Editing Meal: " + foodToEdit);
+
+            // Set the attributes for the reqeust
             request.setAttribute("editMeal", foodToEdit);
             request.setAttribute("title", "Edit Meal");
 
+            // Tell the server where the reqeust will go
             RequestDispatcher dispatcher = request.getRequestDispatcher("/editMeal.jsp");
+
+            // Forward the request and response
             dispatcher.forward(request, response);
         } catch (Exception e) {
             logger.error("Error in doGet for EditMeal: ", e);
         }
     }
 
+    /**
+     * Do Post
+     * This method will update the meal whose ID was passed in.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Get the mealId from the request and parse it as an integer
             int mealId = Integer.parseInt(request.getParameter("food_to_edit"));
+
+            // Log the mealId for debugging
             logger.debug("Editing Meal: " + mealId);
 
+            // Get the meal specified by the mealId with the getById method from the genericDao
             UserFood mealToEdit = genericDao.getById(mealId);
+
+            // Log the meal for debugging
             logger.debug("Editing Meal: " + mealToEdit);
 
-            // set the new values
-
+            // set the new values and log them for debugging
             mealToEdit.setServingSize((int) Double.parseDouble(request.getParameter("servingSize")));
             logger.debug(request.getParameter("servingSize"));
 
@@ -68,7 +103,7 @@ public class EditMeal extends HttpServlet {
             logger.debug(request.getParameter("fat"));
 
 
-            // pass an updated food object to the update table method
+            // Pass an updated food object to the update table method
             genericDao.update(mealToEdit);
 
             // Redirect back to the searchFood page
