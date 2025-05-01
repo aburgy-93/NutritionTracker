@@ -2,5 +2,83 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Nutrition Tracking Application</display-name>
+
+<!--  Client Errors -->
+  <error-page>
+    <error-code>400</error-code>
+    <location>/errorPages/Error400.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>401</error-code>
+    <location>/errorPages/Error401.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/errorPages/Error403.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorPages/Error404.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>405</error-code>
+    <location>/errorPages/Error405.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>408</error-code>
+    <location>/errorPages/Error408.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>429</error-code>
+    <location>/errorPages/Error429.jsp</location>
+  </error-page>
+
+<!-- Server Errors -->
+  <error-page>
+    <error-code>500</error-code>
+    <location>/errorPages/Error500.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>501</error-code>
+    <location>/errorPages/Error501.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>502</error-code>
+    <location>/errorPages/Error502.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>503</error-code>
+    <location>/errorPages/Error503.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>504</error-code>
+    <location>/errorPages/Error504.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>505</error-code>
+    <location>/errorPages/Error505.jsp</location>
+  </error-page>
+
+<!-- Other Errors -->
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/errorPages/ExceptionError.jsp</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>java.io.IOException</exception-type>
+    <location>/errorPages/IoExceptionError.jsp</location>
+  </error-page>
 </web-app>
