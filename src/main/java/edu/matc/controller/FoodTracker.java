@@ -98,26 +98,31 @@ public class FoodTracker extends HttpServlet {
             // TODO: get current user based on who is logged in
             // Get the user
             User retrievedUser = userDao.getById(1); // Hardcoded for testing
-            int userId = retrievedUser.getId();
 
-            // Get all meals made by the user in food_tracker table, organize meals by date
-            Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
+            if(retrievedUser != null) {
+                int userId = retrievedUser.getId();
 
-            // Log the list of foods for debugging
-            logger.debug("Retrieved user food list: " + mealsByDate );
+                // Get all meals made by the user in food_tracker table, organize meals by date
+                Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
 
-            // Set the attributes and forward the request.
-            request.setAttribute("title", "Your Meals");
-            request.setAttribute("weekDates", weekDates);
-            request.setAttribute("isoWeekDates", isoWeekDates);
-            request.setAttribute("weekOffSet", weekOffSet);
-            request.setAttribute("meals", mealsByDate);
+                // Log the list of foods for debugging
+                logger.debug("Retrieved user food list: " + mealsByDate );
 
-            // Tell the server where the request is going
-            RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
+                // Set the attributes and forward the request.
+                request.setAttribute("title", "Your Meals");
+                request.setAttribute("weekDates", weekDates);
+                request.setAttribute("isoWeekDates", isoWeekDates);
+                request.setAttribute("weekOffSet", weekOffSet);
+                request.setAttribute("meals", mealsByDate);
 
-            // Forward the reqeust and response
-            rd.forward(request, response);
+                // Tell the server where the request is going
+                RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
+
+                // Forward the reqeust and response
+                rd.forward(request, response);
+            } else{
+                logger.warn("User not found");
+            }
         } catch (Exception e) {
             logger.debug("Error processing request: {}", e.getMessage(), e);
         }
