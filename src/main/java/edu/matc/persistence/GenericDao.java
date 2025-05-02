@@ -48,6 +48,40 @@ public class GenericDao<T> {
         return entity;
     }
 
+    public T getBySub(String propertyName, String sub) {
+        Session session = getSession();
+
+        logger.debug("Searching for order with " + propertyName + " = " + sub);
+
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<String> property = root.get(propertyName);
+
+        query.where(builder.like(property, "%" + sub + "%"));
+        T user = session.createQuery(query).getSingleResult();
+
+        session.close();
+        return user;
+    }
+
+    public T getByUsername(String propertyName, String value){
+        Session session = getSession();
+
+//        logger.debug("Searching for order with " + propertyName + " = " + value);
+
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<String> property = root.get(propertyName);
+
+        query.where(builder.like(property, "%" + value + "%"));
+        T user = session.createQuery(query).getSingleResult();
+
+        session.close();
+        return user;
+    }
+
     /**
      * Update.
      *
@@ -110,7 +144,7 @@ public class GenericDao<T> {
         Root<T> root = query.from(type);
         List<T> list = session.createSelectionQuery( query ).getResultList();
 
-        logger.debug("The list of " + list);
+//        logger.debug("The list of " + list);
         session.close();
 
         return list;
@@ -126,7 +160,7 @@ public class GenericDao<T> {
     public List<T> getByPropertyLike(String propertyName, String value) {
         Session session = getSession();
 
-        logger.debug("Searching for order with " + propertyName + " = " + value);
+//        logger.debug("Searching for order with " + propertyName + " = " + value);
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
@@ -149,7 +183,7 @@ public class GenericDao<T> {
      */
     public List<T> getMealsByMealType(String propertyName, String mealType) {
         Session session = getSession();
-        logger.debug("Searching for meals with " + propertyName + " = " + mealType);
+//        logger.debug("Searching for meals with " + propertyName + " = " + mealType);
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);

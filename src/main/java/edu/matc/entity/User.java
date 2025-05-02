@@ -20,20 +20,17 @@ public class User {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
 
+    @Column(name = "sub")
+    private String sub;
+
     @Column(name = "access_privileges")
     private String accessPrivileges;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "email")
     private String email;
-
-    @Column(name = "user_weight")
-    private int userWeight;
 
     @Column(name = "birthDate")
     private String birthDate;
@@ -56,12 +53,11 @@ public class User {
      * @param userWeight       the user weight
      * @param birthDate        the birthdate
      */
-    public User(String accessPrivileges,String firstName, String lastName, String email, int userWeight, String birthDate) {
+    public User(String sub, String accessPrivileges, String username, String email, String birthDate) {
+        this.sub = sub;
         this.accessPrivileges = accessPrivileges;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.username = username;
         this.email = email;
-        this.userWeight = userWeight;
         this.birthDate = birthDate;
     }
 
@@ -88,38 +84,16 @@ public class User {
      */
     public void setAccessPrivileges(String accessPrivileges) {this.accessPrivileges = accessPrivileges;};
 
-    /**
-     * Gets the user's first name
-     *
-     * @return user 's first name
-     */
-    public String getFirstName() {return firstName;};
+    public String getSub() {return sub;}
+    public void setSub(String sub) {this.sub = sub;};
 
-    /**
-     * Sets the user's first name
-     *
-     * @param firstName user's first name
-     */
-    public void setFirstName(String firstName) {this.firstName = firstName;};
-
-    /**
-     * Get the user's last name
-     *
-     * @return user 's last name
-     */
-    public String getLastName() {return lastName;};
-
-    /**
-     * Sets the user's last name
-     *
-     * @param lastName user's last name
-     */
-    public void setLastName(String lastName) {this.lastName = lastName;};
+    public String getUsername() {return username;};
+    public void setUsername(String username) {this.username = username;};
 
     /**
      * Gets the user's email
      *
-     * @return user 's email
+     * @return user's email
      */
     public String getEmail() {return email;};
 
@@ -129,20 +103,6 @@ public class User {
      * @param email user's email address
      */
     public void setEmail(String email) {this.email = email;};
-
-    /**
-     * Gets the user's weight
-     *
-     * @return user 's weight
-     */
-    public int getUserWeight() {return userWeight;};
-
-    /**
-     * Sets the user's weight
-     *
-     * @param userWeight user's weight
-     */
-    public void setUserWeight(int userWeight) {this.userWeight = userWeight;};
 
     /**
      * Gets the user's birthdate
@@ -177,10 +137,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", accessPrivileges='" + accessPrivileges + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", userWeight=" + userWeight + " lbs" +
                 ", birthDate='" + birthDate + '\'' +
                 '}';
     }
@@ -190,12 +147,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userWeight == user.userWeight && id == user.id && Objects.equals(accessPrivileges, user.accessPrivileges) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(birthDate, user.birthDate);
+        return id == user.id && Objects.equals(accessPrivileges, user.accessPrivileges) && Objects.equals(email, user.email) && Objects.equals(birthDate, user.birthDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessPrivileges, firstName, lastName, email, userWeight, birthDate, id);
+        return Objects.hash(sub, accessPrivileges, username ,email, birthDate, id);
     }
 }
 
