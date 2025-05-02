@@ -5,6 +5,7 @@ import edu.matc.entity.User;
 import edu.matc.entity.UserFood;
 import edu.matc.util.Database;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,18 +38,18 @@ class UserDaoTest {
         genericUserDao = new GenericDao<>(User.class);
         genericUserFoodDao = new GenericDao<>(UserFood.class);
         genericFoodDao = new GenericDao<>(Food.class);
-        Database database = new Database();
+        Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
     }
 
     /**
-     * Gets user by id.
+     * Gets user by username.
      */
     @Test
-    void getUserById() {
-        User retrievedUser = genericUserDao.getById(1);
+    void getUserByUsername() {
+        User retrievedUser = genericUserDao.getByUsername("username", "aburgy");
         assertNotNull(retrievedUser);
-        assertEquals("Alex", retrievedUser.getFirstName());
+        assertEquals("aburgy", retrievedUser.getUsername());
     }
 
     /**
@@ -56,19 +57,19 @@ class UserDaoTest {
      */
     @Test
     void updateUser() {
-        String newLastName = "Smith";
+        String username = "rbandy";
 
         // Get the user to update
-        User userToUpdate = genericUserDao.getById(1);
+        User userToUpdate = genericUserDao.getByUsername("username", "rbobandy");
 
         // Set their new last name
-        userToUpdate.setLastName(newLastName);
+        userToUpdate.setUsername(username);
 
         // Update the table
         genericUserDao.update(userToUpdate);
 
         // Retrieve the user from the table
-        User retrievedUser = genericUserDao.getById(1);
+        User retrievedUser = genericUserDao.getByUsername("username", "rbandy");
 
         // Verify
         assertEquals(userToUpdate, retrievedUser);
@@ -84,7 +85,7 @@ class UserDaoTest {
     @Test
     void addUser() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         // Create new user
-        User newUser = new User("user", "Ricky", "Bobby", "numberone@gmail.com", 225, "1979-01-01");
+        User newUser = new User("b1db5510-d031-70b0-fe58-bf0ed1039f23", "user", "testUser", "testUser@test.edu", "12-31-1983");
 
         // Insert the new user and return their userId
         int userId = genericUserDao.insert(newUser);
@@ -102,8 +103,8 @@ class UserDaoTest {
      */
     @Test
     void deleteUser() {
-        genericUserDao.deleteEntity(genericUserDao.getById(1));
-        assertNull(genericUserDao.getById(1));
+        genericUserDao.deleteEntity(genericUserDao.getById(2));
+        assertNull(genericUserDao.getById(2));
     }
 
     /**
@@ -138,6 +139,6 @@ class UserDaoTest {
     @Test
     void getAllUsers() {
         List<User> users = genericUserDao.getAll();
-        assertEquals(1, users.size());
+        assertEquals(2, users.size());
     }
 }

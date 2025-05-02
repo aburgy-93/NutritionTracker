@@ -4,6 +4,8 @@ import edu.matc.entity.Food;
 import edu.matc.entity.User;
 import edu.matc.entity.UserFood;
 import edu.matc.util.Database;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * The type User food dao test.
  */
 class UserFoodDaoTest {
+    private final Logger logger = LogManager.getLogger(this.getClass());
     /**
      * The User dao.
      */
@@ -47,7 +50,7 @@ class UserFoodDaoTest {
         userDao = new GenericDao<>(User.class);
         listFoodDao = new UserfoodDao();
 
-        Database database = new Database();
+        Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
     }
 
@@ -128,22 +131,33 @@ class UserFoodDaoTest {
         // Step 1: Create and insert food entry
         Food food = new Food("Ground Beef", "Meat", 1, "Ounce", 93, 8, 0, 4);
         foodDao.insert(food);
-        int foodId = foodDao.getById(1).getId();
+        int foodId = foodDao.getByUsername("foodName", "Ground Beef").getId();
+
+        logger.debug("Created food id (3): " + foodId);
 
         // Step 2: Create and insert user
-        User user = new User("user", "Jim", "Bobert", "email@email.com", 185, "1993-05-22");
+        User user = new User("b1db5510-d031-70b0-fe58-bf0ed1039h23", "user", "testUser", "testUser@test.edu", "12-31-1983");
         int userId = userDao.insert(user);
+
+        logger.debug("Created user id (3): " + userId);
 
         UserFood tracker = new UserFood(user, food, "2025-02-22", 5, "Lunch");
         int trackerId = userFoodDao.insert(tracker);
 
+        logger.debug("Food id in tracker to be deleted: " + trackerId);
+
         // Check that things are inserted properly
         assertNotNull(userDao.getById(userId));
         assertNotNull(foodDao.getById(foodId));
-        assertEquals(3, userFoodDao.getAll().size());
+        assertEquals(4, userFoodDao.getAll().size());
+        logger.debug("Number of userFoods in tracker before deletion (4):  " + userFoodDao.getAll().size());
 
-        // Delete user
+        // Delete user food
+        logger.debug("Id of user to be deleted (3): " + userFoodDao.getById(userId).getId());
+        logger.debug("Id of user to be deleted (3): " + userFoodDao.getById(userId));
+
         userFoodDao.deleteEntity(userFoodDao.getById(userId));
+        logger.debug("User's Foods in DB " + userFoodDao.getAll().toString());
 
         // Verify user deletion
         assertNull(userFoodDao.getById(userId));
@@ -152,7 +166,7 @@ class UserFoodDaoTest {
         assertNull(userFoodDao.getById(userId));
 
         // Verify food still exists in food table
-        assertNotNull(foodDao.getById(trackerId));
+        assertNotNull(foodDao.getById(foodId));
         assertEquals("Ground Beef", food.getFoodName());
     }
 
@@ -163,7 +177,7 @@ class UserFoodDaoTest {
     void getAllUserFood() {
         List<UserFood> foods = userFoodDao.getAll();
         assertNotNull(foods);
-        assertEquals(2, foods.size());
+        assertEquals(3, foods.size());
     }
 
     @Test
@@ -183,7 +197,7 @@ class UserFoodDaoTest {
         // TODO: Case sensitive!!!
         List<UserFood> lunchMeals = meals.get("Lunch");
         assertNotNull(lunchMeals);
-        assertTrue(lunchMeals.size() > 0);
+        assertFalse(lunchMeals.isEmpty());
         assertEquals("2025-02-15", lunchMeals.get(0).getDate());
     }
 

@@ -8,6 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.matc.auth.*;
 import edu.matc.persistence.PropertiesLoader;
+import edu.matc.results.Results;
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -113,6 +115,10 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String authCode = req.getParameter("code");
         String userName = null;
+        String email = null;
+        String sub = null;
+
+        HttpSession session = req.getSession();
 
         if (authCode == null) {
             //TODO forward to an error page or back to the login
@@ -120,8 +126,17 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                userName = validate(tokenResponse);
-                req.setAttribute("userName", userName);
+
+                Results userResults = validate(tokenResponse);
+                userName = userResults.getUsername();
+                email = userResults.getEmail();
+                sub = userResults.getSub();
+
+                // req.setAttribute("userName", userName);
+                session.setAttribute("userName", userName);
+                session.setAttribute("email", email);
+                session.setAttribute("sub", sub);
+
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 //TODO forward to an error page
@@ -167,7 +182,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      * @return
      * @throws IOException
      */
-    private String validate(TokenResponse tokenResponse) throws IOException {
+    private Results validate(TokenResponse tokenResponse) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -205,14 +220,27 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String userName = jwt.getClaim("cognito:username").asString();
+        String email = jwt.getClaim("email").asString();
+        String subject = jwt.getClaim("sub").asString();
+
         logger.debug("here's the username: " + userName);
+        logger.debug("here's the email: " + email);
+        logger.debug("here's the subject: " + subject);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
         // TODO decide what you want to do with the info!
         // for now, I'm just returning username for display back to the browser
 
-        return userName;
+        Results results = new Results(userName, email, subject);
+        Results userInfo = results.getResults();
+
+        logger.debug("userInfo: " + userInfo.toString());
+        logger.debug("userInfo: " + userInfo.getUsername());
+        logger.debug("userInfo: " + userInfo.getEmail());
+        logger.debug("userInfo: " + userInfo.getSub());
+
+        return userInfo;
     }
 
     /** Create the auth url and use it to build the request.

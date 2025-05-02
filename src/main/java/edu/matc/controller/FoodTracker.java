@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -97,32 +98,41 @@ public class FoodTracker extends HttpServlet {
 
             // TODO: get current user based on who is logged in
             // Get the user
-            User retrievedUser = userDao.getById(1); // Hardcoded for testing
+            HttpSession session = request.getSession(false);
+            if(session != null) {
+                // get the sub string from the session.
+                String sub = session.getAttribute("sub").toString();
+                logger.info("sub: " + sub);
 
-            if(retrievedUser != null) {
-                int userId = retrievedUser.getId();
+                User userRetrievedSub = userDao.getBySub("sub", sub);
+                logger.info("userRetrievedSub: " + userRetrievedSub);
 
-                // Get all meals made by the user in food_tracker table, organize meals by date
-                Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
+                if(userRetrievedSub != null) {
+                    int userId = userRetrievedSub.getId();
 
-                // Log the list of foods for debugging
-                logger.debug("Retrieved user food list: " + mealsByDate );
+                    // Get all meals made by the user in food_tracker table, organize meals by date
+                    Map<String, List<UserFood>> mealsByDate = listFoodDao.getMealsGroupedByMealTimeSortedByDate(userId);
 
-                // Set the attributes and forward the request.
-                request.setAttribute("title", "Your Meals");
-                request.setAttribute("weekDates", weekDates);
-                request.setAttribute("isoWeekDates", isoWeekDates);
-                request.setAttribute("weekOffSet", weekOffSet);
-                request.setAttribute("meals", mealsByDate);
+                    // Log the list of foods for debugging
+                    logger.debug("Retrieved user food list: " + mealsByDate );
 
-                // Tell the server where the request is going
-                RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
+                    // Set the attributes and forward the request.
+                    request.setAttribute("title", "Your Meals");
+                    request.setAttribute("weekDates", weekDates);
+                    request.setAttribute("isoWeekDates", isoWeekDates);
+                    request.setAttribute("weekOffSet", weekOffSet);
+                    request.setAttribute("meals", mealsByDate);
 
-                // Forward the reqeust and response
-                rd.forward(request, response);
-            } else{
-                logger.warn("User not found");
+                    // Tell the server where the request is going
+                    RequestDispatcher rd = request.getRequestDispatcher("/mealsDisplay.jsp");
+
+                    // Forward the reqeust and response
+                    rd.forward(request, response);
+                } else{
+                    logger.warn("User not found");
+                }
             }
+
         } catch (Exception e) {
             logger.debug("Error processing request: {}", e.getMessage(), e);
         }
