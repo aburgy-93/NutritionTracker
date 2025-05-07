@@ -32,7 +32,7 @@ class FoodDaoTest {
     void setUp() {
         genericFoodDao = new GenericDao<>(Food.class);
         genericUserFoodDao = new GenericDao<>(UserFood.class);
-        Database database = new Database();
+        Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
     }
 

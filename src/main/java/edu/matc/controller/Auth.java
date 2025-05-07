@@ -7,6 +7,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.matc.auth.*;
+import edu.matc.entity.User;
+import edu.matc.persistence.GenericDao;
 import edu.matc.persistence.PropertiesLoader;
 import edu.matc.results.Results;
 import org.apache.commons.io.*;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URL;
@@ -117,6 +120,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         String userName = null;
         String email = null;
         String sub = null;
+        String birthDate = null;
 
         HttpSession session = req.getSession();
 
@@ -131,11 +135,27 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 userName = userResults.getUsername();
                 email = userResults.getEmail();
                 sub = userResults.getSub();
+                birthDate = userResults.getBirthdate();
 
-                // req.setAttribute("userName", userName);
+                // check db if userName, and sub are already in the db
+//                GenericDao<User> userDao = new GenericDao<>(User.class);
+//                User retrievedUserFromDB = userDao.getBySub("sub", sub);
+//
+//                // if not in the db, add the user to the db
+//                if (retrievedUserFromDB == null) {
+//                    User newUserToAddToDB = new User();
+//                    newUserToAddToDB.setEmail(email);
+//                    newUserToAddToDB.setSub(sub);
+//                    newUserToAddToDB.setUsername(userName);
+//                    newUserToAddToDB.setBirthDate(birthDate);
+//
+//                    int newUserId = userDao.insert(newUserToAddToDB);
+//                    logger.debug("New user ID: " + newUserId);
+//
+//                }
                 session.setAttribute("userName", userName);
-                session.setAttribute("email", email);
-                session.setAttribute("sub", sub);
+//                session.setAttribute("email", email);
+//                session.setAttribute("sub", sub);
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -144,10 +164,14 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 logger.error("Error getting token from Cognito oauth url " + e.getMessage(), e);
                 //TODO forward to an error page
             }
+//            catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+//                throw new RuntimeException(e);
+//            }
         }
+
+        req.setAttribute("title", "Macro Calculator");
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
-
     }
 
     /**
@@ -222,23 +246,26 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         String userName = jwt.getClaim("cognito:username").asString();
         String email = jwt.getClaim("email").asString();
         String subject = jwt.getClaim("sub").asString();
+        String birthdate = jwt.getClaim("birthdate").asString();
 
         logger.debug("here's the username: " + userName);
         logger.debug("here's the email: " + email);
         logger.debug("here's the subject: " + subject);
+        logger.debug("here's the birthdate: " + birthdate);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
         // TODO decide what you want to do with the info!
         // for now, I'm just returning username for display back to the browser
 
-        Results results = new Results(userName, email, subject);
+        Results results = new Results(userName, email, subject, birthdate);
         Results userInfo = results.getResults();
 
         logger.debug("userInfo: " + userInfo.toString());
         logger.debug("userInfo: " + userInfo.getUsername());
         logger.debug("userInfo: " + userInfo.getEmail());
         logger.debug("userInfo: " + userInfo.getSub());
+        logger.debug("userInfo: " + userInfo.getBirthdate());
 
         return userInfo;
     }

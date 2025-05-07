@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
+import javax.persistence.NoResultException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -51,24 +52,31 @@ public class GenericDao<T> {
     public T getBySub(String propertyName, String sub) {
         Session session = getSession();
 
-        logger.debug("Searching for order with " + propertyName + " = " + sub);
+        logger.debug("Searching for user with " + propertyName + " = " + sub);
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
         Expression<String> property = root.get(propertyName);
 
-        query.where(builder.like(property, "%" + sub + "%"));
-        T user = session.createQuery(query).getSingleResult();
+        query.where(builder.equal(property, sub ));
+        T user = null;
 
-        session.close();
+        try {
+            user = session.createQuery(query).getSingleResult();
+            logger.debug("Found user: " + user);
+        } catch (NoResultException e) {
+            logger.debug("User not found: " +  e);
+        } finally {
+            session.close();
+        }
         return user;
     }
 
     public T getByUsername(String propertyName, String value){
         Session session = getSession();
 
-//        logger.debug("Searching for order with " + propertyName + " = " + value);
+        logger.debug("Searching for user with " + propertyName + " = " + value);
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);

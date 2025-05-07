@@ -1,6 +1,5 @@
 package edu.matc.controller;
 
-import edu.matc.entity.Food;
 import edu.matc.entity.User;
 import edu.matc.entity.UserFood;
 import edu.matc.persistence.GenericDao;
