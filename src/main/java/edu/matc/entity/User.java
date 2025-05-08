@@ -23,8 +23,9 @@ public class User {
     @Column(name = "sub")
     private String sub;
 
+    // user is the default setting for all users
     @Column(name = "access_privileges")
-    private String accessPrivileges;
+    private String accessPrivileges = "user";
 
     @Column(name = "username")
     private String username;
@@ -47,10 +48,7 @@ public class User {
      * Instantiates a new User.
      *
      * @param accessPrivileges the access privileges
-     * @param firstName        the first name
-     * @param lastName         the last name
      * @param email            the email
-     * @param userWeight       the user weight
      * @param birthDate        the birthdate
      */
     public User(String sub, String accessPrivileges, String username, String email, String birthDate) {

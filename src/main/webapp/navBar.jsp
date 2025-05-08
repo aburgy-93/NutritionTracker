@@ -23,10 +23,10 @@
         <div>
             <c:choose>
                 <c:when test="${empty userName}">
-
                 </c:when>
                 <c:otherwise>
                     <h3 style="color: white; margin-right: 22px; margin-bottom: 20px">Welcome ${userName}</h3>
+                    <a href = "logOut">Log Out</a>
                 </c:otherwise>
             </c:choose>
         </div>

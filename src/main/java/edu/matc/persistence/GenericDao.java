@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
+import javax.persistence.NoResultException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -51,24 +52,37 @@ public class GenericDao<T> {
     public T getBySub(String propertyName, String sub) {
         Session session = getSession();
 
-        logger.debug("Searching for order with " + propertyName + " = " + sub);
-
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
         Expression<String> property = root.get(propertyName);
 
-        query.where(builder.like(property, "%" + sub + "%"));
-        T user = session.createQuery(query).getSingleResult();
+        logger.debug("Querying for property '" + propertyName + "' with value '" + sub + "'");
+        query.where(builder.equal(property, sub));
 
-        session.close();
-        return user;
+        T user = null;
+        try {
+            // Use getResultList instead of getSingleResult to handle no results gracefully
+            List<T> resultList = session.createQuery(query).getResultList();
+
+            if (!resultList.isEmpty()) {
+                user = resultList.get(0);  // Retrieve the first result if present
+                logger.debug("Found user: " + user);
+            } else {
+                logger.debug("No user found for sub: " + sub);  // Log no result found
+            }
+        } catch (Exception e) {
+            logger.error("Unexpected error: " + e.getMessage(), e);
+        } finally {
+            session.close();
+        }
+        return user;  // Return null if no user is found
     }
 
     public T getByUsername(String propertyName, String value){
         Session session = getSession();
 
-//        logger.debug("Searching for order with " + propertyName + " = " + value);
+        logger.debug("Searching for user with " + propertyName + " = " + value);
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
