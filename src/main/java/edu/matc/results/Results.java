@@ -27,10 +27,6 @@ public class Results {
     public String getBirthdate() {return birthdate;}
     public void setBirthdate(String birthdate) {this.birthdate = birthdate;}
 
-    public Results getResults() {
-        return new Results(username, email, sub, birthdate);
-    }
-
     @Override
     public String toString() {
         return "Results [username=" + username + ", email=" + email + ", sub=" + sub + "]";

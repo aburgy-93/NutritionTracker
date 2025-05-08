@@ -23,8 +23,9 @@ public class User {
     @Column(name = "sub")
     private String sub;
 
+    // user is the default setting for all users
     @Column(name = "access_privileges")
-    private String accessPrivileges;
+    private String accessPrivileges = "user";
 
     @Column(name = "username")
     private String username;

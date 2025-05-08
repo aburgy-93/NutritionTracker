@@ -138,24 +138,26 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 birthDate = userResults.getBirthdate();
 
                 // check db if userName, and sub are already in the db
-//                GenericDao<User> userDao = new GenericDao<>(User.class);
-//                User retrievedUserFromDB = userDao.getBySub("sub", sub);
-//
-//                // if not in the db, add the user to the db
-//                if (retrievedUserFromDB == null) {
-//                    User newUserToAddToDB = new User();
-//                    newUserToAddToDB.setEmail(email);
-//                    newUserToAddToDB.setSub(sub);
-//                    newUserToAddToDB.setUsername(userName);
-//                    newUserToAddToDB.setBirthDate(birthDate);
-//
-//                    int newUserId = userDao.insert(newUserToAddToDB);
-//                    logger.debug("New user ID: " + newUserId);
-//
-//                }
+                logger.debug("Sub from token: " + sub);
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+                User retrievedUserFromDB = userDao.getBySub("sub", sub);
+                logger.debug("Retrieved user from DB: " + retrievedUserFromDB);
+
+                // if not in the db, add the user to the db
+                if (retrievedUserFromDB == null) {
+                    User newUserToAddToDB = new User();
+                    newUserToAddToDB.setEmail(email);
+                    newUserToAddToDB.setSub(sub);
+                    newUserToAddToDB.setUsername(userName);
+                    newUserToAddToDB.setBirthDate(birthDate);
+
+                    int newUserId = userDao.insert(newUserToAddToDB);
+                    logger.debug("New user ID: " + newUserId);
+
+                }
                 session.setAttribute("userName", userName);
+                session.setAttribute("sub", sub);
 //                session.setAttribute("email", email);
-//                session.setAttribute("sub", sub);
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -164,9 +166,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 logger.error("Error getting token from Cognito oauth url " + e.getMessage(), e);
                 //TODO forward to an error page
             }
-//            catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-//                throw new RuntimeException(e);
-//            }
+            catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         req.setAttribute("title", "Macro Calculator");
@@ -243,6 +245,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
+
         String userName = jwt.getClaim("cognito:username").asString();
         String email = jwt.getClaim("email").asString();
         String subject = jwt.getClaim("sub").asString();
@@ -252,16 +255,13 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         logger.debug("here's the email: " + email);
         logger.debug("here's the subject: " + subject);
         logger.debug("here's the birthdate: " + birthdate);
-
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
         // TODO decide what you want to do with the info!
         // for now, I'm just returning username for display back to the browser
 
-        Results results = new Results(userName, email, subject, birthdate);
-        Results userInfo = results.getResults();
+        Results userInfo = new Results(userName, email, subject, birthdate);
 
-        logger.debug("userInfo: " + userInfo.toString());
         logger.debug("userInfo: " + userInfo.getUsername());
         logger.debug("userInfo: " + userInfo.getEmail());
         logger.debug("userInfo: " + userInfo.getSub());
