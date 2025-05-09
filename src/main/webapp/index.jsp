@@ -167,13 +167,62 @@
         tr:hover {
             background-color: #f1f1f1;
         }
+
+        .login-container {
+            max-width: 700px !important;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
+            padding-bottom: 20px;
+        }
+
+        .loginTitle {
+            color: white;
+            background-color: #333333;
+            width: 100%;
+            box-sizing: border-box;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            text-align: center;
+        }
+
+        .loginTitle h1 {
+            margin: 0 auto;
+            padding: 16px 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
 <c:choose>
     <c:when test="${empty userName}">
-        <a href = "logIn">Log in</a>
+        <div class="login-container">
+            <div class="login">
+                <div class="loginTitle">
+                    <h1>Food Tracker</h1>
+                </div>
+                <p>Track your every meal.</p>
+                <p>See your daily nutritional progress.</p>
+                <p>Search for all different kinds of foods or create your own!</p>
+            </div>
+            <div class="login">
+                <h3>Login or sign up now!</h3>
+                <a href = "logIn">Log in</a>
+            </div>
+        </div>
+
     </c:when>
     <c:otherwise>
         <c:import url="navBar.jsp" />
