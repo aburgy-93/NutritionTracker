@@ -1,3 +1,5 @@
+# Food Tracker - Individual Project - Alex Burgy
+
 ## Problem Statement
 
 The Nutrition Tracker determines the user's daily macronutrient needs (carbohydrates, protein, and 
@@ -23,6 +25,25 @@ Text color transitions from red (far from goal) to green (on target), or a messa
 indicating how many grams remain. If a user exceeds their daily goal significantly, 
 the display reflects that as well.
 
+### Presentation
+* App Demo - https://www.youtube.com/watch?v=uaJj2eTW7PU
+* Code Demo - https://www.youtube.com/watch?v=_2QT-O_I5a0
+
+### Design
+* [User Stories](DesignDocuments/userStoreis.md)
+* [ScreenDesign](DesignDocuments/wireframes)
+* [Database Design](DesignDocuments/databaseDesign.png)
+
+1) Create meal
+2) Food tracker
+3) Update meal
+4) Delete meal
+5) Created food table
+6) Search food table from Spoonacular API
+
+### Timelog
+*[Timelog Document](timeLog.md)
+
 ##### Future Ideas
 I could add an activity tracker with in it as well.
 Something to record if you worked out that day,
@@ -37,7 +58,7 @@ a notes section.
 - ORM Framework
   - Hibernate 
 - Web Services consumed using Java
-  - Spoonacular API
+  - Spoonacular API (https://spoonacular.com/food-api)
   - USDA API (V2)
 - CSS 
   - Bootstrap
@@ -55,12 +76,31 @@ a notes section.
 - IDE: IntelliJ IDEA
 
 
-## Design 
-Screens: 
+## ScreenShots
 
-1) Create meal
-2) Food tracker
-3) Update meal
-4) Delete meal
-5) Created food table
-6) Search food table from Spoonacular API
+### Login Screen
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/LoginScreen.png">
+
+### Homepage
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/HomePage.png">
+
+### User Food Table
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/UserFoodTable.png">
+
+### Spoonacular API Search
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/SpoonacularSearch.png">
+
+### Food Tracker
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/FoodTracker.png">
+
+### Add Food
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/AddFoodForm.png">
+
+### Edit Food
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/EditFoodForm.png">
+
+### Edit Meal
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/EditMealForm.png">
+
+### Logout Screen
+<img src="https://github.com/aburgy-93/NutritionTracker/blob/main/screenshots/app/LogoutScreen.png">

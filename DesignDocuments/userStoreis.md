@@ -8,13 +8,12 @@ how close I am to reaching my nutritional goals each day.
 As a registered user, I want to log into my account so that I can track my meals and monitor my progress toward my 
 nutritional goals.
 
-### Password Reset * 
-As a user, I want to be able to reset my password if I forget it.
+### Search for user entered foods *
+A User will have a food table that will store foods they have entered themselves and are able to search it for any
+food they have entered.
 
-### Edit User Profile *
-As a user, I would like to be able to update my nutritional goals as needed. Some phases
-someone may need to eat more or less depending on their goals, so being able to update
-how much food you need to eat in a day is important to users.
+### Use a food API to add other foods not entered in user food table *
+A user can search for different foods that come from a food database (Spoonacular)
 
 ### Add Meals or Individual Foods *
 As a user, I want to save the nutritional information of meals or individual foods I eat regularly 
@@ -34,12 +33,26 @@ As a user, I want to be able to delete meals if needed.
 As a user, when adding a meal, I want to specify if it was for breakfast, lunch, dinner, snack, etc., 
 so that I can organize my daily intake.
 
-### Copy Meals from Previous Days *
+### Add up nutritional data *
+When a user enters a food into their tracker, there should be a space that tracks the totals of the nutritional facts
+across all meals for that day. 
+
+
+### Nutrition Tracker (V2)
+### Edit User Profile 
+As a user, I would like to be able to update my nutritional goals as needed. Some phases
+someone may need to eat more or less depending on their goals, so being able to update
+how much food you need to eat in a day is important to users.
+
+### Copy Meals from Previous Days
 As a user, I want to copy a meal from a previous day to a new day so that I don’t have to re-enter 
 the same information repeatedly.
 As a user, I want to edit a copied meal in case I need to make small adjustments.
 
-### Track Daily Progress *
+### Password Reset
+As a user, I want to be able to reset my password if I forget it.
+
+### Track Daily Progress
 As a user, I want to see a summary of my daily macronutrient intake so that I can quickly check how 
 close I am to meeting my goals.
 
