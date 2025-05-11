@@ -2,6 +2,7 @@ package edu.matc.controller;
 
 import edu.matc.entity.UserFood;
 import edu.matc.persistence.GenericDao;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 @WebServlet(
@@ -35,28 +38,43 @@ public class EditMeal extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // TODO: Check for null!
-            // Get the mealId from the request
-            String mealId = request.getParameter("mealId");
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            // Get the meal from UserFood based on the mealId passed in
-            UserFood foodToEdit = genericDao.getById(Integer.parseInt(mealId));
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            try {
+                // TODO: Check for null!
+                // Get the mealId from the request
+                String mealId = request.getParameter("mealId");
 
-            // Log meal for debugging
-            logger.debug("Editing Meal: " + foodToEdit);
+                // Get the meal from UserFood based on the mealId passed in
+                UserFood foodToEdit = genericDao.getById(Integer.parseInt(mealId));
 
-            // Set the attributes for the reqeust
-            request.setAttribute("editMeal", foodToEdit);
-            request.setAttribute("title", "Edit Meal");
+                // Check to see if meal exists in the database
+                if (foodToEdit == null) {
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPages/400Error.jsp");
+                    dispatcher.forward(request, response);
+                }
 
-            // Tell the server where the reqeust will go
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/editMeal.jsp");
+                // Log meal for debugging
+                logger.debug("Editing Meal: " + foodToEdit);
 
-            // Forward the request and response
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            logger.error("Error in doGet for EditMeal: ", e);
+                // Set the attributes for the reqeust
+                request.setAttribute("editMeal", foodToEdit);
+                request.setAttribute("title", "Edit Meal");
+
+                // Tell the server where the reqeust will go
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/editMeal.jsp");
+
+                // Forward the request and response
+                dispatcher.forward(request, response);
+            } catch (Exception e) {
+                logger.error("Error in doGet for EditMeal: ", e);
+            }
+        } else {
+            // TODO: Error Page
         }
     }
 
@@ -70,47 +88,51 @@ public class EditMeal extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Get the mealId from the request and parse it as an integer
-            int mealId = Integer.parseInt(request.getParameter("food_to_edit"));
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            // Log the mealId for debugging
-            logger.debug("Editing Meal: " + mealId);
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            try {
+                // Get the mealId from the request and parse it as an integer
+                int mealId = Integer.parseInt(request.getParameter("food_to_edit"));
 
-            // Get the meal specified by the mealId with the getById method from the genericDao
-            UserFood mealToEdit = genericDao.getById(mealId);
+                // Log the mealId for debugging
+                logger.debug("Edited Meal: " + mealId);
 
-            // Log the meal for debugging
-            logger.debug("Editing Meal: " + mealToEdit);
+                // Get the meal specified by the mealId with the getById method from the genericDao
+                UserFood mealToEdit = genericDao.getById(mealId);
 
-            // set the new values and log them for debugging
-            mealToEdit.setServingSize((int) Double.parseDouble(request.getParameter("servingSize")));
-            logger.debug(request.getParameter("servingSize"));
+                // set the new values and log them for debugging
+                mealToEdit.setServingSize((int) Double.parseDouble(request.getParameter("servingSize")));
+                logger.debug(request.getParameter("servingSize"));
 
-            mealToEdit.setMealTime(request.getParameter("meal_times"));
-            logger.debug(request.getParameter("meal_times"));
+                mealToEdit.setMealTime(request.getParameter("meal_times"));
+                logger.debug(request.getParameter("meal_times"));
 
-            mealToEdit.setUpdatedCalories(Double.parseDouble(request.getParameter("calories")));
-            logger.debug(request.getParameter("calories"));
+                mealToEdit.setUpdatedCalories(Double.parseDouble(request.getParameter("calories")));
+                logger.debug(request.getParameter("calories"));
 
-            mealToEdit.setUpdatedProtein(Double.parseDouble(request.getParameter("protein")));
-            logger.debug(request.getParameter("protein"));
+                mealToEdit.setUpdatedProtein(Double.parseDouble(request.getParameter("protein")));
+                logger.debug(request.getParameter("protein"));
 
-            mealToEdit.setUpdatedCarbs(Double.parseDouble(request.getParameter("carbs")));
-            logger.debug(request.getParameter("carbs"));
+                mealToEdit.setUpdatedCarbs(Double.parseDouble(request.getParameter("carbs")));
+                logger.debug(request.getParameter("carbs"));
 
-            mealToEdit.setUpdatedFats(Double.parseDouble(request.getParameter("fat")));
-            logger.debug(request.getParameter("fat"));
+                mealToEdit.setUpdatedFats(Double.parseDouble(request.getParameter("fat")));
+                logger.debug(request.getParameter("fat"));
 
+                // Pass an updated food object to the update table method
+                genericDao.update(mealToEdit);
 
-            // Pass an updated food object to the update table method
-            genericDao.update(mealToEdit);
+                // Redirect back to the searchFood page
+                response.sendRedirect("meal-display");
 
-            // Redirect back to the searchFood page
-            response.sendRedirect("meal-display");
-
-        } catch (Exception e) {
-            logger.error("Error updating meal in doPost for EditMeal: ", e);
+            } catch (Exception e) {
+                logger.error("Error updating meal in doPost for EditMeal: ", e);
+            }
         }
+
     }
 }

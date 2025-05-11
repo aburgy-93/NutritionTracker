@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
@@ -38,34 +39,43 @@ public class SearchYourFoods extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Get the searchTerm from the request
-            String searchTerm = request.getParameter("searchTerm");
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            // Instantiate the GenericDao with the Food entity
-            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            try {
+                // Get the searchTerm from the request
+                String searchTerm = request.getParameter("searchTerm");
 
-            // Check that the searchTerm is not null or an empty string
-            if (searchTerm != null && !searchTerm.isEmpty()) {
-                // If not empty, set the request attributes
-                request.setAttribute("title", "Search Your Foods");
-                request.setAttribute("foods", genericDao.getByPropertyLike("foodName", searchTerm));
-            } else {
-                // Else return all of the foods from the genericDao getAll method
-                request.setAttribute("foods", genericDao.getAll());
-                request.setAttribute("title", "Search Your Foods");
+                // Instantiate the GenericDao with the Food entity
+                GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+
+                // Check that the searchTerm is not null or an empty string
+                if (searchTerm != null && !searchTerm.isEmpty()) {
+                    // If not empty, set the request attributes
+                    request.setAttribute("title", "Search Your Foods");
+                    request.setAttribute("foods", genericDao.getByPropertyLike("foodName", searchTerm));
+                } else {
+                    // Else return all of the foods from the genericDao getAll method
+                    request.setAttribute("foods", genericDao.getAll());
+                    request.setAttribute("title", "Search Your Foods");
+                }
+
+                // Set the request attributes
+                request.setAttribute("searchTerm", searchTerm);
+
+                // Tell the server where the request will go
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/searchYourFoods.jsp");
+
+                // Forward the request and the response
+                dispatcher.forward(request, response);
+            } catch (Exception e) {
+                logger.error(e);
             }
-
-            // Set the request attributes
-            request.setAttribute("searchTerm", searchTerm);
-
-            // Tell the server where the request will go
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/searchYourFoods.jsp");
-
-            // Forward the request and the response
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            logger.error(e);
+        } else {
+            // Route to error page
         }
     }
 
@@ -77,23 +87,32 @@ public class SearchYourFoods extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            // From the request get the value from the _method parameter, then based on that value call the correct method
-            String method = request.getParameter("_method");
-            if("ADD".equals(method)) {
-                doAdd(request, response);
-            } else if ("EDIT".equals(method)) {
-                doPut(request, response);
-            } else if ("UPDATE".equals(method)) {
-                doUpdate(request, response);
-            } else if("DELETE".equals(method)) {
-                doDelete(request, response);
-            } else {
-                doUpdate(request, response);
-            }
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-        } catch (Exception e) {
-            logger.debug(e);
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            try {
+                // From the request get the value from the _method parameter, then based on that value call the correct method
+                String method = request.getParameter("_method");
+                if("ADD".equals(method)) {
+                    doAdd(request, response);
+                } else if ("EDIT".equals(method)) {
+                    doPut(request, response);
+                } else if ("UPDATE".equals(method)) {
+                    doUpdate(request, response);
+                } else if("DELETE".equals(method)) {
+                    doDelete(request, response);
+                } else {
+                    doUpdate(request, response);
+                }
+
+            } catch (Exception e) {
+                logger.debug(e);
+            }
+        } else {
+            // Route to error page
         }
     }
 
@@ -113,41 +132,50 @@ public class SearchYourFoods extends HttpServlet {
      * @throws IllegalAccessException    the illegal access exception
      */
     public void doAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        // Instantiate the GenericDao with the Food entity
-        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-        try {
-            // Get the parameters from the request
-            String foodName = request.getParameter("food_name");
-            String foodType = request.getParameter("food_type");
-            int servings = Integer.parseInt(request.getParameter("servings"));
-            String servingsUnits = request.getParameter("serving_units");
-            int calories = Integer.parseInt(request.getParameter("calories"));
-            double protein = Double.parseDouble(request.getParameter("protein"));
-            double carbs = Double.parseDouble(request.getParameter("carbs"));
-            double fat = Double.parseDouble(request.getParameter("fat"));
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            // Instantiate the GenericDao with the Food entity
+            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
 
-            // Check that the values are not null or empty strings and that integers are not less than 0
-            if (!isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType) && servings >= 0 &&
-                    !isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
-                // Create a new Food object, passing in the parameter values
-                Food newFood = new Food(foodName, foodType, servings, servingsUnits, calories, protein, carbs, fat);
+            try {
+                // Get the parameters from the request
+                String foodName = request.getParameter("food_name");
+                String foodType = request.getParameter("food_type");
+                int servings = Integer.parseInt(request.getParameter("servings"));
+                String servingsUnits = request.getParameter("serving_units");
+                int calories = Integer.parseInt(request.getParameter("calories"));
+                double protein = Double.parseDouble(request.getParameter("protein"));
+                double carbs = Double.parseDouble(request.getParameter("carbs"));
+                double fat = Double.parseDouble(request.getParameter("fat"));
 
-                // Set the request attribute for the new food
-                request.setAttribute("newFood", genericDao.insert(newFood));
+                // Check that the values are not null or empty strings and that integers are not less than 0
+                if (!isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType) && servings >= 0 &&
+                        !isNullOrEmptyString(servingsUnits) && calories >= 0 && !(protein < 0) && !(carbs < 0) && !(fat < 0)) {
+                    // Create a new Food object, passing in the parameter values
+                    Food newFood = new Food(foodName, foodType, servings, servingsUnits, calories, protein, carbs, fat);
+
+                    // Set the request attribute for the new food
+                    request.setAttribute("newFood", genericDao.insert(newFood));
+                }
+
+                // Set the request attributes and return all foods if null was returned above
+                request.setAttribute("title", "Foods");
+                request.setAttribute("foods", genericDao.getAll());
+
+                // Tell the server where the request will go
+                RequestDispatcher rd = request.getRequestDispatcher("/searchYourFoods.jsp");
+
+                // forward the request and response
+                rd.forward(request, response);
+            } catch (Exception e) {
+                logger.error(e);
             }
-
-            // Set the request attributes and return all foods if null was returned above
-            request.setAttribute("title", "Foods");
-            request.setAttribute("foods", genericDao.getAll());
-
-            // Tell the server where the request will go
-            RequestDispatcher rd = request.getRequestDispatcher("/searchYourFoods.jsp");
-
-            // forward the request and response
-            rd.forward(request, response);
-        } catch (Exception e) {
-            logger.error(e);
+        } else {
+            // Route to error page
         }
     }
 
@@ -165,30 +193,39 @@ public class SearchYourFoods extends HttpServlet {
      */
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // Instantiate the GenericDao with the Food entity
-        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-        try {
-            // Get the foodId from the request
-            String foodId = request.getParameter("food_to_edit");
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null)  {
+            // Instantiate the GenericDao with the Food entity
+            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
 
-            // Get the food we want to edit by passing in the foodId into the getById method on the genericDao
-            Food foodToEdit = genericDao.getById(Integer.parseInt(foodId));
+            try {
+                // Get the foodId from the request
+                String foodId = request.getParameter("food_to_edit");
 
-            // Log food for debugging
-            logger.debug("Editing Food: " + foodId);
+                // Get the food we want to edit by passing in the foodId into the getById method on the genericDao
+                Food foodToEdit = genericDao.getById(Integer.parseInt(foodId));
 
-            // Set the request attributes
-            request.setAttribute("editFood", foodToEdit);
-            request.setAttribute("title", "Edit Food");
+                // Log food for debugging
+                logger.debug("Editing Food: " + foodId);
 
-            // Tell the server where the request will go
-            RequestDispatcher rd = request.getRequestDispatcher("/editFood.jsp");
+                // Set the request attributes
+                request.setAttribute("editFood", foodToEdit);
+                request.setAttribute("title", "Edit Food");
 
-            // Forward the request and response
-            rd.forward(request, response);
-        } catch (Exception e ) {
-            logger.error(e);
+                // Tell the server where the request will go
+                RequestDispatcher rd = request.getRequestDispatcher("/editFood.jsp");
+
+                // Forward the request and response
+                rd.forward(request, response);
+            } catch (Exception e ) {
+                logger.error(e);
+            }
+        } else {
+            // Route to error page
         }
     }
 
@@ -207,50 +244,57 @@ public class SearchYourFoods extends HttpServlet {
      * @throws ServletException the servlet exception
      */
     public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // Instantiate the GenericDao with the Food entity
-        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-        try {
-            // Get id of food entity to edit
-            int foodId = Integer.parseInt(request.getParameter("food_to_edit"));
-            logger.debug("Editing Food: " + foodId);
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            // Instantiate the GenericDao with the Food entity
+            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
 
-            // get that entity from the table
-            Food foodToEdit = genericDao.getById(foodId);
-            logger.debug("Food to Edit: " + foodToEdit);
+            try {
+                // Get id of food entity to edit
+                int foodId = Integer.parseInt(request.getParameter("food_to_edit"));
+                logger.debug("Editing Food: " + foodId);
 
-            // Set the new values and log them for debugging
-            foodToEdit.setFoodName(request.getParameter("foodName"));
-            logger.debug(request.getParameter("foodName"));
+                // get that entity from the table
+                Food foodToEdit = genericDao.getById(foodId);
+                logger.debug("Food to Edit: " + foodToEdit);
 
-            foodToEdit.setFoodType(request.getParameter("foodType"));
-            logger.debug(request.getParameter("foodType"));
+                // Set the new values and log them for debugging
+                foodToEdit.setFoodName(request.getParameter("foodName"));
+                logger.debug(request.getParameter("foodName"));
 
-            foodToEdit.setServingSize((int) Double.parseDouble(request.getParameter("servingSize")));
-            logger.debug(request.getParameter("servingSize"));
+                foodToEdit.setFoodType(request.getParameter("foodType"));
+                logger.debug(request.getParameter("foodType"));
 
-            foodToEdit.setServingUnit(request.getParameter("servingUnit"));
-            logger.debug(request.getParameter("servingUnit"));
+                foodToEdit.setServingSize((int) Double.parseDouble(request.getParameter("servingSize")));
+                logger.debug(request.getParameter("servingSize"));
 
-            foodToEdit.setCalories(Double.parseDouble(request.getParameter("calories")));
-            logger.debug(request.getParameter("calories"));
+                foodToEdit.setServingUnit(request.getParameter("servingUnit"));
+                logger.debug(request.getParameter("servingUnit"));
 
-            foodToEdit.setProtein(Double.parseDouble(request.getParameter("protein")));
-            logger.debug(request.getParameter("protein"));
+                foodToEdit.setCalories(Double.parseDouble(request.getParameter("calories")));
+                logger.debug(request.getParameter("calories"));
 
-            foodToEdit.setCarbs(Double.parseDouble(request.getParameter("carbs")));
-            logger.debug(request.getParameter("carbs"));
+                foodToEdit.setProtein(Double.parseDouble(request.getParameter("protein")));
+                logger.debug(request.getParameter("protein"));
 
-            foodToEdit.setFat(Double.parseDouble(request.getParameter("fat")));
-            logger.debug(request.getParameter("fat"));
+                foodToEdit.setCarbs(Double.parseDouble(request.getParameter("carbs")));
+                logger.debug(request.getParameter("carbs"));
 
-            // pass an updated food object to the update table method
-            genericDao.update(foodToEdit);
+                foodToEdit.setFat(Double.parseDouble(request.getParameter("fat")));
+                logger.debug(request.getParameter("fat"));
 
-            // Redirect back to the searchFood page
-            response.sendRedirect("search-food");
-        } catch (Exception e) {
-            logger.error(e);
+                // pass an updated food object to the update table method
+                genericDao.update(foodToEdit);
+
+                // Redirect back to the searchFood page
+                response.sendRedirect("search-food");
+            } catch (Exception e) {
+                logger.error(e);
+            }
         }
     }
 
@@ -269,32 +313,40 @@ public class SearchYourFoods extends HttpServlet {
      */
     @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // Instantiate the GenericDao with the Food entity
-        GenericDao<Food> genericDao = new GenericDao<>(Food.class);
-        try {
-            // Get the foodId from the request
-            String foodId = request.getParameter("food_to_delete");
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            // Log the food to be deleted for debugging
-            logger.debug("Deleting Food: " + foodId);
+        if(session != null && sub != null) {
+            // Instantiate the GenericDao with the Food entity
+            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+            try {
+                // Get the foodId from the request
+                String foodId = request.getParameter("food_to_delete");
 
-            // Set the request attribute with the foodId
-            request.setAttribute("foodId", foodId);
+                // Log the food to be deleted for debugging
+                logger.debug("Deleting Food: " + foodId);
 
-            // Delete the entity by calling the deleteEntity method from the genericDao by passing in the foodId
-            genericDao.deleteEntity(genericDao.getById(Integer.parseInt(foodId)));
+                // Set the request attribute with the foodId
+                request.setAttribute("foodId", foodId);
 
-            // Set the request attributes
-            request.setAttribute("title", "Foods");
-            request.setAttribute("foods", genericDao.getAll());
+                // Delete the entity by calling the deleteEntity method from the genericDao by passing in the foodId
+                genericDao.deleteEntity(genericDao.getById(Integer.parseInt(foodId)));
 
-            // Tell the server where the request will go
-            RequestDispatcher rd = request.getRequestDispatcher("/searchYourFoods.jsp");
+                // Set the request attributes
+                request.setAttribute("title", "Foods");
+                request.setAttribute("foods", genericDao.getAll());
 
-            // Forward the request and response
-            rd.forward(request, response);
-        } catch (Exception e ) {
-            logger.error(e);
+                // Tell the server where the request will go
+                RequestDispatcher rd = request.getRequestDispatcher("/searchYourFoods.jsp");
+
+                // Forward the request and response
+                rd.forward(request, response);
+            } catch (Exception e ) {
+                logger.error(e);
+            }
+        } else {
+            // TODO: Route to error page
         }
     }
 

@@ -8,28 +8,31 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>405 Error - Method Not Allowed</title>
 </head>
 <body>
 <c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>405 - Method Not Allowed</strong></h1>
-  <p>The request method you used is not allowed for this resource.</p>
-</div>
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>405 - Method Not Allowed</strong></h1>
+    <p>The request method you used is not allowed for this resource.</p>
+  </div>
 
-<div style="text-align: center;">
-  <p>This can happen when:</p>
-  <ul>
-    <li>You tried to use an unsupported method (e.g., sending a POST request to a read-only endpoint)</li>
-    <li>There is a misconfiguration in the client or API call</li>
-  </ul>
+  <div class="errorReasons">
+    <p>This can happen when:</p>
+    <ul class="errorList">
+      <li>You tried to use an unsupported method (e.g., sending a POST request to a read-only endpoint)</li>
+      <li>There is a misconfiguration in the client or API call</li>
+    </ul>
 
-  <p>What you can do:</p>
-  <ul>
-    <li>Check the request method and try again</li>
-    <li>Return to the homepage or use the navigation menu</li>
-    <li>Contact support if you believe this is a mistake</li>
-  </ul>
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Check the request method and try again</li>
+      <li>Return to the homepage or use the navigation menu</li>
+      <li>Contact support if you believe this is a mistake</li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>

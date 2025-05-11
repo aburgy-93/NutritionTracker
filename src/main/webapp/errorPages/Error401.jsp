@@ -8,28 +8,31 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>401 Unauthorized</title>
 </head>
 <body>
-<c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>401 - Access Denied</strong></h1>
-  <p>You are not authorized to view this page or perform this action.</p>
-</div>
+<c:import url="/navBar.jsp" />
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>401 - Access Denied</strong></h1>
+    <p>You are not authorized to view this page or perform this action.</p>
+  </div>
 
-<div style="text-align: center;">
-  <p>This could be because:</p>
-  <ul>
-    <li>You're not logged in</li>
-    <li>Your session has expired</li>
-    <li>You do not have permission to access this resource</li>
-  </ul>
+  <div class="errorReasons">
+    <p>This could be because:</p>
+    <ul class="errorList">
+      <li>You're not logged in</li>
+      <li>Your session has expired</li>
+      <li>You do not have permission to access this resource</li>
+    </ul>
 
-  <p>What you can do:</p>
-  <ul>
-    <li>Log in to your account</li>
-    <li>Contact support if you believe this is a mistake</li>
-  </ul>
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Log in to your account</li>
+      <li>Contact support if you believe this is a mistake</li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>

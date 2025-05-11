@@ -6,11 +6,13 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import edu.matc.auth.*;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.persistence.PropertiesLoader;
 import edu.matc.results.Results;
+
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -43,7 +46,6 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.stream.Collectors;
-
 
 /**
  * The type Auth.
@@ -125,7 +127,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         HttpSession session = req.getSession();
 
         if (authCode == null) {
-            //TODO forward to an error page or back to the login
+            // If the authCode is null, send the user back to the login/sign up page
+            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+            rd.forward(req, resp);
         } else {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
@@ -154,11 +158,16 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                     int newUserId = userDao.insert(newUserToAddToDB);
                     logger.debug("New user ID: " + newUserId);
 
+                    if (newUserId != 0) {
+                        // Check that use is logged in before setting the session
+                        session.setAttribute("userName", userName);
+                        session.setAttribute("sub", sub);
+                    }
+                } else {
+                    // Check that use is logged in before setting the session
+                    session.setAttribute("userName", userName);
+                    session.setAttribute("sub", sub);
                 }
-                session.setAttribute("userName", userName);
-                session.setAttribute("sub", sub);
-//                session.setAttribute("email", email);
-
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 //TODO forward to an error page

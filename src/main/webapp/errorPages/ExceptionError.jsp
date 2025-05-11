@@ -8,18 +8,23 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
     <title>Exception Error</title>
 </head>
 <body>
-<c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-    <h1>We are sorry: an unexpected error has occurred.</h1>
-    <p>Please try the following:</p>
-    <ul>
-        <li>Go back and try again</li>
-        <li>Refresh the page</li>
-        <li>Contact support if the problem persists</li>
-    </ul>
+<c:import url="/errorNav.jsp" />
+<div class="container">
+    <div class="errorTitle">
+        <h1>We are sorry: an unexpected error has occurred.</h1>
+    </div>
+    <div class="errorReasons">
+        <p>Please try the following:</p>
+        <ul class="errorList">
+            <li>Go back and try again</li>
+            <li>Refresh the page</li>
+            <li>Contact support if the problem persists</li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>
