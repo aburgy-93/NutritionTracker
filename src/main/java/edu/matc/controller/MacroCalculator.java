@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -35,43 +36,51 @@ public class MacroCalculator extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Get the values from the request
-            String age = request.getParameter("age");
-            String gender = request.getParameter("gender");
-            String heightFeet = request.getParameter("heightFeet");
-            String heightInches = request.getParameter("heightInches");
-            String weight = request.getParameter("weight");
-            String activity = request.getParameter("activity");
-            String goal = request.getParameter("goal");
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            // Parse the strings that need to be either integers or doubles to their correct datatypes
-            int ageInt = Integer.parseInt(age);
-            int heightFeetInt = Integer.parseInt(heightFeet);
-            int heightInchesInt = Integer.parseInt(heightInches);
-            double weightInt = Double.parseDouble(weight);
-            double activityLevelInt = Double.parseDouble(activity);
+        if (session != null && sub != null) {
+            try {
+                // Get the values from the request
+                String age = request.getParameter("age");
+                String gender = request.getParameter("gender");
+                String heightFeet = request.getParameter("heightFeet");
+                String heightInches = request.getParameter("heightInches");
+                String weight = request.getParameter("weight");
+                String activity = request.getParameter("activity");
+                String goal = request.getParameter("goal");
 
-            // Instantiate a new Calculator and pass in the user's information
-            Calculator calculator = new Calculator(ageInt, gender, heightFeetInt, heightInchesInt, weightInt, activityLevelInt, goal);
+                // Parse the strings that need to be either integers or doubles to their correct datatypes
+                int ageInt = Integer.parseInt(age);
+                int heightFeetInt = Integer.parseInt(heightFeet);
+                int heightInchesInt = Integer.parseInt(heightInches);
+                double weightInt = Double.parseDouble(weight);
+                double activityLevelInt = Double.parseDouble(activity);
 
-            // Create a HashMap with key, value pairs for the returned values from teh calculateMacros method
-            HashMap<String, Double> results = calculator.calculateMacros();
+                // Instantiate a new Calculator and pass in the user's information
+                Calculator calculator = new Calculator(ageInt, gender, heightFeetInt, heightInchesInt, weightInt, activityLevelInt, goal);
 
-            // Set the attributes for the request
-            request.setAttribute("results",results);
-            request.setAttribute("title", "Macro Calculator");
+                // Create a HashMap with key, value pairs for the returned values from the calculateMacros method
+                HashMap<String, Double> results = calculator.calculateMacros();
 
-            // Tell the server where the request is going
-            RequestDispatcher rd = request.getRequestDispatcher("/macroResults.jsp");
+                // Set the attributes for the request
+                request.setAttribute("results",results);
+                request.setAttribute("title", "Macro Calculator");
 
-            // Forward the request and response
-            rd.forward(request, response);
+                // Tell the server where the request is going
+                RequestDispatcher rd = request.getRequestDispatcher("/macroResults.jsp");
 
-            // Log the information for debugging
-            logger.info(results);
-        } catch (Exception e) {
-            logger.debug("Error processing request: {}", e.getMessage(), e);
+                // Forward the request and response
+                rd.forward(request, response);
+
+                // Log the information for debugging
+                logger.info(results);
+            } catch (Exception e) {
+                logger.debug("Error processing request: {}", e.getMessage(), e);
+            }
+        } else {
+            // TODO: Route to error page
         }
     }
 }

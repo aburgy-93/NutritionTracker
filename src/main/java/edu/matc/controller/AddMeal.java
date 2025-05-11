@@ -4,6 +4,7 @@ import edu.matc.entity.Food;
 import edu.matc.entity.User;
 import edu.matc.entity.UserFood;
 import edu.matc.persistence.GenericDao;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,32 +41,41 @@ public class AddMeal extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Create a new instance of the GenericDao with the Food class entity
-            GenericDao<Food> genericDao = new GenericDao<>(Food.class);
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            // Get the food id from the request parameter
-            String foodId = request.getParameter("add_food_to_meal");
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            try {
+                // Create a new instance of the GenericDao with the Food class entity
+                GenericDao<Food> genericDao = new GenericDao<>(Food.class);
 
-            // Get the food by calling the getById method and pass in the foodId
-            Food foodToAdd = genericDao.getById(Integer.parseInt(foodId));
+                // Get the food id from the request parameter
+                String foodId = request.getParameter("add_food_to_meal");
 
-            // Log the added food data for debugging
-            logger.debug("Food to add: " + foodToAdd);
+                // Get the food by calling the getById method and pass in the foodId
+                Food foodToAdd = genericDao.getById(Integer.parseInt(foodId));
 
-            // Add the foodToAdd as an attribute to the request
-            request.setAttribute("foodToAdd", foodToAdd);
+                // Log the added food data for debugging
+                logger.debug("Food to add: " + foodToAdd);
 
-            // Set the title for the jsp
-            request.setAttribute("title", "Track Your Food");
+                // Add the foodToAdd as an attribute to the request
+                request.setAttribute("foodToAdd", foodToAdd);
 
-            // Tell the server where the request is going to
-            RequestDispatcher rd = request.getRequestDispatcher("/addMeal.jsp");
+                // Set the title for the jsp
+                request.setAttribute("title", "Track Your Food");
 
-            // Forward the request
-            rd.forward(request, response);
-        } catch (Exception e) {
-            logger.error(e);
+                // Tell the server where the request is going to
+                RequestDispatcher rd = request.getRequestDispatcher("/addMeal.jsp");
+
+                // Forward the request
+                rd.forward(request, response);
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        } else {
+            // TODO: Error Page
         }
     }
 
@@ -80,75 +90,84 @@ public class AddMeal extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Retrieve DAOs for the UserFood and User entities
-            GenericDao<UserFood> userFoodDao = new GenericDao<>(UserFood.class);
-            GenericDao<User> userDao = new GenericDao<>(User.class);
-            HttpSession session = request.getSession(false);
+        // Get the session and sub string from the session
+        HttpSession session = request.getSession(false);
+        String sub = session.getAttribute("sub").toString();
 
-            if(session != null) {
-                String sub = session.getAttribute("sub").toString();
-                // Get form data
-                String date = request.getParameter("date");
-                String foodIdStr = request.getParameter("food_id");
-                String foodName = request.getParameter("food_name");
-                String foodType = request.getParameter("food_type");
-                String servingsStr = request.getParameter("servings");
-                String servingsUnits = request.getParameter("serving_units");
-                String mealTime = request.getParameter("meal_times");
-                String caloriesStr = request.getParameter("calories");
-                String proteinStr = request.getParameter("protein");
-                String carbsStr = request.getParameter("carbs");
-                String fatStr = request.getParameter("fat");
+        // If the session is not null and the sub string is not null, continue on. Else route to error page
+        if (session != null && sub != null) {
+            try {
+                // Retrieve DAOs for the UserFood and User entities
+                GenericDao<UserFood> userFoodDao = new GenericDao<>(UserFood.class);
+                GenericDao<User> userDao = new GenericDao<>(User.class);
 
-                // Try to parse numeric values (double), handle potential errors
-                double servings = parseDouble(servingsStr);
-                double calories = parseDouble(caloriesStr);
-                double protein = parseDouble(proteinStr);
-                double carbs = parseDouble(carbsStr);
-                double fat = parseDouble(fatStr);
+                    // Get form data
+                    String date = request.getParameter("date");
+                    String foodIdStr = request.getParameter("food_id");
+                    String foodName = request.getParameter("food_name");
+                    String foodType = request.getParameter("food_type");
+                    String servingsStr = request.getParameter("servings");
+                    String servingsUnits = request.getParameter("serving_units");
+                    String mealTime = request.getParameter("meal_times");
+                    String caloriesStr = request.getParameter("calories");
+                    String proteinStr = request.getParameter("protein");
+                    String carbsStr = request.getParameter("carbs");
+                    String fatStr = request.getParameter("fat");
 
-                // Validate input (ensure non-null and non-empty for text fields, non-negative for numeric fields)
-                if (!isNullOrEmptyString(date) && !isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType)
-                        && !isNullOrEmptyString(mealTime) && servings >= 0 && !isNullOrEmptyString(servingsUnits)
-                        && calories >= 0 && protein >= 0 && carbs >= 0 && fat >= 0) {
+                    // Try to parse numeric values (double), handle potential errors
+                    double servings = parseDouble(servingsStr);
+                    double calories = parseDouble(caloriesStr);
+                    double protein = parseDouble(proteinStr);
+                    double carbs = parseDouble(carbsStr);
+                    double fat = parseDouble(fatStr);
 
-                    // Get the food item from the database using the foodId
-                    GenericDao<Food> foodDao = new GenericDao<>(Food.class);
-                    Food foodToAdd = foodDao.getById(Integer.parseInt(foodIdStr));
+                    // Validate input (ensure non-null and non-empty for text fields, non-negative for numeric fields)
+                    if (!isNullOrEmptyString(date) && !isNullOrEmptyString(foodName) && !isNullOrEmptyString(foodType)
+                            && !isNullOrEmptyString(mealTime) && servings >= 0 && !isNullOrEmptyString(servingsUnits)
+                            && calories >= 0 && protein >= 0 && carbs >= 0 && fat >= 0) {
 
-                    // TODO: Retrieve the actual user ID from the session (or Cognito)
-                    // For testing, this is hardcoded
-                    // User user = userDao.getById(1);
-                    User user = userDao.getBySub("sub", sub);
+                        // Get the food item from the database using the foodId
+                        GenericDao<Food> foodDao = new GenericDao<>(Food.class);
+                        Food foodToAdd = foodDao.getById(Integer.parseInt(foodIdStr));
 
-                    // Create a UserFood entry
-                    UserFood foodEnteredByUser = new UserFood(user, foodToAdd, date, servings, mealTime);
+                        // TODO: Retrieve the actual user ID from the session (or Cognito)
+                        // For testing, this is hardcoded
+                        // User user = userDao.getById(1);
+                        User user = userDao.getBySub("sub", sub);
 
-                    // Insert the new food entry into the database
-                    userFoodDao.insert(foodEnteredByUser);
+                        // Create a UserFood entry
+                        UserFood foodEnteredByUser = new UserFood(user, foodToAdd, date, servings, mealTime);
 
-                    // Redirect to the meals' display page
-                    response.sendRedirect(request.getContextPath() + "/meal-display");
+                        // Insert the new food entry into the database
+                        userFoodDao.insert(foodEnteredByUser);
 
-                    // Log the success
-                    logger.debug("Food entry added successfully: " + foodEnteredByUser);
+                        // Redirect to the meals' display page
+                        response.sendRedirect(request.getContextPath() + "/meal-display");
 
-                } else {
-                    // If validation fails, log an error
-                    logger.debug("Invalid input detected, unable to add meal.");
-                    request.setAttribute("error", "Invalid input. Please check your form data.");
-                    request.getRequestDispatcher("/addMeal.jsp").forward(request, response);
-                }
+                        // Log the success
+                        logger.debug("Food entry added successfully: " + foodEnteredByUser);
+
+                        // TODO: Error page
+                    } else {
+                        // If validation fails, log an error
+                        logger.debug("Invalid input detected, unable to add meal.");
+                        request.setAttribute("error", "Invalid input. Please check your form data.");
+                        request.getRequestDispatcher("/addMeal.jsp").forward(request, response);
+                    }
+
+                // TODO: Error page
+            } catch (Exception e) {
+                // Log the exception with its stack trace
+                logger.error("Add Meal Error: " + e.getMessage(), e);
+                request.setAttribute("error", "An error occurred while adding the meal.");
+                request.getRequestDispatcher("/addMeal.jsp").forward(request, response);
             }
-
-        } catch (Exception e) {
-            logger.error("Add Meal Error: " + e.getMessage(), e);  // Log the exception with its stack trace
-            request.setAttribute("error", "An error occurred while adding the meal.");
-            request.getRequestDispatcher("/addMeal.jsp").forward(request, response);
+        } else {
+            // If the session is null, send the user back to the login page
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
         }
     }
-
 
     /**
      * checks to see if the string values passed in are null or empty

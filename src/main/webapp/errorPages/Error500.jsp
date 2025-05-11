@@ -8,25 +8,28 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>500 Error - Server Error</title>
 </head>
 <body>
-<c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>500 Error - Server Error</strong></h1>
-  <p>Oops! Something went wrong on our end.</p>
-  <p>The server encountered an unexpected error and could not complete your request.</p>
-</div>
+<c:import url="/errorNav.jsp" />
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>500 Error - Server Error</strong></h1>
+    <p>Oops! Something went wrong on our end.</p>
+    <p>The server encountered an unexpected error and could not complete your request.</p>
+  </div>
 
-<div>
-  <p>What you can do:</p>
-  <ul>
-    <li>Try again in a few moments</li>
-    <li>Go back to the homepage</li>
-    <li>Contact support if the issue continues</li>
-  </ul>
+  <div class="errorReasons">
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Try again in a few moments</li>
+      <li>Go back to the homepage</li>
+      <li>Contact support if the issue continues</li>
+    </ul>
 
-  <p>We are working to fix the problem as quickly as possible. Thank you for your patience.</p>
+    <p>We are working to fix the problem as quickly as possible. Thank you for your patience.</p>
+  </div>
 </div>
 </body>
 </html>

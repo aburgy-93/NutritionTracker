@@ -8,25 +8,28 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>502 Error - Bad Gateway</title>
 </head>
 <body>
-<c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>502 Error - Bad Gateway</strong></h1>
-  <p>There was a problem connecting to the server.</p>
-  <p>Our servers were unable to complete your request due to a communication issue with another server.</p>
-</div>
+<c:import url="/errorNav.jsp" />
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>502 Error - Bad Gateway</strong></h1>
+    <p>There was a problem connecting to the server.</p>
+    <p>Our servers were unable to complete your request due to a communication issue with another server.</p>
+  </div>
 
-<div>
-  <p>What you can do:</p>
-  <ul>
-    <li>Refresh the page and try again</li>
-    <li>Wait a moment and try later</li>
-    <li>Contact support if the problem persists</li>
-  </ul>
+  <div class="errorReasons">
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Refresh the page and try again</li>
+      <li>Wait a moment and try later</li>
+      <li>Contact support if the problem persists</li>
+    </ul>
 
-  <p>We are working to resolve the issue as quickly as possible. Thanks for your patience.</p>
+    <p>We are working to resolve the issue as quickly as possible. Thanks for your patience.</p>
+  </div>
 </div>
 </body>
 </html>

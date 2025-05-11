@@ -8,29 +8,32 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>408 Error - Request Timeout</title>
 </head>
 <body>
 <c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>408 - Request Timeout</strong></h1>
-  <p>Your request took too long to complete, and the server closed the connection.</p>
-</div>
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>408 - Request Timeout</strong></h1>
+    <p>Your request took too long to complete, and the server closed the connection.</p>
+  </div>
 
-<div style="text-align: center;">
-  <p>This could be because:</p>
-  <ul>
-    <li>Your internet connection is slow or unstable</li>
-    <li>The server is experiencing high traffic</li>
-    <li>The request was left idle for too long</li>
-  </ul>
+  <div class="errorReasons">
+    <p>This could be because:</p>
+    <ul class="errorList">
+      <li>Your internet connection is slow or unstable</li>
+      <li>The server is experiencing high traffic</li>
+      <li>The request was left idle for too long</li>
+    </ul>
 
-  <p>What you can do:</p>
-  <ul>
-    <li>Check your internet connection</li>
-    <li>Try again in a few moments</li>
-    <li>Contact support if the problem keeps happening</li>
-  </ul>
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Check your internet connection</li>
+      <li>Try again in a few moments</li>
+      <li>Contact support if the problem keeps happening</li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>

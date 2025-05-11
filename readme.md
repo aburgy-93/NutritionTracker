@@ -12,7 +12,7 @@ The app displays progress toward daily macronutrient targets, such as:
     0/75g fat
 
 As users add meals, the totals update dynamically. For example, after logging a meal with 
-50g protein, 75g carbs, and 15g fat, the display updates to:
+50 g protein, 75 g carbs, and 15 g fat, the display updates to:
 
     50/150g protein
     75/200g carbs
@@ -24,8 +24,9 @@ indicating how many grams remain. If a user exceeds their daily goal significant
 the display reflects that as well.
 
 ##### Future Ideas
-I could also add an activity tracker with in it as well. Something to record if you worked out that day,
-the duration of the workout, intensity level, on a scale of 1-10 how happy were you with the workout, or
+I could add an activity tracker with in it as well.
+Something to record if you worked out that day,
+the duration of the workout, intensity level, on a scale of 1–10 how happy were you with the workout, or
 a notes section. 
 
 ## Project Technologies/Techniques
@@ -36,18 +37,19 @@ a notes section.
 - ORM Framework
   - Hibernate 
 - Web Services consumed using Java
-  - TBD 
+  - Spoonacular API
+  - USDA API (V2)
 - CSS 
   - Bootstrap
+  - Custom CSS
 - Data Validation
-  - Bootstrap Validator for front end
+  - Bootstrap Validator for the front end
 - Logging
   - Log4J2
 - Hosting
-  - AWS
+  - AWS (V2)
 - Tech I'd like to explore as part of this work
-  - TBD
-  - Food database API
+  - 
 - Unit Testing
   - JUnit tests
 - IDE: IntelliJ IDEA
@@ -57,6 +59,8 @@ a notes section.
 Screens: 
 
 1) Create meal
-2) View meals
+2) Food tracker
 3) Update meal
-4) Delete Meal
+4) Delete meal
+5) Created food table
+6) Search food table from Spoonacular API

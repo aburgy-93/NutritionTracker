@@ -8,28 +8,31 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>403 Error - Forbidden</title>
 </head>
 <body>
-<c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>403 - Forbidden</strong></h1>
-  <p>You do not have permission to access this page or resource.</p>
-</div>
+<c:import url="/navBar.jsp" />
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>403 - Forbidden</strong></h1>
+    <p>You do not have permission to access this page or resource.</p>
+  </div>
 
-<div style="text-align: center;">
-  <p>This might be because:</p>
-  <ul>
-    <li>Your account does not have the required permissions</li>
-    <li>Access to this resource is restricted</li>
-    <li>You are trying to perform an action you are not authorized for</li>
-  </ul>
+  <div class="errorReasons">
+    <p>This might be because:</p>
+    <ul class="errorList">
+      <li>Your account does not have the required permissions</li>
+      <li>Access to this resource is restricted</li>
+      <li>You are trying to perform an action you are not authorized for</li>
+    </ul>
 
-  <p>What you can do:</p>
-  <ul>
-    <li>Return to the homepage</li>
-    <li>Contact support if you believe this is an error</li>
-  </ul>
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Return to the homepage</li>
+      <li>Contact support if you believe this is an error</li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>

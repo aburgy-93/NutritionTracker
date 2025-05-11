@@ -2,6 +2,9 @@
 <c:import url="head.jsp" />
 
 <html>
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
+</head>
 <body>
   <c:import url="navBar.jsp" />
   <div class="container">

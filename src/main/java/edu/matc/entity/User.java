@@ -47,7 +47,9 @@ public class User {
     /**
      * Instantiates a new User.
      *
+     * @param sub              the sub
      * @param accessPrivileges the access privileges
+     * @param username         the username
      * @param email            the email
      * @param birthDate        the birthdate
      */
@@ -82,16 +84,38 @@ public class User {
      */
     public void setAccessPrivileges(String accessPrivileges) {this.accessPrivileges = accessPrivileges;};
 
+    /**
+     * Gets sub.
+     *
+     * @return the sub
+     */
     public String getSub() {return sub;}
+
+    /**
+     * Sets sub.
+     *
+     * @param sub the sub
+     */
     public void setSub(String sub) {this.sub = sub;};
 
+    /**
+     * Gets username.
+     *
+     * @return the username
+     */
     public String getUsername() {return username;};
+
+    /**
+     * Sets username.
+     *
+     * @param username the username
+     */
     public void setUsername(String username) {this.username = username;};
 
     /**
      * Gets the user's email
      *
-     * @return user's email
+     * @return user 's email
      */
     public String getEmail() {return email;};
 
@@ -105,7 +129,7 @@ public class User {
     /**
      * Gets the user's birthdate
      *
-     * @return user 's birthdate
+     * @return user's birthdate
      */
     public String getBirthDate() {return birthDate;};
 

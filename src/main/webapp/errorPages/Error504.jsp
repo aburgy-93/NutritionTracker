@@ -8,31 +8,34 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>504 Error - Gateway Timeout</title>
 </head>
 <body>
-<c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>504 Error - Gateway Timeout</strong></h1>
-  <p>The server took too long to respond.</p>
-</div>
+<c:import url="/errorNav.jsp" />
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>504 Error - Gateway Timeout</strong></h1>
+    <p>The server took too long to respond.</p>
+  </div>
 
-<div>
-  <p>This can happen when:</p>
-  <ul>
-    <li>The upstream server is down or slow to respond</li>
-    <li>There is heavy network traffic</li>
-    <li>A timeout occurred between server components</li>
-  </ul>
+  <div class="errorReasons">
+    <p>This can happen when:</p>
+    <ul class="errorList">
+      <li>The upstream server is down or slow to respond</li>
+      <li>There is heavy network traffic</li>
+      <li>A timeout occurred between server components</li>
+    </ul>
 
-  <p>What you can do:</p>
-  <ul>
-    <li>Refresh the page or try again shortly</li>
-    <li>Check your internet connection</li>
-    <li>Contact support if the issue continues</li>
-  </ul>
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Refresh the page or try again shortly</li>
+      <li>Check your internet connection</li>
+      <li>Contact support if the issue continues</li>
+    </ul>
 
-  <p>We are aware of the issue and working to fix it as quickly as possible.</p>
+    <p>We are aware of the issue and working to fix it as quickly as possible.</p>
+  </div>
 </div>
 </body>
 </html>

@@ -8,29 +8,32 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/errors.css">
   <title>400 Bad Request</title>
 </head>
 <body>
 <c:import url="/navBar.jsp"/>
-<div style="text-align: center;">
-  <h1><strong>400 - Bad Request</strong></h1>
-  <p>The server could not understand your request.</p>
-</div>
+<div class="container">
+  <div class="errorTitle">
+    <h1><strong>400 - Bad Request</strong></h1>
+    <p>The server could not understand your request.</p>
+  </div>
 
-<div style="text-align: center;">
-  <p>This could be because:</p>
-  <ul>
-    <li>Invalid or incomplete form data</li>
-    <li>A malformed request URL</li>
-    <li>Unsupported characters or encoding issues</li>
-  </ul>
+  <div class="errorReasons">
+    <p>This could be because:</p>
+    <ul class="errorList">
+      <li>Invalid or incomplete form data</li>
+      <li>A malformed request URL</li>
+      <li>Unsupported characters or encoding issues</li>
+    </ul>
 
-  <p>What you can do:</p>
-  <ul>
-    <li>Double-check the information you entered</li>
-    <li>Refresh the page and try again</li>
-    <li>Contact support if the issue continues</li>
-  </ul>
+    <p>What you can do:</p>
+    <ul class="errorList">
+      <li>Double-check the information you entered</li>
+      <li>Refresh the page and try again</li>
+      <li>Contact support if the issue continues</li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>

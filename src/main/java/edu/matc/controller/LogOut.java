@@ -81,12 +81,16 @@ public class LogOut extends HttpServlet implements PropertiesLoader {
         // TODO if properties weren't loaded properly, route to an error page
         // Get session without creating a new one
         HttpSession session = req.getSession(false);
+        String sub = req.getParameter("sub");
 
         // Destroy the session
         if (session != null) {
             session.invalidate(); // Destroys the session
+
+            logger.debug("Session invalidated: " + sub);
         }
 
+        // TODO: Rewrite string so not hard coded
         String url = "https://us-east-2if53rzaoz.auth.us-east-2.amazoncognito.com/logout?client_id=43d94gjlojq8i6oq4btbas462v&logout_uri=http://localhost:8080/NutritionTracker_war/logout.jsp";
         logger.debug(url);
         resp.sendRedirect(url);

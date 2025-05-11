@@ -1,6 +1,5 @@
 package edu.matc.persistence;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
@@ -9,8 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
-
-import javax.persistence.NoResultException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -49,6 +46,13 @@ public class GenericDao<T> {
         return entity;
     }
 
+    /**
+     * Gets by sub.
+     *
+     * @param propertyName the property name
+     * @param sub          the sub
+     * @return user by the sub
+     */
     public T getBySub(String propertyName, String sub) {
         Session session = getSession();
 
@@ -79,6 +83,13 @@ public class GenericDao<T> {
         return user;  // Return null if no user is found
     }
 
+    /**
+     * Get by username propertyName and value passed in.
+     *
+     * @param propertyName the property name
+     * @param value        the value
+     * @return the user
+     */
     public T getByUsername(String propertyName, String value){
         Session session = getSession();
 
@@ -158,7 +169,6 @@ public class GenericDao<T> {
         Root<T> root = query.from(type);
         List<T> list = session.createSelectionQuery( query ).getResultList();
 
-//        logger.debug("The list of " + list);
         session.close();
 
         return list;
