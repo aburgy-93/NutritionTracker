@@ -1,9 +1,9 @@
-package com.nutritiontracker.controller;
+package edu.matc.controller;
 
-import com.nutritiontracker.entity.User;
-import com.nutritiontracker.entity.UserFood;
-import com.nutritiontracker.persistence.GenericDao;
-import com.nutritiontracker.persistence.UserfoodDao;
+import edu.matc.entity.User;
+import edu.matc.entity.UserFood;
+import edu.matc.persistence.GenericDao;
+import edu.matc.persistence.UserfoodDao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

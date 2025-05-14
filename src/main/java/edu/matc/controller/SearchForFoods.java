@@ -1,7 +1,7 @@
-package com.nutritiontracker.controller;
+package edu.matc.controller;
 
-import com.nutritiontracker.entity.User;
-import com.nutritiontracker.persistence.SpoontacularDao;
+import edu.matc.entity.User;
+import edu.matc.persistence.SpoontacularDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

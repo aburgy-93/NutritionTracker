@@ -42,7 +42,7 @@ the display reflects that as well.
 6) Search food table from Spoonacular API
 
 ### Timelog
-*[Timelog Document](timeLog.md)
+* [Timelog Document](timeLog.md)
 
 ##### Future Ideas
 I could add an activity tracker with in it as well.
