@@ -1,4 +1,4 @@
-package com.nutritiontracker.entity;
+package edu.matc.entity;
 
 import java.util.HashMap;
 

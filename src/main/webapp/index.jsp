@@ -207,7 +207,7 @@
 <body>
 
 <c:choose>
-    <c:when test="${empty userName}">
+    <c:when test="${empty user}">
         <div class="login-container">
             <div class="login">
                 <div class="loginTitle">

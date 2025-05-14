@@ -1,4 +1,4 @@
-package com.nutritiontracker.persistence;
+package edu.matc.persistence;
 
 import com.*;
 import com.fasterxml.jackson.core.JsonProcessingException;

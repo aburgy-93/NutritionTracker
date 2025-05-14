@@ -1,10 +1,11 @@
-package com.nutritiontracker.persistence;
+package edu.matc.persistence;
 
-import com.nutritiontracker.entity.Food;
-import com.nutritiontracker.entity.User;
-import com.nutritiontracker.entity.UserFood;
-import com.nutritiontracker.util.Database;
+import edu.matc.entity.Food;
+import edu.matc.entity.User;
+import edu.matc.entity.UserFood;
+import edu.matc.util.Database;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;

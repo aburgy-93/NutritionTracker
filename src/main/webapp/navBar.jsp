@@ -27,9 +27,9 @@
 
         <div class="user-info">
             <c:choose>
-                <c:when test="${empty userName}"></c:when>
+                <c:when test="${empty user}"></c:when>
                 <c:otherwise>
-                    <span>Welcome ${userName}</span>
+                    <span>Welcome ${user.username}</span>
                     <a href="logOut">Log Out</a>
                 </c:otherwise>
             </c:choose>

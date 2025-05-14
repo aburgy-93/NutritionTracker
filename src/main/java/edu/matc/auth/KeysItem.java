@@ -1,4 +1,4 @@
-package com.nutritiontracker.auth;
+package edu.matc.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,6 @@
-package com.nutritiontracker.util;
+package edu.matc.util;
 
-import com.nutritiontracker.persistence.PropertiesLoader;
+import edu.matc.persistence.PropertiesLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package com.nutritiontracker.persistence;
+package edu.matc.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;

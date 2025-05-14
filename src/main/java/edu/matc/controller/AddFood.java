@@ -1,6 +1,6 @@
-package com.nutritiontracker.controller;
+package edu.matc.controller;
 
-import com.nutritiontracker.entity.User;
+import edu.matc.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

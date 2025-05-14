@@ -1,6 +1,6 @@
-package com.nutritiontracker.persistence;
+package edu.matc.persistence;
 
-import com.nutritiontracker.entity.UserFood;
+import edu.matc.entity.UserFood;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
