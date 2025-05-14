@@ -1,9 +1,9 @@
-package edu.matc.controller;
+package com.nutritiontracker.controller;
 
-import edu.matc.entity.Food;
-import edu.matc.entity.User;
-import edu.matc.entity.UserFood;
-import edu.matc.persistence.GenericDao;
+import com.nutritiontracker.entity.Food;
+import com.nutritiontracker.entity.User;
+import com.nutritiontracker.entity.UserFood;
+import com.nutritiontracker.persistence.GenericDao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,8 @@ public class AddMeal extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {
@@ -92,7 +93,8 @@ public class AddMeal extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {
@@ -132,8 +134,6 @@ public class AddMeal extends HttpServlet {
 
                         // TODO: Retrieve the actual user ID from the session (or Cognito)
                         // For testing, this is hardcoded
-                        // User user = userDao.getById(1);
-                        User user = userDao.getBySub("sub", sub);
 
                         // Create a UserFood entry
                         UserFood foodEnteredByUser = new UserFood(user, foodToAdd, date, servings, mealTime);

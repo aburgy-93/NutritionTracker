@@ -1,4 +1,4 @@
-package edu.matc.results;
+package com.nutritiontracker.results;
 
 /**
  * The type Results.

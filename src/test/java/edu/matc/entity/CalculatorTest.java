@@ -1,4 +1,4 @@
-package edu.matc.entity;
+package com.nutritiontracker.entity;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

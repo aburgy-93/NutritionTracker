@@ -1,7 +1,8 @@
-package edu.matc.controller;
+package com.nutritiontracker.controller;
 
-import edu.matc.entity.Food;
-import edu.matc.persistence.GenericDao;
+import com.nutritiontracker.entity.Food;
+import com.nutritiontracker.entity.User;
+import com.nutritiontracker.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,7 +42,8 @@ public class SearchYourFoods extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {
@@ -89,7 +91,8 @@ public class SearchYourFoods extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {
@@ -134,7 +137,8 @@ public class SearchYourFoods extends HttpServlet {
     public void doAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {
@@ -195,7 +199,8 @@ public class SearchYourFoods extends HttpServlet {
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null)  {
@@ -246,7 +251,8 @@ public class SearchYourFoods extends HttpServlet {
     public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {
@@ -315,7 +321,8 @@ public class SearchYourFoods extends HttpServlet {
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         if(session != null && sub != null) {
             // Instantiate the GenericDao with the Food entity

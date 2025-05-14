@@ -1,5 +1,6 @@
-package edu.matc.controller;
+package com.nutritiontracker.controller;
 
+import com.nutritiontracker.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,7 +36,8 @@ public class AddFood extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         logger.info("sub: " + sub);
 

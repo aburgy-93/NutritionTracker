@@ -1,4 +1,4 @@
-package edu.matc.controller;
+package com.nutritiontracker.controller;
 
 
 import com.auth0.jwt.JWT;
@@ -7,11 +7,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.nutritiontracker.auth.*;
 import edu.matc.auth.*;
-import edu.matc.entity.User;
-import edu.matc.persistence.GenericDao;
-import edu.matc.persistence.PropertiesLoader;
-import edu.matc.results.Results;
+import com.nutritiontracker.entity.User;
+import com.nutritiontracker.persistence.GenericDao;
+import com.nutritiontracker.persistence.PropertiesLoader;
+import com.nutritiontracker.results.Results;
 
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
@@ -160,13 +161,11 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
                     if (newUserId != 0) {
                         // Check that use is logged in before setting the session
-                        session.setAttribute("userName", userName);
-                        session.setAttribute("sub", sub);
+                        session.setAttribute("user", newUserToAddToDB);
                     }
                 } else {
                     // Check that use is logged in before setting the session
-                    session.setAttribute("userName", userName);
-                    session.setAttribute("sub", sub);
+                    session.setAttribute("user", retrievedUserFromDB);
                 }
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
