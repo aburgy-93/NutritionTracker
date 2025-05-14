@@ -1,6 +1,7 @@
-package edu.matc.controller;
+package com.nutritiontracker.controller;
 
-import edu.matc.persistence.SpoontacularDao;
+import com.nutritiontracker.entity.User;
+import com.nutritiontracker.persistence.SpoontacularDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,7 +37,8 @@ public class SearchForFoods extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         // If the session is not null and the sub string is not null, continue on. Else route to error page
         if (session != null && sub != null) {

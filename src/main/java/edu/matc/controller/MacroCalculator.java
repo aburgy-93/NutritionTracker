@@ -1,6 +1,7 @@
-package edu.matc.controller;
+package com.nutritiontracker.controller;
 
-import edu.matc.entity.Calculator;
+import com.nutritiontracker.entity.Calculator;
+import com.nutritiontracker.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,7 +39,8 @@ public class MacroCalculator extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the session and sub string from the session
         HttpSession session = request.getSession(false);
-        String sub = session.getAttribute("sub").toString();
+        User user = (User) session.getAttribute("user");
+        String sub = user.getSub();
 
         if (session != null && sub != null) {
             try {

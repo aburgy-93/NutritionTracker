@@ -1,6 +1,6 @@
-package edu.matc.persistence;
+package com.nutritiontracker.persistence;
 
-import edu.matc.entity.UserFood;
+import com.nutritiontracker.entity.UserFood;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -43,7 +43,7 @@ public class UserfoodDao {
                     meals.sort(Comparator.comparing(meal -> LocalDate.parse(meal.getDate())))
             );
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug("Error: " + e.getMessage());
         }
 
         return groupedMeals;
